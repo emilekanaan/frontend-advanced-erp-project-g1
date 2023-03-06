@@ -1,17 +1,18 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Sidebar from '../../components/sidebar/sidebar'
-import "./visitor.css"
-// import ToggleColorMode from '../../components/dark'
+
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Sidebar from "../../components/sidebar/sidebar";
+import "./visitor.css";
 
 function Visitor() {
     return (
-        <div className='visitor'>
-         
+        <div className="visitor">
             <Sidebar />
-            <Outlet />
+            <div className="visitor-main">
+                <Outlet />
+            </div>
         </div>
-    )
+    );
 }
 
-export default Visitor
+export default Visitor;
