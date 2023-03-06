@@ -1,0 +1,43 @@
+:root {
+  --primary: #16202a;
+  --secondary: #f4f4f9;
+  --accent: #4dedf5;
+}
+.employee_project_team div {
+  width: 400px;
+  height: 150px;
+  border-radius: 7px;
+  box-shadow: -1px -1px 1px 0px #2F4550;
+}
+.employee_project_team div:hover {
+  box-shadow: 1px 1px 1px 1px var(--accent);
+}
+.employee_project_team {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+.recently {
+  margin-top: 5%;
+  width: 50%;
+  height: 480px;
+  border-width: 1px;
+  border-radius: 7px;
+  box-shadow: -1px -1px 1px 0px #2F4550;
+
+}
+.recently:hover{
+  box-shadow: 1px 1px 1px 1px var(--accent);
+
+}
+.bottom{
+  display: flex;
+}
+.dash_title {
+  display: flex;
+  justify-content: center;
+}
+.dash_title h1{
+  margin-left: 10px;
+  color: var(--secondary);
+}

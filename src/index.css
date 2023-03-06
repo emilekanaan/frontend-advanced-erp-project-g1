@@ -1,6 +1,7 @@
 :root {
   --primary: #16202a;
   --secondary: #f4f4f9;
+  --activeItem: #4dedf570;
   --accent: #4dedf5;
 }
 
@@ -9,6 +10,7 @@ body {
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary);
 }
 
 code {

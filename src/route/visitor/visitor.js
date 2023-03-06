@@ -5,10 +5,10 @@ import "./visitor.css"
 
 function Visitor() {
     return (
-        <>
+        <div className='visitor'>
             <Sidebar />
             <Outlet />
-        </>
+        </div>
     )
 }
 
