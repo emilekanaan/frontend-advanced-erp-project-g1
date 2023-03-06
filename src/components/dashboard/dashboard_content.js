@@ -5,14 +5,12 @@ import LineChart from "./chart/Chart";
 import Groups2Icon from "@mui/icons-material/Groups2";
 import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import WebStoriesSharpIcon from "@mui/icons-material/WebStoriesSharp";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
+ 
 
 
 function DashboardContent() {
   return (
-    <div>
+    <div className="dash_board_content">
       <SearchBar />
       <section className="employee_project_team">
         <div className="card_project">
