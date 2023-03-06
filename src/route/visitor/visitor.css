@@ -1,3 +1,8 @@
-.visitor{
-    display: flex;
+.visitor {
+  display: flex;
+}
+
+.visitor-main {
+  width: calc(90vw - 200px);
+  margin: 0 auto;
 }
