@@ -8,7 +8,8 @@
     
 }
 .visitor-main {
-  width: calc(90vw - 200px);
+  width: calc(100vw - 200px);
   margin: 0 auto;
- 
+  overflow-y: scroll;
+  height: 100vh;
 }

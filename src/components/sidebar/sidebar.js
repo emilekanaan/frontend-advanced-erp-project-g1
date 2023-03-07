@@ -21,7 +21,7 @@ const Sidebar = () => {
       left: "-60%",
     },
   };
-  
+
 
   return (
     <>
