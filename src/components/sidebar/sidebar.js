@@ -21,7 +21,6 @@ const Sidebar = () => {
       left: "-60%",
     },
   };
-  console.log(window.innerWidth);
 
   return (
     <>
