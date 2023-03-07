@@ -15,7 +15,7 @@
 }
 .employee_project_team {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 5%;
 }
 .recently {
@@ -33,6 +33,8 @@
 }
 .bottom {
   display: flex;
+  justify-content: space-around;
+
 }
 .dash_title {
   display: flex;

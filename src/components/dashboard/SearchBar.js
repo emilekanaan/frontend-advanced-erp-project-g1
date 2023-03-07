@@ -13,7 +13,7 @@ const Search = styled('div')(({ theme }) => ({
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
-    marginRight: theme.spacing(155),
+    marginRight: theme.spacing(170),
     marginTop: theme.spacing(3),
     width: 'auto',
   },
@@ -48,7 +48,9 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 function searchBar() {
     return (
         <div>
-            <Search>
+            <Search sx={{
+              marginLeft:"5%"
+            }} >
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>

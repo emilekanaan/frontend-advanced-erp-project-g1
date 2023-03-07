@@ -1,10 +1,5 @@
 import React from "react";
 import "./login_form.css";
-// import Poligons from "../src/components/login_form/Poligons.jpg";
-import { InputBase, TextField } from "@mui/material";
-import { makeStyles } from "@mui/material";
-import { Button } from "@mui/material";
-import { color } from "framer-motion";
 import pic from "../login_form/Poligons.jpg";
 
 
@@ -25,7 +20,7 @@ function LoginForm() {
           
           <button variant="outlined" className="login-button"  ><span>Sign in</span></button><br/>
         </div>
-          <img className="login-pic" src={pic}/>
+          <img className="login-pic" src={pic} alt=''/>
       </div>
     </div>
   );
