@@ -1,8 +1,14 @@
 .visitor {
-  display: flex;
+    display: flex;
+  background-color: var(--primary);
 }
-
+.dark-mode{
+    display: flex;
+    background-color: var(--secondary);
+    
+}
 .visitor-main {
   width: calc(90vw - 200px);
   margin: 0 auto;
+ 
 }

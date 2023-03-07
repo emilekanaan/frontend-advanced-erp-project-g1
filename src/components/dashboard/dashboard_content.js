@@ -5,13 +5,12 @@ import LineChart from "./chart/Chart";
 import Groups2Icon from "@mui/icons-material/Groups2";
 import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import WebStoriesSharpIcon from "@mui/icons-material/WebStoriesSharp";
- 
 
-
-function DashboardContent() {
+function DashboardContent(props) {
+  
   return (
-    <div className="dash_board_content">
-      <SearchBar />
+    <div className='dash_board_content'>
+      <SearchBar className="searchDash"/>
       <section className="employee_project_team">
         <div className="card_project">
           <article className="dash_title">

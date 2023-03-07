@@ -4,14 +4,13 @@
   --accent: #4dedf5;
 }
 .employee_project_team div {
-  transition: .5s;
+  transition: 0.5s;
   width: 400px;
   height: 150px;
   border-radius: 7px;
-  box-shadow: 1px 1px 2px 1px #2F4550;
+  box-shadow: 1px 1px 2px 1px #2f4550;
 }
 .employee_project_team div:hover {
-
   box-shadow: 1px 1px 20px 1px var(--accent);
 }
 .employee_project_team {
@@ -20,30 +19,60 @@
   margin-top: 5%;
 }
 .recently {
-  transition: .5s;
+
+  transition: 0.5s;
   margin-top: 5%;
   width: 50%;
   height: 480px;
   border-width: 1px;
   border-radius: 7px;
-  box-shadow: 1px 1px 2px 1px #2F4550;
-
+  box-shadow: 1px 1px 2px 1px #2f4550;
 }
-.recently:hover{
+.recently:hover {
   box-shadow: 1px 1px 20px 1px var(--accent);
-
 }
-.bottom{
+.bottom {
   display: flex;
 }
 .dash_title {
   display: flex;
   justify-content: center;
 }
-.dash_title h1{
+.dash_title h1 {
   margin-left: 10px;
   color: var(--secondary);
 }
-.dash_board_content{
+.dash_board_content {
   margin: auto;
 }
+@media (max-width: 1545px) {
+  .employee_project_team div {
+    width: 300px;
+  }
+  .recently{
+    width: 400px;
+  }
+  .searchDash{
+    margin-right: 50px;
+  }
+
+}
+.whiteModeOn .recently {
+background-color: var(--secondary);
+
+}
+.whiteModeOn  .employee_project_team div{
+  background-color: var(--secondary);
+
+}
+.whiteModeOn h1{
+  color: #16202a;
+}
+.dash_board_content .recently div{
+background-color: var(--primary);
+  
+}
+ .employee_project_team div {
+  background-color: var(--primary);
+    
+  }
