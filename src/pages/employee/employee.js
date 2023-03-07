@@ -6,7 +6,7 @@ function Employee() {
     return (
         <>
 
-            <FormEmployee />
+           
             <ListEmployee />
         </>
     );

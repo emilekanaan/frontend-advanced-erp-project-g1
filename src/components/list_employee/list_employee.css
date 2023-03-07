@@ -1,0 +1,9 @@
+/* {{ height: '75%', width: '100%', marginTop:,marginLeft:'2%'}} */
+.employee-table{
+    height: 75%;
+    width: 100%;
+    margin: 70px auto;
+}
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
+    color:grey;
+}
