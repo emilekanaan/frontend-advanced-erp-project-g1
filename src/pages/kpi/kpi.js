@@ -6,7 +6,7 @@ function Kpi() {
     return (
         <>
 
-            <FormKpi />
+        
             <ListKpi />
         </>
     );
