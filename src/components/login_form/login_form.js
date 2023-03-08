@@ -14,9 +14,9 @@ function LoginForm() {
             See your growth and get consultoing support!
           </h5>
           <label className="login-label">Email:</label><br/>
-          <input id="outlined-basic"  placeholder="@gmail.com" type="email"   /><br/>
+          <input className="outlined-basic"  placeholder="@gmail.com" type="email"   /><br/>
           <label className="login-label">Passwords:</label><br/>
-          <input id="outlined-basic"  type="password" placeholder="Enter your password"  /><br/>
+          <input className="outlined-basic<"  type="password" placeholder="Enter your password"  /><br/>
           
           <button variant="outlined" className="login-button"  ><span>Sign in</span></button><br/>
         </div>

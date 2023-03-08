@@ -47,7 +47,7 @@ const LineChart = () => {
 
   return (
     <div>
-     <canvas id="myChart" ref={chartRef} width="600" height="500"></canvas>
+     <canvas id="myChart" ref={chartRef} width="1500" height="500"></canvas>
 
     </div>
   )

@@ -50,7 +50,7 @@ function DashboardContent(props) {
         </div>
       </section>
       <section className="bottom">
-        <section className="recently"></section>
+      
         <LineChart />
       </section>
     </div>
