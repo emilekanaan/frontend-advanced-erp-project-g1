@@ -1,20 +1,5 @@
-.listKpi-contain{
-    height: 100vh;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    background-color: var(--primary);
-}
-.listKpi-form{
-    position: relative;
-    width: 20rem;
-}
-.listKpi-form input[type="text"]{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 2px solid var(--accent);
+.Kpi-table{
+    height: 75%;
+    width: 60%;
+    margin: 70px auto;
 }
