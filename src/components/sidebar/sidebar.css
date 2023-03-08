@@ -3,7 +3,6 @@
   display: flex;
   justify-content: flex-start;
   font-family: "Inter", sans-serif;
-  
 }
 
 .side-comp__sidebar {
@@ -44,10 +43,10 @@
 
 /* menu */
 .side-comp__menu {
-  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-top: 4rem;
 }
 
 .menuItem {
@@ -89,14 +88,14 @@
 }
 
 /* Tablets */
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
   .menuItem > span {
     display: none;
   }
   .side-comp__logo {
     display: none;
   }
-}
+} */
 
 @media screen and (max-width: 768px) {
   .side-comp__sidebar {
@@ -132,6 +131,6 @@
     z-index: 9;
   }
 }
-.side_content{
+.side_content {
   color: var(--primary);
 }

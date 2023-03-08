@@ -61,7 +61,7 @@ function FormTeam() {
 
                 <Button
                     onClick={handleClickOpen}
-                    Name="Add team"
+                    name="Add team"
                     color="accent"
                     startIcon={<AddIcon />}
                     variant="contained"
