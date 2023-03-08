@@ -4,29 +4,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddIcon from "@mui/icons-material/Add";
-import Dialog from '@mui/material/Dialog';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
+import Dialog from "@mui/material/Dialog";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
-
-
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
-
-
 
 const theme = createTheme({
     palette: {
@@ -38,7 +33,6 @@ const theme = createTheme({
 });
 
 function FormTeam() {
-
     const test = () => {
         console.log("clicked!!!");
     };
@@ -52,13 +46,10 @@ function FormTeam() {
     const handleClose = () => {
         setOpen(false);
     };
-  
 
     return (
         <>
             <ThemeProvider theme={theme}>
-
-
                 <Button
                     onClick={handleClickOpen}
                     Name="Add team"
@@ -66,17 +57,17 @@ function FormTeam() {
                     startIcon={<AddIcon />}
                     variant="contained"
                     sx={{
-                        margin: "2pc"
+                        margin: "2pc 0",
                     }}
-                >Add Team</Button>
+                >
+                    Add Team
+                </Button>
                 <Dialog
-
                     open={open}
                     onClose={handleClose}
                     TransitionComponent={Transition}
-                    
                 >
-                    <AppBar sx={{ position: "relative" ,width:'500px'}}>
+                    <AppBar sx={{ position: "relative", width: "500px" }}>
                         <Toolbar>
                             <IconButton
                                 edge="start"
@@ -94,12 +85,17 @@ function FormTeam() {
                             </Button>
                         </Toolbar>
                     </AppBar>
-                    <List sx={{width:'500px'}}>
-                        <TextField id="outlined-basic" label="Name" variant="outlined" sx={{width:'300px ',marginLeft:'20%',
-                    
-                    }}/>
-                        <Divider />
-                    
+                    <List sx={{ width: "60%", margin: "auto" }}>
+                        <TextField
+                            id="outlined-basic"
+                            label="Name"
+                            variant="outlined"
+                            sx={{
+                                width: "90%",
+                                margin: "1pc"
+                            }}
+                        />
+                        {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
                     </List>
                 </Dialog>
             </ThemeProvider>
