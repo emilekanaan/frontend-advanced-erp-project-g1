@@ -5,9 +5,10 @@ import "./list_employee.css";
 import { Button } from "@mui/material";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined';
+import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 export default function ListEmployee() {
   const theme = createTheme({
     palette: {
@@ -18,13 +19,11 @@ export default function ListEmployee() {
     },
   });
 
-
   const { data } = useDemoData({
     dataSet: "Employee", // Change the data set to "Employee"
     rowLength: 100,
     maxColumns: 6,
   });
-
 
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
@@ -98,20 +97,19 @@ export default function ListEmployee() {
   return (
     <ThemeProvider theme={theme}>
       <div className="employee-table">
-      <section style={{display:"flex",justifyContent: "space-between"}}>
-        <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
-        <Button
-          Name="Add team"
-          startIcon={<AddIcon />}
-          color="accent"
-          variant="contained"
-          sx={{
-            margin: "2pc",
-           
-          }}
-        >
-          Add Project
-        </Button>
+        <section style={{ display: "flex", justifyContent: "space-between" }}>
+          <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
+          <Button
+            Name="Add team"
+            startIcon={<AddIcon />}
+            color="accent"
+            variant="contained"
+            sx={{
+              margin: "2pc",
+            }}
+          >
+            Add Project
+          </Button>
         </section>
         <DataGrid
           rows={data.rows}

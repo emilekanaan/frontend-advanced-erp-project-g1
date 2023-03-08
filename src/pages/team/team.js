@@ -6,7 +6,7 @@ function Team() {
     return (
         <>
 
-            <FormTeam />
+
             <ListTeam />
         </>
     );
