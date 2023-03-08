@@ -17,6 +17,7 @@ function LoginForm() {
           <input className="outlined-basic"  placeholder="@gmail.com" type="email"   /><br/>
           <label className="login-label">Passwords:</label><br/>
           <input className="outlined-basic"  type="password" placeholder="Enter your password"  /><br/>
+
           
           <button variant="outlined" className="login-button"  ><span>Sign in</span></button><br/>
         </div>

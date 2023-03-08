@@ -20,6 +20,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
 
 
+
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -50,6 +52,7 @@ function FormTeam() {
     const handleClose = () => {
         setOpen(false);
     };
+  
 
     return (
         <>
@@ -71,9 +74,9 @@ function FormTeam() {
                     open={open}
                     onClose={handleClose}
                     TransitionComponent={Transition}
-
+                    
                 >
-                    <AppBar sx={{ position: "relative" }}>
+                    <AppBar sx={{ position: "relative" ,width:'500px'}}>
                         <Toolbar>
                             <IconButton
                                 edge="start"
@@ -84,22 +87,19 @@ function FormTeam() {
                                 <CloseIcon />
                             </IconButton>
                             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                                Sound
+                                Add New Team
                             </Typography>
                             <Button autoFocus color="inherit" onClick={handleClose}>
                                 save
                             </Button>
                         </Toolbar>
                     </AppBar>
-                    <List>
-                        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+                    <List sx={{width:'500px'}}>
+                        <TextField id="outlined-basic" label="Name" variant="outlined" sx={{width:'300px ',marginLeft:'20%',
+                    
+                    }}/>
                         <Divider />
-                        <ListItem button>
-                            <ListItemText
-                                primary="Default notification ringtone"
-                                secondary="Tethys"
-                            />
-                        </ListItem>
+                    
                     </List>
                 </Dialog>
             </ThemeProvider>
