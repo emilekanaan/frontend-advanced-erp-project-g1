@@ -8,6 +8,8 @@ import Delete from "@mui/icons-material/Delete";
 
 import "./list_admin.css";
 import FormAdmin from "../form_admin/form_admin";
+import DeleteTeam from "../delete_team/delete_team";
+import EditAdmin from "../edit_Form/EditAdmin";
 
 function ListAdmin() {
   const { data } = useDemoData({
@@ -17,48 +19,24 @@ function ListAdmin() {
   });
 
   const columns = [
-    { field: "id", headerName: "ID", width: 100 },
+    { field: "id", headerName: "ID", width: 200 },
     { field: "name", headerName: "Name", width: 250 },
     { field: "email", headerName: "Email", width: 250 },
     { field: "picture", headerName: "Picture", width: 150 },
     {
       field: "edit",
       headerName: "Edit",
-      width: 85,
+      width: 150,
       renderCell: () => (
-        <Button
-          name="edit admin"
-          startIcon={<Edit />}
-          variant="contained"
-          sx={{
-            backgroundColor: "transparent",
-
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        ></Button>
+      <EditAdmin/>
       ),
     },
     {
       field: "delete",
       headerName: "Delete",
-      width: 85,
+      width: 150,
       renderCell: () => (
-        <Button
-          name="edit admin"
-          startIcon={<Delete />}
-          variant="contained"
-          sx={{
-            padding: "10 50px",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        ></Button>
+      <DeleteTeam text="Admin"/>
       ),
     },
   ];

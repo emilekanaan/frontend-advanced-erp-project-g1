@@ -15,11 +15,10 @@ function DashboardContent(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/lastsUpdate")
+      .get(`${process.env.REACT_APP_URL}lastsUpdate`)
       .then((response) => {
         if (response.status === 200) {
           setUpdate(response.data);
-
           console.log(response.data);
         }
       })
@@ -27,7 +26,7 @@ function DashboardContent(props) {
         console.log(error);
       });
     axios
-      .get("http://localhost:8000/api/count")
+      .get(`${process.env.REACT_APP_URL}count`)
       .then((response) => {
         if (response.status === 200) {
           setCount(response.data);
