@@ -20,16 +20,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const theme = createTheme({
-    palette: {
-        primary: { main: "#16202a" },
-        secondary: { main: "#f4f4f9" },
-        activeItem: { main: "#4dedf570" },
-        accent: { main: "#4dedf5" },
-    },
+  palette: {
+    primary: { main: "#16202a" },
+    secondary: { main: "#f4f4f9" },
+    activeItem: { main: "#4dedf570" },
+    accent: { main: "#4dedf5" },
+  },
 });
 
 function FormTeam() {

@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [selected, setSelected] = useState();
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   const sidebarVariants = {
     true: {
@@ -28,7 +28,7 @@ const Sidebar = () => {
       <div className="side-comp">
         <div
           className="side-comp__bars"
-          style={expanded ? { left: "60%" } : { left: "5%" }}
+          style={expanded ? { left: "65%" } : { left: "5%" }}
           onClick={() => setExpanded(!expanded)}
         >
           <MenuIcon />
