@@ -5,11 +5,30 @@ import "./list_employee.css";
 import { Button } from "@mui/material";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined';
 import AddIcon from "@mui/icons-material/Add";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import EmployeeProfile from "../profileEmployee";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function ListEmployee() {
+  const [EmployeeTable, setEmployeeTable] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/employee")
+      .then((response) => {
+        if (response.status === 200) {
+          setEmployeeTable(response.data.data);
+
+          console.log(response.data.data[1].team.name);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const theme = createTheme({
     palette: {
       primary: { main: "#16202a" },
@@ -19,40 +38,24 @@ export default function ListEmployee() {
     },
   });
 
-
-  const { data } = useDemoData({
-    dataSet: "Employee", // Change the data set to "Employee"
-    rowLength: 100,
-    maxColumns: 6,
-  });
-
-
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
-    { field: "firstName", headerName: "First Name", width: 200 },
-    { field: "lastName", headerName: "Last Name", width: 200 },
+    { field: "first_name", headerName: "First Name", width: 200 },
+    { field: "last_name", headerName: "Last Name", width: 200 },
     { field: "email", headerName: "Email", width: 200 },
-    { field: "phone", headerName: "Phone", width: 150 },
-    { field: "team", headerName: "Team", width: 150 },
+    { field: "phone_num", headerName: "Phone", width: 150 },
+
+    {
+      field: "name",
+      headerName: "Team",
+      width: 150,
+      valueGetter: (params) => params.row.team.name,
+    },
     {
       field: "showprofile",
       headerName: "Show profile",
       width: 150,
-      renderCell: () => (
-        <Button
-          name="edit project"
-          startIcon={<ContactPageOutlinedIcon />}
-          variant="contained"
-          sx={{
-            padding: "10 50px",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        ></Button>
-      ),
+      renderCell: () => <EmployeeProfile />,
     },
     {
       field: "edit",
@@ -61,17 +64,19 @@ export default function ListEmployee() {
       renderCell: () => (
         <Button
           name="edit project"
-          startIcon={<Edit />}
           variant="contained"
           sx={{
-            padding: "10 50px",
+            padding: "50px",
             backgroundColor: "transparent",
             "&:hover": {
               backgroundColor: "#4dedf5",
               color: "#16202a",
             },
           }}
-        ></Button>
+        >
+          {" "}
+          <Edit />
+        </Button>
       ),
     },
     {
@@ -81,17 +86,19 @@ export default function ListEmployee() {
       renderCell: () => (
         <Button
           name="edit project"
-          startIcon={<Delete />}
           variant="contained"
           sx={{
-            padding: "10 50px",
+            padding: "50px",
             backgroundColor: "transparent",
             "&:hover": {
               backgroundColor: "#4dedf5",
               color: "#16202a",
             },
           }}
-        ></Button>
+        >
+          {" "}
+          <Delete />
+        </Button>
       ),
     },
   ];
@@ -99,23 +106,22 @@ export default function ListEmployee() {
   return (
     <ThemeProvider theme={theme}>
       <div className="employee-table">
-      <section style={{display:"flex",justifyContent: "space-between"}}>
-        <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
-        <Button
-          Name="Add team"
-          startIcon={<AddIcon />}
-          color="accent"
-          variant="contained"
-          sx={{
-            margin: "2pc",
-           
-          }}
-        >
-          Add Project
-        </Button>
+        <section style={{ display: "flex", justifyContent: "space-between" }}>
+          <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
+          <Button
+            Name="Add team"
+            startIcon={<AddIcon />}
+            color="accent"
+            variant="contained"
+            sx={{
+              margin: "2pc",
+            }}
+          >
+            Add Project
+          </Button>
         </section>
         <DataGrid
-          rows={data.rows}
+          rows={EmployeeTable}
           columns={columns} // Pass the columns array as a prop
           slots={{
             toolbar: GridToolbar,
