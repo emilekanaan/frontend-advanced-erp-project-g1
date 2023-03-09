@@ -29,7 +29,6 @@ function ListProject() {
           variant="contained"
           sx={{
             backgroundColor: "transparent",
-
             "&:hover": {
               backgroundColor: "#4dedf5",
               color: "#16202a",
