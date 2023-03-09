@@ -6,6 +6,8 @@ import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import RoleForm from '../Role-form/role-form';
 import './role-list.css'
+import EditRole from '../edit_Form/EditRole';
+import DeleteTeam from '../delete_team/delete_team';
 function RoleList() {
     const { data } = useDemoData({
         dataSet: "Employee", // Change the data set to "Employee"
@@ -20,41 +22,17 @@ function RoleList() {
           headerName: "Edit",
           width: 170,
           renderCell: () => (
-            <Button
-              name="edit Role"
-              startIcon={<Edit />}
-              variant="contained"
-              sx={{
-                backgroundColor: "transparent",
-    
-                "&:hover": {
-                  backgroundColor: "#4dedf5",
-                  color: "#16202a",
-                },
-              }}
-            ></Button>
+           <EditRole/>
           ),
         },
         {
           field: "delete",
           headerName: "Delete",
-          width: 170,
+          width: 84,
           renderCell: () => (
-            <Button
-              name="edit Role"
-              startIcon={<Delete />}
-              variant="contained"
-              sx={{
-                padding: "10 50px",
-                backgroundColor: "transparent",
-                "&:hover": {
-                  backgroundColor: "#4dedf5",
-                  color: "#16202a",
-                },
-              }}
-            ></Button>
+              <DeleteTeam text="role"/>
           ),
-        },
+      },
       ];
     return (
         <div className="role-table">
