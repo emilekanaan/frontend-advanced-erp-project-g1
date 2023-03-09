@@ -6,7 +6,7 @@ import Employee from "./pages/employee/employee";
 import Kpi from "./pages/kpi/kpi";
 import Login from "./pages/login/login";
 import Project from "./pages/project/project";
-import Report from "./pages/report/report";
+import Role from "./pages/role/role";
 import Team from "./pages/team/team";
 import Visitor from "./route/visitor/visitor";
 

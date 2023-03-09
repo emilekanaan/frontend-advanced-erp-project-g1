@@ -1,4 +1,5 @@
 import React from "react";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -31,7 +32,7 @@ const theme = createTheme({
     },
 });
 
-function FormKpi() {
+function EditTeam() {
     const test = () => {
         console.log("clicked!!!");
     };
@@ -47,21 +48,22 @@ function FormKpi() {
     };
 
     return (
-
-
         <>
             <ThemeProvider theme={theme}>
                 <Button
                     onClick={handleClickOpen}
-                    name="Add team"
-                    color="accent"
-                    startIcon={<AddIcon />}
+                    name="edit team"
                     variant="contained"
                     sx={{
-                        margin: "2pc 0",
+                        padding: "0.5pc",
+                        backgroundColor: "transparent",
+                        "&:hover": {
+                            backgroundColor: "#4dedf5",
+                            color: "#16202a",
+                        },
                     }}
                 >
-                    Add KPI
+                    <EditIcon/>
                 </Button>
                 <Dialog
                     open={open}
@@ -79,7 +81,7 @@ function FormKpi() {
                                 <CloseIcon />
                             </IconButton>
                             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                                Add New KPI
+                                Edit Team
                             </Typography>
                             <Button autoFocus color="inherit" onClick={handleClose}>
                                 save
@@ -104,4 +106,4 @@ function FormKpi() {
     );
 }
 
-export default FormKpi;
+export default EditTeam;

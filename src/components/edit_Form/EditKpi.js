@@ -17,6 +17,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
+import { Edit } from "@mui/icons-material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -31,7 +32,7 @@ const theme = createTheme({
     },
 });
 
-function FormKpi() {
+function EditKpi() {
     const test = () => {
         console.log("clicked!!!");
     };
@@ -47,21 +48,23 @@ function FormKpi() {
     };
 
     return (
-
-
         <>
             <ThemeProvider theme={theme}>
                 <Button
                     onClick={handleClickOpen}
                     name="Add team"
                     color="accent"
-                    startIcon={<AddIcon />}
+                 
                     variant="contained"
                     sx={{
-                        margin: "2pc 0",
-                    }}
+                        padding: "0.5pc",
+                        backgroundColor: "transparent",
+                        "&:hover": {
+                            backgroundColor: "#4dedf5",
+                            color: "#16202a",
+                        },}}
                 >
-                    Add KPI
+                   <Edit/>
                 </Button>
                 <Dialog
                     open={open}
@@ -104,4 +107,4 @@ function FormKpi() {
     );
 }
 
-export default FormKpi;
+export default EditKpi;

@@ -18,6 +18,10 @@ import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
 
+import Stack from '@mui/material/Stack';
+import MultipleSelectPlaceholder from "../DropDown";
+import { Edit } from "@mui/icons-material";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -31,7 +35,7 @@ const theme = createTheme({
     },
 });
 
-function FormKpi() {
+function EditEmployee() {
     const test = () => {
         console.log("clicked!!!");
     };
@@ -47,28 +51,29 @@ function FormKpi() {
     };
 
     return (
-
-
         <>
             <ThemeProvider theme={theme}>
                 <Button
                     onClick={handleClickOpen}
-                    name="Add team"
-                    color="accent"
-                    startIcon={<AddIcon />}
+                    name="edit team"
                     variant="contained"
                     sx={{
-                        margin: "2pc 0",
+                        padding: "0.5pc",
+                        backgroundColor: "transparent",
+                        "&:hover": {
+                            backgroundColor: "#4dedf5",
+                            color: "#16202a",
+                        },
                     }}
                 >
-                    Add KPI
+                    <Edit/>
                 </Button>
                 <Dialog
                     open={open}
                     onClose={handleClose}
                     TransitionComponent={Transition}
                 >
-                    <AppBar sx={{ position: "relative", width: "500px" }}>
+                    <AppBar sx={{ position: "relative", width: "600px" }}>
                         <Toolbar>
                             <IconButton
                                 edge="start"
@@ -79,7 +84,7 @@ function FormKpi() {
                                 <CloseIcon />
                             </IconButton>
                             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                                Add New KPI
+                                Add New Employee
                             </Typography>
                             <Button autoFocus color="inherit" onClick={handleClose}>
                                 save
@@ -89,13 +94,47 @@ function FormKpi() {
                     <List sx={{ width: "60%", margin: "auto" }}>
                         <TextField
                             id="outlined-basic"
-                            label="Name"
+                            label="First Name"
                             variant="outlined"
                             sx={{
                                 width: "90%",
                                 margin: "1pc"
                             }}
                         />
+                          <TextField
+                            id="outlined-basic"
+                            label="Last Name"
+                            variant="outlined"
+                            sx={{
+                                width: "90%",
+                                margin: "1pc"
+                            }}
+                        />
+                        <TextField
+                            id="outlined-basic"
+                            label="Email"
+                            variant="outlined"
+                            sx={{
+                                width: "90%",
+                                margin: "1pc"
+                            }}
+                        />
+                        <TextField
+                            id="outlined-basic"
+                            label="phone"
+                            variant="outlined"
+                            sx={{
+                                width: "90%",
+                                margin: "1pc"
+                            }}
+                        />
+                        <MultipleSelectPlaceholder />
+                          <Stack direction="row" alignItems="center" spacing={2}>
+      <Button variant="contained" component="label" sx={{width:"90%", margin: "1pc"}}>
+        Employee image
+        <input hidden accept="image/*" multiple type="file" />
+      </Button>
+    </Stack>
                         {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
                     </List>
                 </Dialog>
@@ -104,4 +143,4 @@ function FormKpi() {
     );
 }
 
-export default FormKpi;
+export default EditEmployee;

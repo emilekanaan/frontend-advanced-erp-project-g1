@@ -35,9 +35,9 @@ export const SidebarData = [
     heading: "Projects",
   },
   {
-    path: "report",
+    path: "role",
     icon: AssessmentIcon,
-    heading: "Reports",
+    heading: "Roles",
   },
   {
     path: "kpi",
