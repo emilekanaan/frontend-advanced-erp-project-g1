@@ -25,26 +25,7 @@
   justify-content: space-around;
   margin-top: 5%;
 }
-.recently {
-  background: linear-gradient(
-    -120deg,
-    #4b6069b0 10%,
-    #273b46 60%,
-    #0000002f 100%
-  );
-  overflow-y: scroll;
-  transition: 0.5s;
-  margin-top: 5%;
-  max-width: 50%;
-  width: 30%;
-  height: 480px;
-  border-width: 1px;
-  border-radius: 7px;
-  box-shadow: 1px 1px 2px 1px #2f4550;
-}
-.recently:hover {
-  box-shadow: 1px 1px 20px 1px var(--accent);
-}
+
 .bottom {
   display: flex;
   justify-content: space-around;
