@@ -87,15 +87,15 @@ function DashboardContent(props) {
         </div>
       </section>
       <section className="bottom">
-        {/* <div className="recently">
-              {
+        <div className="recently">
+              {/* {
                 update.map((update)=>{
                   
                 })
-              }
+              } */}
 
 
-        </div> */}
+        </div>
         <LineChart />
       </section>
     </div>
