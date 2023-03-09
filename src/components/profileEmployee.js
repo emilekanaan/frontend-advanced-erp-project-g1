@@ -52,14 +52,16 @@ function EmployeeProfile() {
           name="Add team"
           variant="contained"
           sx={{
-            margin: "2pc 0",
+            margin: "1.2pc",
+            padding: "0.5pc 1pc",
             backgroundColor: "transparent",
-            padding: "50px",
             "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
+                backgroundColor: "#4dedf5",
+                color: "#16202a",
             },
-          }}
+        }}
+            
+        
         >
           <ContactPageOutlinedIcon />
         </Button>

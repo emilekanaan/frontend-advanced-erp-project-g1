@@ -28,6 +28,7 @@ function DeleteTeam(props) {
                 sx={{
                     backgroundColor: "transparent",
                     padding: "0.5pc",
+                    color:"#16202a",
                     "&:hover": {
                         backgroundColor: "#4dedf5",
                         color: "#16202a",
@@ -49,12 +50,12 @@ function DeleteTeam(props) {
                         backgroundColor: "#2F4550",
                     }}
                 >
-                    {"Are you sure do you want to delete this team?"}
+                    {`Are you sure do you want to delete this ${props.text}?`}
                 </DialogTitle>
                 <DialogActions
                     sx={{
                         backgroundColor: "#f4f4f9",
-                        backgroundColor: "#2F4550",
+                       
                     }}
                 >
                     <Button onClick={handleClose}

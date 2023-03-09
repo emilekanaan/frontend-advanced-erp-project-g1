@@ -8,6 +8,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import FormKpi from "../form_kpi/form_kpi";
+import DeleteTeam from "../delete_team/delete_team";
+import EditKpi from "../edit_Form/EditKpi";
 function ListKpi() {
   const { data } = useDemoData({
     dataSet: "Employee", // Change the data set to "Employee"
@@ -25,47 +27,23 @@ function ListKpi() {
 
   const columns = [
     { field: "id", headerName: "ID", width: 300 },
-    { field: "Name", headerName: "Name", width: 200 },
+    { field: "Name", headerName: "Name", width: 300 },
     {
       field: "edit",
       headerName: "Edit",
       width: 200,
       renderCell: () => (
-        <Button
-          name="edit project"
-          startIcon={<Edit />}
-          variant="contained"
-          sx={{
-            padding: "10 50px",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        ></Button>
+         <EditKpi/>
       ),
-    },
-    {
-      field: "delete",
-      headerName: "Delete",
-      width: 200,
-      renderCell: () => (
-        <Button
-          name="edit project"
-          startIcon={<Delete />}
-          variant="contained"
-          sx={{
-            padding: "10 50px",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        ></Button>
-      ),
-    },
+  },
+  {
+    field: "delete",
+    headerName: "Delete",
+    width: 200,
+    renderCell: () => (
+        <DeleteTeam text="Kpi"/>
+    ),
+},
   ];
 
   return (
