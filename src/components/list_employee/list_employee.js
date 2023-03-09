@@ -108,7 +108,7 @@ export default function ListEmployee() {
               margin: "2pc",
             }}
           >
-            Add Project
+            Add Employee
           </Button>
         </section>
         <DataGrid

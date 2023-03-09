@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
+import "./role-form.css";
 import AddIcon from "@mui/icons-material/Add";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button } from '@mui/material';
-import "./form_kpi.css"
 
-function FormKpi() {
+function RoleForm() {
     const theme = createTheme({
         palette: {
           primary: { main: "#16202a" },
@@ -18,7 +18,7 @@ function FormKpi() {
        
      
        <Button
-          Name="Add team"
+          name="Add team"
           startIcon={<AddIcon />}
           color="accent"
           variant="contained"
@@ -27,11 +27,11 @@ function FormKpi() {
            
           }}
         >
-          Add KPI
+          Add Role
         </Button>
  
         </ThemeProvider>
     )
 }
 
-export default FormKpi
+export default RoleForm;
