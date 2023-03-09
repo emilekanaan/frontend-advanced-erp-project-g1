@@ -102,7 +102,7 @@
     position: fixed;
     z-index: 9;
     background: var(--primary);
-    width: 55%;
+    width: 56%;
     padding-right: 1rem;
     height: 100%;
   }
