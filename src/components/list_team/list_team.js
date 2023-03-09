@@ -8,6 +8,7 @@ import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import DeleteTeam from "../delete_team/delete_team";
+import EditTeam from "../edit_Form/EditTeam";
 
 function ListTeam() {
     const { data } = useDemoData({
@@ -44,18 +45,7 @@ function ListTeam() {
             headerName: "Edit",
             width: 84,
             renderCell: () => (
-                <Button
-                    name="edit team"
-                    variant="contained"
-                    sx={{
-                        padding: "0.5pc",
-                        backgroundColor: "transparent",
-                        "&:hover": {
-                            backgroundColor: "#4dedf5",
-                            color: "#16202a",
-                        },
-                    }}
-                >{<Edit />}</Button>
+              <EditTeam/>
             ),
         },
         {
