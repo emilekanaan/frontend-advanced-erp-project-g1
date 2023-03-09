@@ -7,6 +7,7 @@ import { useDemoData } from "@mui/x-data-grid-generator";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
+import DeleteTeam from "../delete_team/delete_team";
 
 function ListTeam() {
     const { data } = useDemoData({
@@ -16,66 +17,53 @@ function ListTeam() {
     });
 
     const columns = [
-        { field: "id", headerName: "ID", width: 200 },
-        { field: "Name", headerName: "Name", width: 200 },
+        { field: "id", headerName: "ID", width: 350 },
+        { field: "Name", headerName: "Name", width: 350 },
         {
             field: "showTeam",
             headerName: "Show Team",
-            width: 200,
+            width: 120,
             renderCell: () => (
                 <Button
-                    name="edit project"
-                    startIcon={<ContactPageOutlinedIcon />}
+                    name="show team"
                     variant="contained"
                     sx={{
-                        padding: "10 50px",
+                        margin: "1.2pc",
+                        padding: "0.5pc 1pc",
                         backgroundColor: "transparent",
                         "&:hover": {
                             backgroundColor: "#4dedf5",
                             color: "#16202a",
                         },
                     }}
-                ></Button>
+                >{<ContactPageOutlinedIcon />}</Button>
             ),
         },
         {
             field: "edit",
             headerName: "Edit",
-            width: 200,
+            width: 84,
             renderCell: () => (
                 <Button
-                    name="edit project"
-                    startIcon={<Edit />}
+                    name="edit team"
                     variant="contained"
                     sx={{
-                        padding: "10 50px",
+                        padding: "0.5pc",
                         backgroundColor: "transparent",
                         "&:hover": {
                             backgroundColor: "#4dedf5",
                             color: "#16202a",
                         },
                     }}
-                ></Button>
+                >{<Edit />}</Button>
             ),
         },
         {
             field: "delete",
             headerName: "Delete",
-            width: 200,
+            width: 84,
             renderCell: () => (
-                <Button
-                    name="edit project"
-                    startIcon={<Delete />}
-                    variant="contained"
-                    sx={{
-                        padding: "10 50px",
-                        backgroundColor: "transparent",
-                        "&:hover": {
-                            backgroundColor: "#4dedf5",
-                            color: "#16202a",
-                        },
-                    }}
-                ></Button>
+                <DeleteTeam />
             ),
         },
     ];
@@ -91,6 +79,7 @@ function ListTeam() {
             >
                 <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Team</h1>
                 <FormTeam />
+
             </section>
             <DataGrid
                 rows={data.rows}
