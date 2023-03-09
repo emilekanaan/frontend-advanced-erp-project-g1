@@ -6,6 +6,8 @@ import { Button } from "@mui/material";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import FormProject from "../form_project/form_project.js";
+import DeleteTeam from "../delete_team/delete_team";
+import EditProject from "../edit_Form/EditProject";
 
 function ListProject() {
   const { data } = useDemoData({
@@ -17,46 +19,23 @@ function ListProject() {
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
     { field: "name", headerName: "Name", width: 350 },
-    { field: "team", headerName: "Team", width: 150 },
+    { field: "team", headerName: "Team", width: 200 },
     {
       field: "edit",
       headerName: "Edit",
       width: 150,
       renderCell: () => (
-        <Button
-          name="edit project"
-          startIcon={<Edit />}
-          variant="contained"
-          sx={{
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        ></Button>
+        <EditProject/>
       ),
-    },
-    {
-      field: "delete",
-      headerName: "Delete",
-      width: 150,
-      renderCell: () => (
-        <Button
-          name="edit project"
-          startIcon={<Delete />}
-          variant="contained"
-          sx={{
-            padding: "10 50px",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        ></Button>
-      ),
-    },
+  },
+  {
+    field: "delete",
+    headerName: "Delete",
+    width: 84,
+    renderCell: () => (
+        <DeleteTeam text="employee"/>
+    ),
+},
   ];
 
   return (

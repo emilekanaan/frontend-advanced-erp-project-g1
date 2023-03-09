@@ -10,6 +10,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import EmployeeProfile from "../profileEmployee";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import DeleteTeam from "../delete_team/delete_team";
+import FormEmployee from "../form_employee/form_employee";
+import EditEmployee from "../edit_Form/EditEmployee";
 export default function ListEmployee() {
   const [EmployeeTable, setEmployeeTable] = useState([]);
 
@@ -41,8 +44,8 @@ export default function ListEmployee() {
     { field: "id", headerName: "ID", width: 150 },
     { field: "first_name", headerName: "First Name", width: 200 },
     { field: "last_name", headerName: "Last Name", width: 200 },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "phone_num", headerName: "Phone", width: 150 },
+    { field: "email", headerName: "Email", width: 300 },
+    { field: "phone_num", headerName: "Phone", width: 200 },
 
     {
       field: "name",
@@ -59,47 +62,19 @@ export default function ListEmployee() {
     {
       field: "edit",
       headerName: "Edit",
-      width: 150,
+      width: 84,
       renderCell: () => (
-        <Button
-          name="edit project"
-          variant="contained"
-          sx={{
-            padding: "50px",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        >
-          {" "}
-          <Edit />
-        </Button>
+         <EditEmployee/>
       ),
-    },
-    {
-      field: "delete",
-      headerName: "Delete",
-      width: 150,
-      renderCell: () => (
-        <Button
-          name="edit project"
-          variant="contained"
-          sx={{
-            padding: "50px",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        >
-          {" "}
-          <Delete />
-        </Button>
-      ),
-    },
+  },
+  {
+    field: "delete",
+    headerName: "Delete",
+    width: 84,
+    renderCell: () => (
+        <DeleteTeam text="employee"/>
+    ),
+},
   ];
 
   return (
@@ -107,17 +82,7 @@ export default function ListEmployee() {
       <div className="employee-table">
         <section style={{ display: "flex", justifyContent: "space-between" }}>
           <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
-          <Button
-            Name="Add team"
-            startIcon={<AddIcon />}
-            color="accent"
-            variant="contained"
-            sx={{
-              margin: "2pc",
-            }}
-          >
-            Add Project
-          </Button>
+         <FormEmployee/>
         </section>
         <DataGrid
           rows={EmployeeTable}
