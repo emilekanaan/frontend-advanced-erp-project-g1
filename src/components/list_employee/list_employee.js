@@ -84,7 +84,9 @@ export default function ListEmployee() {
       <div className="employee-table">
         <section style={{ display: "flex", justifyContent: "space-between" }}>
           <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
+
          <FormEmployee/>
+
         </section>
         <DataGrid
           rows={EmployeeTable}
