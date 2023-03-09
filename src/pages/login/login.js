@@ -5,7 +5,6 @@ function Login() {
   return (
     <section className="login_page">
       <LoginForm />
-      {/* <CompanyName /> */}
     </section>
   );
 }

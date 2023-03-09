@@ -10,21 +10,28 @@ import Report from "./pages/report/report";
 import Team from "./pages/team/team";
 import Visitor from "./route/visitor/visitor";
 
+import { useState, createContext } from "react";
+
+export const UserContext = createContext(null);
+
 const App = () => {
+  const [token, setToken] = useState("test");
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/" element={<Visitor />} >
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/employee" element={<Employee />} />
-          <Route path="/project" element={<Project />} />
-          <Route path="/report" element={<Report />} />
-          <Route path="/kpi" element={<Kpi />} />
-        </Route >
-      </Routes>
+      <UserContext.Provider value={{ token, setToken }}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Visitor />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/employee" element={<Employee />} />
+            <Route path="/project" element={<Project />} />
+            <Route path="/report" element={<Report />} />
+            <Route path="/kpi" element={<Kpi />} />
+          </Route>
+        </Routes>
+      </UserContext.Provider>
     </>
   );
 };
