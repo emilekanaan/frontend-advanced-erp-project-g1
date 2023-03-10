@@ -19,6 +19,7 @@ const Sidebar = () => {
     },
     false: {
       left: "-60%",
+      display:'none'
     },
   };
 

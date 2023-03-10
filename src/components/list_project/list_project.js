@@ -17,25 +17,22 @@ function ListProject() {
   });
 
   const columns = [
-    { field: "id", headerName: "ID", width: 150 },
     { field: "name", headerName: "Name", width: 350 },
     { field: "team", headerName: "Team", width: 200 },
+    { field: "created_at", headerName: "created", width: 180 },
+    { field: "update_at", headerName: "updated", width: 180 },
     {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: () => (
-        <EditProject/>
-      ),
-  },
-  {
-    field: "delete",
-    headerName: "Delete",
-    width: 84,
-    renderCell: () => (
-        <DeleteTeam text="employee"/>
-    ),
-},
+      renderCell: () => <EditProject />,
+    },
+    {
+      field: "delete",
+      headerName: "Delete",
+      width: 84,
+      renderCell: () => <DeleteTeam text="employee" />,
+    },
   ];
 
   return (
@@ -52,6 +49,7 @@ function ListProject() {
       </section>
       <DataGrid
         rows={data.rows}
+        getRowHeight={() => 70} 
         columns={columns} // Pass the columns array as a prop
         slots={{
           toolbar: GridToolbar,
@@ -64,10 +62,7 @@ function ListProject() {
           color: "#f4f4f9",
 
           fontSize: "20px",
-          "& .MuiDataGrid-cell:hover": {
-            backgroundColor: "#16202A",
-            color: "#F4F4F9",
-          },
+
           "& .MuiDataGrid-cell": {
             backgroundColor: "#2f4550",
             color: "#F4F4F9",

@@ -1,16 +1,10 @@
 import * as React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useDemoData } from "@mui/x-data-grid-generator";
 import "./list_employee.css";
-import { Button } from "@mui/material";
-import Edit from "@mui/icons-material/Edit";
-import Delete from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import EmployeeProfile from "../profileEmployee";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import DeleteTeam from "../delete_team/delete_team";
 import FormEmployee from "../form_employee/form_employee";
 import EditEmployee from "../edit_Form/EditEmployee";
@@ -43,12 +37,12 @@ export default function ListEmployee() {
   });
 
   const columns = [
-    { field: "id", headerName: "ID", width: 150 },
-    { field: "first_name", headerName: "First Name", width: 200 },
-    { field: "last_name", headerName: "Last Name", width: 200 },
-    { field: "email", headerName: "Email", width: 300 },
-    { field: "phone_num", headerName: "Phone", width: 200 },
-
+    { field: "first_name", headerName: "First Name", width: 150 },
+    { field: "last_name", headerName: "Last Name", width: 150 },
+    { field: "email", headerName: "Email", width: 250 },
+    { field: "phone_num", headerName: "Phone", width: 150 },
+    { field: "created_at", headerName: "created", width: 180 },
+    { field: "update_at", headerName: "updated", width: 180 },
     {
       field: "name",
       headerName: "Team",
@@ -65,18 +59,14 @@ export default function ListEmployee() {
       field: "edit",
       headerName: "Edit",
       width: 84,
-      renderCell: () => (
-         <EditEmployee/>
-      ),
-  },
-  {
-    field: "delete",
-    headerName: "Delete",
-    width: 84,
-    renderCell: () => (
-        <DeleteTeam text="employee"/>
-    ),
-},
+      renderCell: () => <EditEmployee />,
+    },
+    {
+      field: "delete",
+      headerName: "Delete",
+      width: 84,
+      renderCell: () => <DeleteTeam text="employee" />,
+    },
   ];
 
   return (
@@ -85,11 +75,11 @@ export default function ListEmployee() {
         <section style={{ display: "flex", justifyContent: "space-between" }}>
           <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
 
-         <FormEmployee/>
-
+          <FormEmployee />
         </section>
         <DataGrid
           rows={EmployeeTable}
+          getRowHeight={() => 70}
           columns={columns} // Pass the columns array as a prop
           slots={{
             toolbar: GridToolbar,
@@ -102,10 +92,7 @@ export default function ListEmployee() {
             color: "#f4f4f9",
 
             fontSize: "20px",
-            "& .MuiDataGrid-cell:hover": {
-              backgroundColor: "#16202A",
-              color: "#F4F4F9",
-            },
+
             "& .MuiDataGrid-cell": {
               backgroundColor: "#2f4550",
               color: "#F4F4F9",

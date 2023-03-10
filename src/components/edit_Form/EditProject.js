@@ -1,19 +1,15 @@
-import React from 'react'
-import AddIcon from "@mui/icons-material/Add";
+import React from 'react';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-import { Input, TextField } from "@mui/material";
+import {  TextField } from "@mui/material";
 import MultipleSelectPlaceholder from '../DropDown';
 import { Edit } from '@mui/icons-material';
 
@@ -86,14 +82,19 @@ function EditProject() {
                             </Button>
                         </Toolbar>
                     </AppBar>
-                    <List sx={{ width: "60%", margin: "auto" }}>
+                    <List sx={{ backgroundColor:"#2F4550" }}>
                         <TextField
                             id="outlined-basic"
                             label="Name"
                             variant="outlined"
                             sx={{
                                 width: "90%",
-                                margin: "1pc"
+                                margin: "1pc",
+                                '& .MuiOutlinedInput-root': {
+                                    color: "white", // sets the text color to white
+                                    '& fieldset': {
+                                      borderColor: "white", // sets the border color to white
+                                    }} 
                             }}
                         />
                         <MultipleSelectPlaceholder  />

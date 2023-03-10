@@ -54,7 +54,12 @@ export default function MultipleSelectPlaceholder() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1.5, width: "93%", mt: 3 }}>
+      <FormControl sx={{ m: 1.5, width: "91%", mt: 3 ,  '& .MuiOutlinedInput-root': {
+                    color: "white", // sets the text color to white
+                    '& fieldset': {
+                      borderColor: "white", // sets the border color to white
+                    }}
+               }}>
         <Select
           multiple
           displayEmpty

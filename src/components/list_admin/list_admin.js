@@ -1,11 +1,6 @@
 import React from "react";
-
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useDemoData } from "@mui/x-data-grid-generator";
-import { Button } from "@mui/material";
-import Edit from "@mui/icons-material/Edit";
-import Delete from "@mui/icons-material/Delete";
-
 import "./list_admin.css";
 import FormAdmin from "../form_admin/form_admin";
 import DeleteTeam from "../delete_team/delete_team";
@@ -19,25 +14,22 @@ function ListAdmin() {
   });
 
   const columns = [
-    { field: "id", headerName: "ID", width: 200 },
+    { field: "picture", headerName: "Picture", width: 150 },
     { field: "name", headerName: "Name", width: 250 },
     { field: "email", headerName: "Email", width: 250 },
-    { field: "picture", headerName: "Picture", width: 150 },
+    { field: "created_at", headerName: "created", width: 180 },
+    { field: "update_at", headerName: "updated", width: 180 },
     {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: () => (
-      <EditAdmin/>
-      ),
+      renderCell: () => <EditAdmin />,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 150,
-      renderCell: () => (
-      <DeleteTeam text="Admin"/>
-      ),
+      renderCell: () => <DeleteTeam text="Admin" />,
     },
   ];
 
@@ -55,6 +47,7 @@ function ListAdmin() {
       </section>
       <DataGrid
         rows={data.rows}
+        getRowHeight={() => 70} // set the row height to 50px
         columns={columns} // Pass the columns array as a prop
         slots={{
           toolbar: GridToolbar,
@@ -66,14 +59,15 @@ function ListAdmin() {
 
           color: "#f4f4f9",
 
-          fontSize: "20px",
-          "& .MuiDataGrid-cell:hover": {
-            backgroundColor: "#16202A",
-            color: "#F4F4F9",
-          },
           "& .MuiDataGrid-cell": {
             backgroundColor: "#2f4550",
             color: "#F4F4F9",
+          },
+          "& .MuiDataGrid-columnHeaderTitleIcon": {
+            color: "#F4F4F9", // sets the color of the sort 3-point icon to white
+          },
+          "& .MuiDataGrid-filterIcon": {
+            color: "#F4F4F9", // sets the color of the filter/flesh icon to white
           },
         }}
       />

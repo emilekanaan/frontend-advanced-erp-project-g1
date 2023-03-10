@@ -1,9 +1,6 @@
 import React from 'react'
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useDemoData } from "@mui/x-data-grid-generator";
-import { Button } from "@mui/material";
-import Edit from "@mui/icons-material/Edit";
-import Delete from "@mui/icons-material/Delete";
 import RoleForm from '../Role-form/role-form';
 import './role-list.css'
 import EditRole from '../edit_Form/EditRole';
@@ -16,8 +13,11 @@ function RoleList() {
       });
     
       const columns = [
-        { field: "id", headerName: "ID", width: 362 },
-        { field: "name", headerName: "Name", width: 260 },        {
+       
+        { field: "name", headerName: "Name", width: 260 },
+        { field: "created_at", headerName: "created", width: 180 },
+        { field: "update_at", headerName: "updated", width: 180 },
+        {
           field: "edit",
           headerName: "Edit",
           width: 170,
@@ -49,6 +49,7 @@ function RoleList() {
       </section>
       <DataGrid
         rows={data.rows}
+        getRowHeight={() => 70} 
         columns={columns} // Pass the columns array as a prop
         slots={{
           toolbar: GridToolbar,
@@ -61,10 +62,7 @@ function RoleList() {
           color: "#f4f4f9",
 
           fontSize: "20px",
-          "& .MuiDataGrid-cell:hover": {
-            backgroundColor: "#16202A",
-            color: "#F4F4F9",
-          },
+        
           "& .MuiDataGrid-cell": {
             backgroundColor: "#2f4550",
             color: "#F4F4F9",
