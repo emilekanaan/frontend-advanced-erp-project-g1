@@ -45,7 +45,7 @@ function ListTeam() {
             headerName: "Edit",
             width: 84,
             renderCell: () => (
-              <EditTeam/>
+                <EditTeam />
             ),
         },
         {

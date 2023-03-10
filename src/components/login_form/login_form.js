@@ -1,31 +1,39 @@
 import React from "react";
 import "./login_form.css";
-import { UserContext } from "../../App";
 import axios from "axios";
-
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { Alert } from "@mui/material";
+import cookie from "react-cookies";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(
-        "http://localhost:8000/api/admin/login",
-        {
-          email: email,
-          password: password,
-        }
-      )
-      .then((response) => {
-        console.log(response);
-      
-        
+      .post(`${process.env.REACT_APP_URL}/admin/login`, {
+        email: email,
+        password: password,
       })
-      .catch((e) => console.log(e));
+      .then((response) => {
+        if (response.status === 200) {
+          cookie.save("access_token", JSON.stringify(response.data.access_token), {
+            maxAge: 5 * 60 * 60 * 1000,
+          });
+          setLoggedIn(true);
+        }
+      })
+      .catch((e) => {
+        if (e.message === "Request failed with status code 401") {
+          setError(e.response.data["error"]);
+        } else {
+          setError(e.message);
+        }
+      });
   };
 
   const handleChange = (e) => {
@@ -35,8 +43,6 @@ function LoginForm() {
       setPassword(e.target.value);
     }
   };
-
-  const { token, setToken } = useContext(UserContext);
 
   return (
     <div className="login-page">
@@ -301,10 +307,11 @@ function LoginForm() {
         <span></span>
         <span></span>
         <span></span>
-
+        {loggedIn && <Navigate to="/dashboard" replace={true} />}
         <div className="login-page__signin">
           <div className="login-page__content">
             <h2>Sign In</h2>
+            {error && <Alert severity="error">{error}</Alert>}
             <form className="login-page__form" onSubmit={handleSubmit}>
               <input type="hidden" name="_token" value="{{ csrf_token() }}" />
               <div className="login-page__inputBox">
