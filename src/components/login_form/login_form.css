@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #000;
+  background: var(--activeItem);
 }
 .login-page__section {
   position: absolute;
@@ -63,6 +63,7 @@
   padding: 40px;
   border-radius: 4px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
+  background-color: var(--primary);
 }
 .login-page__section .login-page__signin .login-page__content {
   position: relative;
