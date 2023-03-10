@@ -86,14 +86,19 @@ function FormKpi() {
                             </Button>
                         </Toolbar>
                     </AppBar>
-                    <List sx={{ width: "60%", margin: "auto" }}>
+                    <List sx={{ backgroundColor:"#2F4550"}}>
                         <TextField
                             id="outlined-basic"
                             label="Name"
                             variant="outlined"
                             sx={{
                                 width: "90%",
-                                margin: "1pc"
+                                margin: "1pc",
+                                '& .MuiOutlinedInput-root': {
+                                    color: "white", // sets the text color to white
+                                    '& fieldset': {
+                                      borderColor: "white", // sets the border color to white
+                                    }}
                             }}
                         />
                         {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}

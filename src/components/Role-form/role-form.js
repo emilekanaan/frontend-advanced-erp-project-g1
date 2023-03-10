@@ -19,89 +19,93 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const theme = createTheme({
-    palette: {
-        primary: { main: "#16202a" },
-        secondary: { main: "#f4f4f9" },
-        activeItem: { main: "#4dedf570" },
-        accent: { main: "#4dedf5" },
-    },
+  palette: {
+    primary: { main: "#16202a" },
+    secondary: { main: "#f4f4f9" },
+    activeItem: { main: "#4dedf570" },
+    accent: { main: "#4dedf5" },
+  },
 });
 
 function RoleForm() {
-    const test = () => {
-        console.log("clicked!!!");
-    };
+  const test = () => {
+    console.log("clicked!!!");
+  };
 
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    return (
-
-
-        <>
-            <ThemeProvider theme={theme}>
-                <Button
-                    onClick={handleClickOpen}
-                    name="Add team"
-                    color="accent"
-                    startIcon={<AddIcon />}
-                    variant="contained"
-                    sx={{
-                        margin: "2pc 0",
-                    }}
-                >
-                    Add Role
-                </Button>
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    TransitionComponent={Transition}
-                >
-                    <AppBar sx={{ position: "relative", width: "500px" }}>
-                        <Toolbar>
-                            <IconButton
-                                edge="start"
-                                color="inherit"
-                                onClick={handleClose}
-                                aria-label="close"
-                            >
-                                <CloseIcon />
-                            </IconButton>
-                            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                                Add New Role
-                            </Typography>
-                            <Button autoFocus color="inherit" onClick={handleClose}>
-                                save
-                            </Button>
-                        </Toolbar>
-                    </AppBar>
-                    <List sx={{ width: "60%", margin: "auto" }}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Name"
-                            variant="outlined"
-                            sx={{
-                                width: "90%",
-                                margin: "1pc"
-                            }}
-                        />
-                        {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
-                    </List>
-                </Dialog>
-            </ThemeProvider>
-        </>
-    );
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <Button
+          onClick={handleClickOpen}
+          name="Add team"
+          color="accent"
+          startIcon={<AddIcon />}
+          variant="contained"
+          sx={{
+            margin: "2pc 0",
+          }}
+        >
+          Add Role
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <AppBar sx={{ position: "relative", width: "500px" }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Add New Role
+              </Typography>
+              <Button autoFocus color="inherit" onClick={handleClose}>
+                save
+              </Button>
+            </Toolbar>
+          </AppBar>
+          <List sx={{backgroundColor:"#2F4550"}}>
+            <TextField
+              id="outlined-basic"
+              label="Name"
+              variant="outlined"
+              sx={{
+                width: "90%",
+                margin: "1pc",
+                "& .MuiOutlinedInput-root": {
+                  color: "white", // sets the text color to white
+                  "& fieldset": {
+                    borderColor: "white", // sets the border color to white
+                  },
+                },
+              }}
+            />
+            {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
+          </List>
+        </Dialog>
+      </ThemeProvider>
+    </>
+  );
 }
 
 export default RoleForm;

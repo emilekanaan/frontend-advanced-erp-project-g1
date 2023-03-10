@@ -2,11 +2,7 @@ import React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useDemoData } from "@mui/x-data-grid-generator";
 import "./list_kpi.css";
-import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Edit from "@mui/icons-material/Edit";
-import Delete from "@mui/icons-material/Delete";
+import { createTheme } from "@mui/material/styles";
 import FormKpi from "../form_kpi/form_kpi";
 import DeleteTeam from "../delete_team/delete_team";
 import EditKpi from "../edit_Form/EditKpi";
@@ -16,34 +12,23 @@ function ListKpi() {
     rowLength: 100,
     maxColumns: 6,
   });
-  const theme = createTheme({
-    palette: {
-      primary: { main: "#16202a" },
-      secondary: { main: "#f4f4f9" },
-      activeItem: { main: "#4dedf570" },
-      accent: { main: "#4dedf5" },
-    },
-  });
 
   const columns = [
-    { field: "id", headerName: "ID", width: 300 },
     { field: "Name", headerName: "Name", width: 300 },
+    { field: "created_at", headerName: "created", width: 180 },
+    { field: "update_at", headerName: "updated", width: 180 },
     {
       field: "edit",
       headerName: "Edit",
       width: 200,
-      renderCell: () => (
-         <EditKpi/>
-      ),
-  },
-  {
-    field: "delete",
-    headerName: "Delete",
-    width: 200,
-    renderCell: () => (
-        <DeleteTeam text="Kpi"/>
-    ),
-},
+      renderCell: () => <EditKpi />,
+    },
+    {
+      field: "delete",
+      headerName: "Delete",
+      width: 200,
+      renderCell: () => <DeleteTeam text="Kpi" />,
+    },
   ];
 
   return (
@@ -56,10 +41,11 @@ function ListKpi() {
         }}
       >
         <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>KPI</h1>
-        <FormKpi/>
+        <FormKpi />
       </section>
       <DataGrid
         rows={data.rows}
+        getRowHeight={() => 70}
         columns={columns} // Pass the columns array as a prop
         slots={{
           toolbar: GridToolbar,
@@ -72,10 +58,7 @@ function ListKpi() {
           color: "#f4f4f9",
 
           fontSize: "20px",
-          "& .MuiDataGrid-cell:hover": {
-            backgroundColor: "#16202A",
-            color: "#F4F4F9",
-          },
+
           "& .MuiDataGrid-cell": {
             backgroundColor: "#2f4550",
             color: "#F4F4F9",
