@@ -9,18 +9,29 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/admin/login")
-      .then((response) => console.log(response))
+      .post(
+        "http://localhost:8000/api/admin/login",
+        {
+          email: email,
+          password: password,
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      
+        
+      })
       .catch((e) => console.log(e));
   };
 
   const handleChange = (e) => {
-    if (e.target.name == "email") {
+    if (e.target.name === "email") {
       setEmail(e.target.value);
-    } else if (e.target.name == "password") {
+    } else if (e.target.name === "password") {
       setPassword(e.target.value);
     }
   };
@@ -295,6 +306,7 @@ function LoginForm() {
           <div className="login-page__content">
             <h2>Sign In</h2>
             <form className="login-page__form" onSubmit={handleSubmit}>
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
               <div className="login-page__inputBox">
                 <input
                   className="login-page__input"
