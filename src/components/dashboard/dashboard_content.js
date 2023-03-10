@@ -7,6 +7,7 @@ import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import WebStoriesSharpIcon from "@mui/icons-material/WebStoriesSharp";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import cookie from "react-cookies";
 
 function DashboardContent(props) {
   const [update, setUpdate] = useState([]);
@@ -15,7 +16,7 @@ function DashboardContent(props) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL}lastsUpdate`)
+      .get(`${process.env.REACT_APP_URL}/lastsUpdate`, { headers: { access_token: cookie.load("access_token") } })
       .then((response) => {
         if (response.status === 200) {
           setUpdate(response.data);
@@ -26,12 +27,12 @@ function DashboardContent(props) {
         console.log(error);
       });
     axios
-      .get(`${process.env.REACT_APP_URL}count`)
+      .get(`${process.env.REACT_APP_URL}/count`, { headers: { access_token: cookie.load("access_token") } })
       .then((response) => {
         if (response.status === 200) {
           setCount(response.data);
           console.log(response.data);
-         
+
         }
       })
       .catch((error) => {
@@ -40,7 +41,7 @@ function DashboardContent(props) {
   }, []);
 
   return (
-    
+
     <div className="dash_board_content">
       <SearchBar className="searchDash" />
       <section className="employee_project_team">
@@ -54,7 +55,7 @@ function DashboardContent(props) {
               }}
             />
             <h1>Project</h1>
-            
+
           </article>
           <span>{count[0]}</span>
         </div>
@@ -86,7 +87,7 @@ function DashboardContent(props) {
         </div>
       </section>
       <section className="bottom">
-    
+
         <LineChart />
       </section>
     </div>

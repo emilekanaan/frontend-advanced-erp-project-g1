@@ -14,7 +14,7 @@ export default function ListEmployee() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/employee")
+      .get(`${process.env.REACT_APP_URL}/employee`)
       .then((response) => {
         if (response.status === 200) {
           setEmployeeTable(response.data.data);
@@ -59,12 +59,14 @@ export default function ListEmployee() {
       field: "edit",
       headerName: "Edit",
       width: 84,
+
       renderCell: () => <EditEmployee />,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 84,
+
       renderCell: () => <DeleteTeam text="employee" />,
     },
   ];
@@ -76,6 +78,7 @@ export default function ListEmployee() {
           <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
 
           <FormEmployee />
+
         </section>
         <DataGrid
           rows={EmployeeTable}
