@@ -4,16 +4,24 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import Delete from "@mui/icons-material/Delete";
+import axios from "axios";
 function DeleteTeam(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+
     setOpen(true);
+
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+  const handleCloseDelete=()=>{
+    console.log(props)
+    setOpen(false);
+    axios.delete(`${process.env.REACT_APP_URL}/${props.url}/${props.Id}`).then((response)=>console.log(response)).catch((error)=>console.log(error));
+  }
 
   return (
     <div>
@@ -58,7 +66,7 @@ function DeleteTeam(props) {
             Cancle
           </Button>
           <Button
-            onClick={handleClose}
+            onClick={handleCloseDelete}
             variant="contained"
             autoFocus
             color="error"

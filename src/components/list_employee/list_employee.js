@@ -2,7 +2,7 @@ import * as React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import "./list_employee.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import EmployeeProfile from "../profileEmployee";
+import EmployeeProfile from "../profileEmployee/profileEmployee";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteTeam from "../delete_team/delete_team";
@@ -18,8 +18,6 @@ export default function ListEmployee() {
       .then((response) => {
         if (response.status === 200) {
           setEmployeeTable(response.data.data);
-
-          console.log(response.data.data[1].team.name);
         }
       })
       .catch((error) => {
@@ -37,6 +35,7 @@ export default function ListEmployee() {
   });
 
   const columns = [
+    { field: "id" },
     { field: "first_name", headerName: "First Name", width: 150 },
     { field: "last_name", headerName: "Last Name", width: 150 },
     { field: "email", headerName: "Email", width: 250 },
@@ -47,27 +46,34 @@ export default function ListEmployee() {
       field: "name",
       headerName: "Team",
       width: 150,
-      valueGetter: (params) => params.row.team.name,
+      valueGetter: (params) => {
+        if (params.row.team && params.row.team.name) {
+          return params.row.team.name;
+        }
+        return "No team yet";
+      },
     },
     {
       field: "showprofile",
       headerName: "Show profile",
       width: 150,
-      renderCell: () => <EmployeeProfile />,
+      renderCell: (params) => {
+        return <EmployeeProfile Id={params.row.id} />;
+      },
     },
     {
       field: "edit",
       headerName: "Edit",
       width: 84,
 
-      renderCell: () => <EditEmployee />,
+      renderCell: (params) => <EditEmployee Id={params.row.id}/>,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 84,
 
-      renderCell: () => <DeleteTeam text="employee" />,
+      renderCell: (params) => <DeleteTeam text="employee" Id={params.row.id} url="employee"/>,
     },
   ];
 
@@ -78,12 +84,12 @@ export default function ListEmployee() {
           <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
 
           <FormEmployee />
-
         </section>
         <DataGrid
           rows={EmployeeTable}
           getRowHeight={() => 70}
-          columns={columns} // Pass the columns array as a prop
+          columns={columns.filter((column) => column.field !== "id")}
+          columnBuffer={2}
           slots={{
             toolbar: GridToolbar,
           }}
@@ -91,11 +97,8 @@ export default function ListEmployee() {
             marginTop: "25px",
             boxShadow: "1px 2px 3px 3px rgba(0,0,0,0.63)",
             border: "1px solid #16202A ",
-
             color: "#f4f4f9",
-
             fontSize: "20px",
-
             "& .MuiDataGrid-cell": {
               backgroundColor: "#2f4550",
               color: "#F4F4F9",

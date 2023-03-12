@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import axios from "axios";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -16,19 +17,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -38,54 +26,78 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelectPlaceholder() {
+export default function SingleSelectPlaceholder(props) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState("");
+  const [names, setNames] = React.useState([]);
+
+  React.useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_URL}/team`)
+      .then((response) => {
+        if (response.status === 200) {
+          if (response.data.data) {
+            setNames(response.data.data);
+            console.log(response.data.data)
+           
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
+    setPersonName(value);
+    const data = [names.find((name) => name.name === value).id];
+    props.onChildData(data);
+    console.log(data);
   };
 
   return (
     <div>
-      <FormControl sx={{ m: 1.5, width: "91%", mt: 3 ,  '& .MuiOutlinedInput-root': {
-                    color: "white", // sets the text color to white
-                    '& fieldset': {
-                      borderColor: "white", // sets the border color to white
-                    }}
-               }}>
+      <FormControl
+        sx={{
+          m: 1.5,
+          width: "91%",
+          mt: 3,
+          "& .MuiOutlinedInput-root": {
+            color: "white",
+            "& fieldset": {
+              borderColor: "white",
+            },
+          },
+        }}
+      >
         <Select
-          multiple
-          displayEmpty
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput />}
           renderValue={(selected) => {
-            if (selected.length === 0) {
-              return <em>Placeholder</em>;
+            if (!selected) {
+              return <em>Team</em>;
             }
 
-            return selected.join(', ');
+            return selected;
           }}
           MenuProps={MenuProps}
-          inputProps={{ 'aria-label': 'Without label' }}
+          inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem disabled value="">
             <em>Placeholder</em>
           </MenuItem>
           {names.map((name) => (
+     
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={name.id}
+              value={name.name}
+              style={getStyles(name.name, personName, theme)}
             >
-              {name}
+              {name.name}
             </MenuItem>
           ))}
         </Select>
