@@ -16,12 +16,12 @@ function DashboardContent(props) {
 
   useEffect(() => {
     let token = cookie.load("access_token");
-    axios
-
+    token && axios
       .get(`${process.env.REACT_APP_URL}/lastsUpdate`, { headers: { Authorization: `Bearer ${token}` } })
       .then((response) => {
         if (response.status === 200) {
           setUpdate(response.data);
+          console.log(token)
           console.log(response.data);
           console.log(cookie.load("access_token"));
         }
