@@ -41,7 +41,7 @@ export default function ListEmployee() {
     { field: "email", headerName: "Email", width: 250 },
     { field: "phone_num", headerName: "Phone", width: 150 },
     { field: "created_at", headerName: "created", width: 180 },
-    { field: "update_at", headerName: "updated", width: 180 },
+    { field: "updated_at", headerName: "updated", width: 180 },
     {
       field: "name",
       headerName: "Team",
