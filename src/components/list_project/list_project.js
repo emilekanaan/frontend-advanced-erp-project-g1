@@ -15,7 +15,9 @@ function ListProject() {
   useEffect(() => {
     let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/project`, { headers: { Authorization: `Bearer ${token}` } })
+      .get(`${process.env.REACT_APP_URL}/project`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           setProjectTable(response.data.data);
@@ -50,7 +52,9 @@ function ListProject() {
       field: "delete",
       headerName: "Delete",
       width: 84,
-      renderCell: (params) => <DeleteTeam text="project" Id={params.row.id} url="project" />,
+      renderCell: (params) => (
+        <DeleteTeam text="project" Id={params.row.id} url="project" />
+      ),
     },
   ];
 

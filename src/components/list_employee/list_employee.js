@@ -15,7 +15,9 @@ export default function ListEmployee() {
   useEffect(() => {
     let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/employee`, { headers: { Authorization: `Bearer ${token}` } })
+      .get(`${process.env.REACT_APP_URL}/employee`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           setEmployeeTable(response.data.data);
@@ -74,7 +76,9 @@ export default function ListEmployee() {
       headerName: "Delete",
       width: 84,
 
-      renderCell: (params) => <DeleteTeam text="employee" Id={params.row.id} url="employee" />,
+      renderCell: (params) => (
+        <DeleteTeam text="employee" Id={params.row.id} url="employee" />
+      ),
     },
   ];
 

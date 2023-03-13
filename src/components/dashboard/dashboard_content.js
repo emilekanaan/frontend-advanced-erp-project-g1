@@ -13,31 +13,33 @@ function DashboardContent(props) {
   const [update, setUpdate] = useState([]);
   const [count, setCount] = useState([]);
 
-
   useEffect(() => {
     let token = cookie.load("access_token");
-    token && axios
-      .get(`${process.env.REACT_APP_URL}/lastsUpdate`, { headers: { Authorization: `Bearer ${token}` } })
-      .then((response) => {
-        if (response.status === 200) {
-          setUpdate(response.data);
-          console.log(token)
-          console.log(response.data);
+    token &&
+      axios
+        .get(`${process.env.REACT_APP_URL}/lastsUpdate`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            setUpdate(response.data);
+            console.log(token);
+            console.log(response.data);
+            console.log(cookie.load("access_token"));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
           console.log(cookie.load("access_token"));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log(cookie.load("access_token"));
-      });
+        });
     axios
-      .get(`${process.env.REACT_APP_URL}/count`, { headers: { Authorization: `Bearer ${token}` } })
+      .get(`${process.env.REACT_APP_URL}/count`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           setCount(response.data);
           console.log(response.data);
-
-
         }
       })
       .catch((error) => {
@@ -46,7 +48,6 @@ function DashboardContent(props) {
   }, []);
 
   return (
-
     <div className="dash_board_content">
       <SearchBar className="searchDash" />
       <section className="employee_project_team">
@@ -60,7 +61,6 @@ function DashboardContent(props) {
               }}
             />
             <h1>Project</h1>
-
           </article>
           <span>{count[0]}</span>
         </div>
@@ -92,7 +92,6 @@ function DashboardContent(props) {
         </div>
       </section>
       <section className="bottom">
-
         <LineChart />
       </section>
     </div>

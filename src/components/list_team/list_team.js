@@ -19,13 +19,14 @@ function ListTeam() {
 
   useEffect(() => {
     getAllTeams();
-
   }, []);
 
   const getAllTeams = () => {
     let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/team`, { headers: { Authorization: `Bearer ${token}` } })
+      .get(`${process.env.REACT_APP_URL}/team`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         setData(response.data);
         setTableData(response.data.data);
@@ -34,8 +35,6 @@ function ListTeam() {
         console.log(error);
       });
   };
-
-
 
   // const { data } = useDemoData({
   //   dataSet: "Employee", // Change the data set to "Employee"
@@ -102,7 +101,6 @@ function ListTeam() {
         rows={tableData}
         getRowHeight={() => 70}
         columns={columns.filter((column) => column.field !== "id")} // Pass the columns array as a prop
-
         slots={{
           toolbar: GridToolbar,
         }}
