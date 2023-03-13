@@ -22,10 +22,15 @@ function LoginForm() {
       .then((response) => {
         if (response.status === 200) {
           cookie.save("access_token", JSON.stringify(response.data.access_token), {
+            
             maxAge: 5 * 60 * 60 * 1000,
           });
+          const accessToken = response.data.access_token;
+          axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
           setLoggedIn(true);
         }
+        console.log(response.data.access_token);
+        
       })
       .catch((e) => {
         if (e.message === "Request failed with status code 401") {

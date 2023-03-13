@@ -17,15 +17,18 @@ function DashboardContent(props) {
   useEffect(() => {
     let token = cookie.load("access_token");
     axios
+
       .get(`${process.env.REACT_APP_URL}/lastsUpdate`, { headers: { Authorization: `Bearer ${token}` } })
       .then((response) => {
         if (response.status === 200) {
           setUpdate(response.data);
           console.log(response.data);
+          console.log(cookie.load("access_token"));
         }
       })
       .catch((error) => {
         console.log(error);
+        console.log(cookie.load("access_token"));
       });
     axios
       .get(`${process.env.REACT_APP_URL}/count`, { headers: { Authorization: `Bearer ${token}` } })
@@ -33,6 +36,7 @@ function DashboardContent(props) {
         if (response.status === 200) {
           setCount(response.data);
           console.log(response.data);
+
 
         }
       })
