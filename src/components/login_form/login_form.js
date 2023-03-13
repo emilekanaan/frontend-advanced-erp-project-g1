@@ -15,7 +15,7 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_URL}/admin/login`, {
+      .post(`${process.env.REACT_APP_URL}/login`, {
         email: email,
         password: password,
       })
@@ -34,9 +34,9 @@ function LoginForm() {
       })
       .catch((e) => {
         if (e.message === "Request failed with status code 401") {
-          setError(e.response.data["error"]);
+          console.log(e);
         } else {
-          setError(e.message);
+          console.log(e);
         }
       });
   };

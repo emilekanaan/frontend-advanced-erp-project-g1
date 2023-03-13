@@ -11,7 +11,6 @@ import EditEmployee from "../edit_Form/EditEmployee";
 
 export default function ListEmployee() {
   const [EmployeeTable, setEmployeeTable] = useState([]);
-
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_URL}/employee`)
