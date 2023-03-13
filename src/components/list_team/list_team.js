@@ -11,6 +11,7 @@ import DeleteTeam from "../delete_team/delete_team";
 import EditTeam from "../edit_Form/EditTeam";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import cookie from "react-cookies";
 
 function ListTeam() {
   const [tableData, setTableData] = useState([]);
@@ -22,8 +23,9 @@ function ListTeam() {
   }, []);
 
   const getAllTeams = () => {
+    let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/team`)
+      .get(`${process.env.REACT_APP_URL}/team`, { headers: { Authorization: `Bearer ${token}` } })
       .then((response) => {
         setData(response.data);
         setTableData(response.data.data);

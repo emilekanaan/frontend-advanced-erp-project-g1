@@ -7,12 +7,15 @@ import DeleteTeam from "../delete_team/delete_team";
 import EditProject from "../edit_Form/EditProject";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import cookie from "react-cookies";
+
 function ListProject() {
   const [projectTable, setProjectTable] = useState([]);
 
   useEffect(() => {
+    let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/project`)
+      .get(`${process.env.REACT_APP_URL}/project`, { headers: { Authorization: `Bearer ${token}` } })
       .then((response) => {
         if (response.status === 200) {
           setProjectTable(response.data.data);
@@ -41,13 +44,13 @@ function ListProject() {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: (params) => <EditProject Id={params.row.id}/>,
+      renderCell: (params) => <EditProject Id={params.row.id} />,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 84,
-      renderCell: (params) => <DeleteTeam text="project"  Id={params.row.id} url="project"/>,
+      renderCell: (params) => <DeleteTeam text="project" Id={params.row.id} url="project" />,
     },
   ];
 
