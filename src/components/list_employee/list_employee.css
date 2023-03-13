@@ -7,3 +7,8 @@
 .css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
     color:grey;
 }
+.MuiDataGrid-colCell[data-field="id"],
+.MuiDataGrid-cell[data-field="id"],
+.MuiDataGrid-colHeader[data-field="id"] {
+  display: none;
+}
