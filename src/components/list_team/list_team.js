@@ -9,8 +9,22 @@ import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import DeleteTeam from "../delete_team/delete_team";
 import EditTeam from "../edit_Form/EditTeam";
+import {useState, useEffect} from "react";
+import axios from 'axios';
 
 function ListTeam() {
+  const [TeamTable, setTeamTable] = useState([]);
+  useEffect(() => {
+    axios
+       .get(`${process.env.REACT_APP_URL}/team`)
+       .then((response) => {
+        console.log(response)
+        setTeamTable(response.data.data);
+       })
+       .catch((error) => {
+        console.log(error);
+       })
+  },[])
   const { data } = useDemoData({
     dataSet: "Employee", // Change the data set to "Employee"
     rowLength: 100,
@@ -20,7 +34,7 @@ function ListTeam() {
 
   const columns = [
    
-    { field: "Name", headerName: "Name", width: 270 },
+    { field: "name", headerName: "Name", width: 270 },
     { field: "created_at", headerName: "created", width: 180 },
     { field: "update_at", headerName: "updated", width: 180 },
     {
@@ -49,13 +63,13 @@ function ListTeam() {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: () => <EditTeam />,
+      renderCell: (params) => <EditTeam Id={params.row.id} />,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 150,
-      renderCell: () => <DeleteTeam />,
+      renderCell: (params) => <DeleteTeam text="team" Id={params.row.id} url="team"/>,
     },
   ];
 
@@ -72,7 +86,7 @@ function ListTeam() {
         <FormTeam />
       </section>
       <DataGrid
-        rows={data.rows}
+        rows={TeamTable}
         getRowHeight={() => 70} 
         columns={columns} // Pass the columns array as a prop
         slots={{

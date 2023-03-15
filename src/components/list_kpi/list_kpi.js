@@ -6,28 +6,39 @@ import { createTheme } from "@mui/material/styles";
 import FormKpi from "../form_kpi/form_kpi";
 import DeleteTeam from "../delete_team/delete_team";
 import EditKpi from "../edit_Form/EditKpi";
+import { useState, useEffect } from "react";
+import axios from "axios";
 function ListKpi() {
-  const { data } = useDemoData({
-    dataSet: "Employee", // Change the data set to "Employee"
-    rowLength: 100,
-    maxColumns: 6,
-  });
+  const[KpiTable, setKpiTable] =useState([]);
+  useEffect(() => {
+    axios
+    .get(`${process.env.REACT_APP_URL}/kpi`)
+    .then((response) => {
+      if(response.status===200) {
+        console.log(response)
+        setKpiTable(response.data.message.data);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  },[]);
 
   const columns = [
-    { field: "Name", headerName: "Name", width: 300 },
+    { field: "name", headerName: "Name", width: 300 },
     { field: "created_at", headerName: "created", width: 180 },
     { field: "update_at", headerName: "updated", width: 180 },
     {
       field: "edit",
       headerName: "Edit",
       width: 200,
-      renderCell: () => <EditKpi />,
+      renderCell: (params) => <EditKpi Id={params.row.id}/>,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 200,
-      renderCell: () => <DeleteTeam text="Kpi" />,
+      renderCell: (params) => <DeleteTeam text="Kpi" Id={params.row.id} url="kpi"/>,
     },
   ];
 
@@ -44,7 +55,7 @@ function ListKpi() {
         <FormKpi />
       </section>
       <DataGrid
-        rows={data.rows}
+        rows={KpiTable}
         getRowHeight={() => 70}
         columns={columns} // Pass the columns array as a prop
         slots={{

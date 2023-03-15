@@ -8,7 +8,8 @@ import Slide from "@mui/material/Slide";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-
+import { useState } from "react";
+import axios from "axios";
 import List from "@mui/material/List";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -27,7 +28,10 @@ const theme = createTheme({
   },
 });
 
-function EditTeam() {
+function EditTeam(props) {
+  const [Name,setName] = useState("")
+  const [dataFromteam, setDataFromTeam] = useState("");
+  const [error , setError] = useState("");
   const test = () => {
     console.log("clicked!!!");
   };
@@ -41,6 +45,29 @@ function EditTeam() {
   const handleClose = () => {
     setOpen(false);
   };
+  function handleChildData(data) {
+    console.log(data);
+    setDataFromTeam(data);
+}
+const handleSubmit = (e) => {
+    console.log(props);
+    e.preventDefault();
+    const formData=new FormData();
+    if (Name) formData.append("name",Name);
+    formData.append("_method","PATCH");
+    console.log(Name);
+    axios
+        .post(`${process.env.REACT_APP_URL}/team/${props.Id}`,formData)
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error ) =>{
+            console.log(error)
+            setError("Invalid credentials");
+
+        });
+
+}
 
   return (
     <>
@@ -65,6 +92,8 @@ function EditTeam() {
           onClose={handleClose}
           TransitionComponent={Transition}
         >
+        <form action="POST" onSubmit={handleSubmit} >
+
           <AppBar sx={{ position: "relative", width: "500px" }}>
             <Toolbar>
               <IconButton
@@ -78,7 +107,7 @@ function EditTeam() {
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                 Edit Team
               </Typography>
-              <Button autoFocus color="inherit" onClick={handleClose}>
+              <Button autoFocus color="inherit" onClick={handleClose} type="submit">
                 save
               </Button>
             </Toolbar>
@@ -87,6 +116,7 @@ function EditTeam() {
             <TextField
               id="outlined-basic"
               label="Name"
+              onChange={(e) => setName (e.target.value)}
               variant="outlined"
               sx={{
                 width: "90%",
@@ -100,6 +130,7 @@ function EditTeam() {
             />
             {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
           </List>
+          </form>
         </Dialog>
       </ThemeProvider>
     </>
