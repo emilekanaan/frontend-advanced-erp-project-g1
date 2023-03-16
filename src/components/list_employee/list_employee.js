@@ -8,13 +8,16 @@ import axios from "axios";
 import DeleteTeam from "../delete_team/delete_team";
 import FormEmployee from "../form_employee/form_employee";
 import EditEmployee from "../edit_Form/EditEmployee";
+import cookie from "react-cookies";
 
 export default function ListEmployee() {
   const [EmployeeTable, setEmployeeTable] = useState([]);
-
   useEffect(() => {
+    let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/employee`)
+      .get(`${process.env.REACT_APP_URL}/employee`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           setEmployeeTable(response.data.data);
@@ -41,7 +44,7 @@ export default function ListEmployee() {
     { field: "email", headerName: "Email", width: 250 },
     { field: "phone_num", headerName: "Phone", width: 150 },
     { field: "created_at", headerName: "created", width: 180 },
-    { field: "update_at", headerName: "updated", width: 180 },
+    { field: "updated_at", headerName: "updated", width: 180 },
     {
       field: "name",
       headerName: "Team",
@@ -66,14 +69,16 @@ export default function ListEmployee() {
       headerName: "Edit",
       width: 84,
 
-      renderCell: (params) => <EditEmployee Id={params.row.id}/>,
+      renderCell: (params) => <EditEmployee Id={params.row.id} />,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 84,
 
-      renderCell: (params) => <DeleteTeam text="employee" Id={params.row.id} url="employee"/>,
+      renderCell: (params) => (
+        <DeleteTeam text="employee" Id={params.row.id} url="employee" />
+      ),
     },
   ];
 

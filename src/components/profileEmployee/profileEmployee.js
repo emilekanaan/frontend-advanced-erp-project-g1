@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import axios from "axios";
 import profile from "./profile.jpeg";
 import "./profile.css";
@@ -81,7 +81,6 @@ function EmployeeProfile(props) {
       accent: { main: "#4dedf5" },
     },
   });
-  const [selectedId, setSelectedId] = useState(null);
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -102,10 +101,12 @@ function EmployeeProfile(props) {
           <ContactPageOutlinedIcon />
         </Button>
         <Dialog
-          fullScreen
+        fullScreen
+       sx={{width:"70%" ,height:"80%", margin:"auto"}}
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
+
         >
           <AppBar>
             <Toolbar>
@@ -117,7 +118,7 @@ function EmployeeProfile(props) {
               >
                 <CloseIcon />
               </IconButton>
-              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              <Typography  variant="h6" component="div">
                 Employee Profile
               </Typography>
             </Toolbar>
@@ -128,13 +129,13 @@ function EmployeeProfile(props) {
             <section
               style={{ display: "flex", marginTop: "70px", marginLeft: "7%" }}
             >
-              <img
+              {/* <img
                 src={profile}
                 alt=""
                 width={300}
                 height={350}
                 className="profileImage"
-              />
+              /> */}
               <section
                 style={{ marginLeft: "50px", color: "white", marginTop: "5%" }}
               >

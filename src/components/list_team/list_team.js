@@ -9,34 +9,46 @@ import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import DeleteTeam from "../delete_team/delete_team";
 import EditTeam from "../edit_Form/EditTeam";
-import {useState, useEffect} from "react";
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import cookie from "react-cookies";
 
 function ListTeam() {
-  const [TeamTable, setTeamTable] = useState([]);
-  useEffect(() => {
-    axios
-       .get(`${process.env.REACT_APP_URL}/team`)
-       .then((response) => {
-        console.log(response)
-        setTeamTable(response.data.data);
-       })
-       .catch((error) => {
-        console.log(error);
-       })
-  },[])
-  const { data } = useDemoData({
-    dataSet: "Employee", // Change the data set to "Employee"
-    rowLength: 100,
-    maxColumns: 5,
-  });
+  const [tableData, setTableData] = useState([]);
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    getAllTeams();
+  }, []);
+
+  const getAllTeams = () => {
+    let token = cookie.load("access_token");
+    axios
+      .get(`${process.env.REACT_APP_URL}/team`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setData(response.data);
+        setTableData(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // const { data } = useDemoData({
+  //   dataSet: "Employee", // Change the data set to "Employee"
+  //   rowLength: 5,
+  //   maxColumns: 5,
+  // });
+
+  console.log(data);
 
   const columns = [
-   
+    { field: "id" },
     { field: "name", headerName: "Name", width: 270 },
     { field: "created_at", headerName: "created", width: 180 },
-    { field: "update_at", headerName: "updated", width: 180 },
+    { field: "updated_at", headerName: "updated", width: 180 },
     {
       field: "showTeam",
       headerName: "Show Team",
@@ -86,9 +98,9 @@ function ListTeam() {
         <FormTeam />
       </section>
       <DataGrid
-        rows={TeamTable}
-        getRowHeight={() => 70} 
-        columns={columns} // Pass the columns array as a prop
+        rows={tableData}
+        getRowHeight={() => 70}
+        columns={columns.filter((column) => column.field !== "id")} // Pass the columns array as a prop
         slots={{
           toolbar: GridToolbar,
         }}
