@@ -42,7 +42,6 @@ function DashboardContent(props) {
             setKpi2(response.data[3][1]);
            setRole1(response.data[4][0])
            setRole2(response.data[4][1])
-
           }
         })
         .catch((error) => {
@@ -56,7 +55,6 @@ function DashboardContent(props) {
       .then((response) => {
         if (response.status === 200) {
           setCount(response.data);
-          console.log(response.data);
         }
       })
       .catch((error) => {

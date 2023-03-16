@@ -106,7 +106,7 @@ function FormEmployee() {
       <ThemeProvider theme={theme}>
         <Button
           onClick={handleClickOpen}
-          name="Add team"
+          name="Add employee"
           color="accent"
           startIcon={<AddIcon />}
           variant="contained"
