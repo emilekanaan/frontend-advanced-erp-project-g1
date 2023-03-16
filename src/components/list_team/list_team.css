@@ -1,5 +1,12 @@
 .team-table {
   height: 75%;
-  width: 65%;
+  width: 73%;
   margin: 40px auto;
+}
+.project_team{
+  padding-left: 5px;
+}
+.projectemployeeData{
+  font-size: 23px;
+
 }

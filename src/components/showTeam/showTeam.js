@@ -10,56 +10,39 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
-import {useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import profile from "./profile.jpeg";
-import "./profile.css";
-import { motion } from "framer-motion";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-function EmployeeProfile(props) {
-  const [evaluation, setEvaluation] = useState([]);
-  const [role, setRole] = useState([]);
-  const [employeeProfile, setEmployeeProfile] = useState({});
+function ShowTeam(props) {
   const [team, setTeam] = useState([]);
-
+  const [project,setProject]=useState([])
   const test = () => {
     console.log("clicked!!!");
   };
-
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     console.log(props);
     axios
-      .get(`${process.env.REACT_APP_URL}/employee/${props.Id}`)
+      .get(`${process.env.REACT_APP_URL}/team/${props.Id}`)
       .then((response) => {
         if (response.status === 200) {
-          setEmployeeProfile(response.data.message[0]);
-          setTeam(response.data.message[0].team);
-          console.log(response.data.message[0].team);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    axios
-      .get(`${process.env.REACT_APP_URL}/evaluation/${props.Id}`)
-      .then((response) => {
-        if (response.status === 200) {
+          console.log(response.data.message);
+          setTeam(response.data.message[0]);
+          console.log(team);
         }
       })
       .catch((error) => {
         console.log(error);
       });
     axios
-      .get(`${process.env.REACT_APP_URL}/employee-project-role/${props.Id}`)
+      .get(`${process.env.REACT_APP_URL}/projectTeam/${props.Id}`)
       .then((response) => {
         if (response.status === 200) {
+          console.log(response.data.message);
+          setProject(response.data.message)
         }
       })
       .catch((error) => {
@@ -101,14 +84,11 @@ function EmployeeProfile(props) {
           <ContactPageOutlinedIcon />
         </Button>
         <Dialog
-        fullScreen
-       sx={{width:"70%" ,height:"80%", margin:"auto"}}
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
-
         >
-          <AppBar>
+          <AppBar sx={{ position: "relative", width: "500px" }}>
             <Toolbar>
               <IconButton
                 edge="start"
@@ -118,39 +98,27 @@ function EmployeeProfile(props) {
               >
                 <CloseIcon />
               </IconButton>
-              <Typography  variant="h6" component="div">
-                Employee Profile
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                {team.name} projects
               </Typography>
             </Toolbar>
           </AppBar>
           <List
-            sx={{ backgroundColor: "#2F4550", width: "100%", height: "100%" }}
+            sx={{
+              backgroundColor: "#2F4550",
+              padding: "100",
+              color: "#f4f4f9",
+            }}
           >
-            <section
-              style={{ display: "flex", marginTop: "70px", marginLeft: "7%" }}
-            >
-           
-              <section
-                style={{ marginLeft: "50px", color: "white", marginTop: "5%" }}
-              >
-                <h1>
-                  Name : {employeeProfile.first_name}{" "}
-                  {employeeProfile.last_name}
-                </h1>
-                <h1>Phone: {employeeProfile.phone_num}</h1>
-                <h1>Email :{employeeProfile.email}</h1>
-                <h1>Team :{team.name}</h1>
-              </section>
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ rotate: 180, scale: 1 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20,
-                }}
-                style={{ marginTop: "50px" }}
-              />
+            <section>
+         
+              {
+                project.map(pro=>{
+                  return (
+                   <h3 className="projectemployeeData"> {pro.name}</h3>
+                  )
+                })
+              }
             </section>
           </List>
         </Dialog>
@@ -159,4 +127,4 @@ function EmployeeProfile(props) {
   );
 }
 
-export default EmployeeProfile;
+export default ShowTeam;

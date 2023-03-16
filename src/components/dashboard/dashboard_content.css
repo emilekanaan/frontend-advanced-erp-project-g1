@@ -11,7 +11,7 @@
     #0000002f 100%
   );
   transition: 0.5s;
-  width: 300px;
+  width: 200px;
   height: 150px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px #00000055;
@@ -22,14 +22,9 @@
 }
 .employee_project_team {
   display: flex;
-  justify-content: space-around;
-  margin-top: 5%;
+  justify-content: space-between;
 }
 
-.bottom {
-  display: flex;
-  justify-content: space-around;
-}
 .dash_title {
   display: flex;
   justify-content: center;
@@ -38,29 +33,83 @@
   margin-left: 10px;
   color: var(--secondary);
 }
-.dash_board_content {
+.dashboard-content {
   margin: auto;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
 }
-@media (max-width: 1545px) {
-  .employee_project_team div {
-    width: 300px;
-  }
-  .recently {
-    width: 400px;
-  }
-  .searchDash {
-    margin-right: 50px;
-  }
-}
+@media (max-width: 1517px) {
+ .dashboard-content{
+  flex-direction: column-reverse;
+ }
+ aside{
+  margin: auto;
 
-.dash_board_content .recently div {
-  background-color: var(--primary);
+ }
+ .left{
+  margin: auto;
+width: 100%;
+ }
+ .employee_project_team {
+  flex-wrap: wrap;
+ }
+ .employee_project_team div{
+  margin: 5px;
+
+ }
 }
-.employee_project_team div {
-  background-color: var(--primary);
+.recently {
+  background: linear-gradient(
+    -120deg,
+    #4b6069b0 10%,
+    #273b46 60%,
+    #0000002f 100%
+  );
+  transition: 0.5s;
+  width: 600px;
+  height: 700px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px #00000055;
+  font-size: 27px;
+  color:#f4f4f9;
+  overflow-y: scroll;
+  margin-top: 7%;
 }
-.dash_board_content span {
+.recently h3{
+  font-size: 25px;
+}
+.left {
+  width: 50%;
+}
+.left span {
   margin: 48%;
   font-size: 35px;
   color: var(--secondary);
+}
+.recentlyTitle{
+text-align: center;
+padding: 15px;
+}
+h3{
+  text-align: center;
+}
+@media (max-width: 695px) {
+  .recently{
+    width: 85%;
+    margin: auto;
+    font-size: 15px;
+  }
+  .recently h3{
+    font-size: 20px;
+  }
+}
+@media (max-width: 420px) {
+  .employee_project_team{
+    flex-direction: column;
+    margin: auto;
+  }
+  .employee_project_team div {
+    margin: 7px;
+  }
 }
