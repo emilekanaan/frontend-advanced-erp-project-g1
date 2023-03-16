@@ -75,13 +75,13 @@ function ListTeam() {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: () => <EditTeam />,
+      renderCell: (params) => <EditTeam Id={params.row.id} />,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 150,
-      renderCell: () => <DeleteTeam />,
+      renderCell: (params) => <DeleteTeam text="team" Id={params.row.id} url="team"/>,
     },
   ];
 

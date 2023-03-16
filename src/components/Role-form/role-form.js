@@ -17,6 +17,8 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
+import { useState } from "react";
+import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -32,6 +34,9 @@ const theme = createTheme({
 });
 
 function RoleForm() {
+  const [role, setRole] = useState("");
+  const [dataFromrole, setDataFromRole] = useState("");
+  const [error, setError] = useState("");
   const test = () => {
     console.log("clicked!!!");
   };
@@ -44,6 +49,19 @@ function RoleForm() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleSubmit=(e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("role",role);
+    console.log(role);
+    axios
+       .post(`${process.env.REACT_APP_URL}/role`,formData)
+       .then((response) => {console.log(response)})
+       .catch((error) => {
+        setError("Invalid credentials")
+        console.log(error)
+       })
   };
 
   return (
@@ -66,6 +84,8 @@ function RoleForm() {
           onClose={handleClose}
           TransitionComponent={Transition}
         >
+       <form action="POST" onSubmit={handleSubmit}>
+
           <AppBar sx={{ position: "relative", width: "500px" }}>
             <Toolbar>
               <IconButton
@@ -79,7 +99,7 @@ function RoleForm() {
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                 Add New Role
               </Typography>
-              <Button autoFocus color="inherit" onClick={handleClose}>
+              <Button autoFocus color="inherit" onClick={handleClose} type="submit">
                 save
               </Button>
             </Toolbar>
@@ -89,6 +109,7 @@ function RoleForm() {
               id="outlined-basic"
               label="Name"
               variant="outlined"
+              onChange={(e)=>setRole(e.target.value)}
               sx={{
                 width: "90%",
                 margin: "1pc",
@@ -102,6 +123,7 @@ function RoleForm() {
             />
             {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
           </List>
+          </form>
         </Dialog>
       </ThemeProvider>
     </>
