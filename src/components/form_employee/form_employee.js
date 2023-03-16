@@ -17,6 +17,8 @@ import MultipleSelectPlaceholder from "../DropDown";
 import { useState } from "react";
 import { Alert } from "@mui/material";
 import cookie from "react-cookies";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -38,7 +40,6 @@ function FormEmployee() {
   const [email, setEmail] = useState("");
   const [phone_num, setPhoneNum] = useState("");
   const [dataFromteam, setDataFromteam] = useState("");
-  const [error, setError] = useState("");
 
   const test = () => {
     console.log("clicked!!!");
@@ -74,9 +75,29 @@ function FormEmployee() {
       .post(`${process.env.REACT_APP_URL}/employee`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => { })
+      .then((response) => {
+        return toast(" added employee!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: { backgroundColor: "#4dedf5", color: "#16202a" },
+        });
+      })
       .catch((error) => {
-        setError("Invalid credentials");
+        toast.error("invalid credintali", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
   };
 
@@ -131,8 +152,6 @@ function FormEmployee() {
             </AppBar>
             <List sx={{ backgroundColor: "#2F4550" }}>
               <section style={{ marginLeft: "19px" }}>
-                {error && <Alert severity="error">{error}</Alert>}
-
                 <TextField
                   id="outlined-basic"
                   label="First Name"

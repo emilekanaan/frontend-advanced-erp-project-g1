@@ -17,6 +17,9 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
+import MultipleSelectPlaceholder from "../DropDown";
+import { useState } from "react";
+import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -32,6 +35,9 @@ const theme = createTheme({
 });
 
 function FormKpi() {
+    const [name, setName] = useState("");
+    const [dataFromteam, setDataFromKpi] = useState("");
+    const [error, setError] = useState("");
     const test = () => {
         console.log("clicked!!!");
     };
@@ -44,6 +50,19 @@ function FormKpi() {
 
     const handleClose = () => {
         setOpen(false);
+    };
+    const handleSumbit =(e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("name", name);
+        console.log(name);
+        axios
+              .post(`${process.env.REACT_APP_URL}/kpi`,formData)
+              .then ((response) => {console.log(response)})
+              .catch((error) => {
+               setError("Invalid credentials")
+               console.log(error)
+                })
     };
 
     return (
@@ -68,6 +87,8 @@ function FormKpi() {
                     onClose={handleClose}
                     TransitionComponent={Transition}
                 >
+                <form action="POST" onSubmit={handleSumbit}>
+
                     <AppBar sx={{ position: "relative", width: "500px" }}>
                         <Toolbar>
                             <IconButton
@@ -81,16 +102,18 @@ function FormKpi() {
                             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                                 Add New KPI
                             </Typography>
-                            <Button autoFocus color="inherit" onClick={handleClose}>
+                            <Button autoFocus color="inherit" onClick={handleClose} type="submit">
                                 save
                             </Button>
                         </Toolbar>
                     </AppBar>
                     <List sx={{ backgroundColor:"#2F4550"}}>
+                       
                         <TextField
                             id="outlined-basic"
                             label="Name"
                             variant="outlined"
+                            onChange={(e)=>setName(e.target.value)}
                             sx={{
                                 width: "90%",
                                 margin: "1pc",
@@ -103,6 +126,7 @@ function FormKpi() {
                         />
                         {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
                     </List>
+                </form>
                 </Dialog>
             </ThemeProvider>
         </>

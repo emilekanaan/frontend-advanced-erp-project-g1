@@ -8,6 +8,7 @@ import EditProject from "../edit_Form/EditProject";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import cookie from "react-cookies";
+import EmployeeRole from "../employeeRole/employeeRole";
 
 function ListProject() {
   const [projectTable, setProjectTable] = useState([]);
@@ -41,6 +42,14 @@ function ListProject() {
     },
     { field: "created_at", headerName: "created", width: 180 },
     { field: "updated_at", headerName: "updated", width: 180 },
+    {
+      field: "Employees",
+      headerName: "Employees",
+      width: 150,
+      renderCell: (params) => {
+        return <EmployeeRole Id={params.row.id} teamId={params.row.team_id}/>;
+      },
+    },
     {
       field: "edit",
       headerName: "Edit",

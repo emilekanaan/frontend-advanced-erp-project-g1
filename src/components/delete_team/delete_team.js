@@ -5,6 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import Delete from "@mui/icons-material/Delete";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 function DeleteTeam(props) {
   const [open, setOpen] = React.useState(false);
 
@@ -20,11 +21,23 @@ function DeleteTeam(props) {
   const handleCloseDelete=()=>{
     console.log(props)
     setOpen(false);
-    axios.delete(`${process.env.REACT_APP_URL}/${props.url}/${props.Id}`).then((response)=>console.log(response)).catch((error)=>console.log(error));
+    axios.delete(`${process.env.REACT_APP_URL}/${props.url}/${props.Id}`).then((response)=>{
+      toast(`${props.text} Deleted successfully`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: { backgroundColor: "#4dedf5",color:"#16202a" }
+      });
+    }).catch((error)=>console.log(error));
   }
 
   return (
     <div>
+      
       <Button
         name="delete team"
         variant="contained"
@@ -32,7 +45,7 @@ function DeleteTeam(props) {
         sx={{
           backgroundColor: "transparent",
           padding: "0.5pc",
-          color: "#16202a",
+          color: "#f4f4f9",
           "&:hover": {
             backgroundColor: "#4dedf5",
             color: "#16202a",

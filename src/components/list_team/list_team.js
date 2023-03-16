@@ -2,16 +2,13 @@ import React from "react";
 import FormTeam from "../form_team/form_team";
 import "./list_team.css";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Button } from "@mui/material";
-import { useDemoData } from "@mui/x-data-grid-generator";
-import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
-import Edit from "@mui/icons-material/Edit";
-import Delete from "@mui/icons-material/Delete";
 import DeleteTeam from "../delete_team/delete_team";
 import EditTeam from "../edit_Form/EditTeam";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import cookie from "react-cookies";
+import ShowTeam from "../showTeam/showTeam";
+import ShowEmployee from "../showTeam/showEmployee";
 
 function ListTeam() {
   const [tableData, setTableData] = useState([]);
@@ -37,11 +34,6 @@ function ListTeam() {
       });
   };
 
-  // const { data } = useDemoData({
-  //   dataSet: "Employee", // Change the data set to "Employee"
-  //   rowLength: 5,
-  //   maxColumns: 5,
-  // });
 
 
   const columns = [
@@ -50,38 +42,32 @@ function ListTeam() {
     { field: "created_at", headerName: "created", width: 180 },
     { field: "updated_at", headerName: "updated", width: 180 },
     {
-      field: "showTeam",
-      headerName: "Show Team",
+      field: "Projects",
+      headerName: "Projects",
       width: 150,
-      renderCell: () => (
-        <Button
-          name="show team"
-          variant="contained"
-          sx={{
-            margin: "1.2pc",
-            padding: "0.5pc 1pc",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "#4dedf5",
-              color: "#16202a",
-            },
-          }}
-        >
-          {<ContactPageOutlinedIcon />}
-        </Button>
-      ),
+      renderCell: (params) => {
+        return <ShowTeam Id={params.row.id} />;
+      },
+    },
+    {
+      field: "Employees",
+      headerName: "Employees",
+      width: 150,
+      renderCell: (params) => {
+        return <ShowEmployee Id={params.row.id} />;
+      },
     },
     {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: () => <EditTeam />,
+      renderCell: (params) => <EditTeam Id={params.row.id} />,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 150,
-      renderCell: () => <DeleteTeam />,
+      renderCell: (params) => <DeleteTeam text="team" Id={params.row.id} url="team"/>,
     },
   ];
 

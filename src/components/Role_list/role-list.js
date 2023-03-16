@@ -5,32 +5,43 @@ import RoleForm from '../Role-form/role-form';
 import './role-list.css'
 import EditRole from '../edit_Form/EditRole';
 import DeleteTeam from '../delete_team/delete_team';
+import {useState, useEffect} from "react";
+import axios from 'axios';
+
 function RoleList() {
-    const { data } = useDemoData({
-        dataSet: "Employee", // Change the data set to "Employee"
-        rowLength: 100,
-        maxColumns: 6,
-      });
+  const [RoleTable, setRoleTable] = useState([]);
+  useEffect(() => {
+    axios
+       .get(`${process.env.REACT_APP_URL}/role`)
+       .then((response) => {
+        console.log(response)
+        setRoleTable(response.data.data);
+       })
+       .catch((error) => {
+        console.log(error);
+       })
+  },[])
+
     
       const columns = [
        
-        { field: "name", headerName: "Name", width: 260 },
+        { field: "role", headerName: "Role", width: 260 },
         { field: "created_at", headerName: "created", width: 180 },
-        { field: "update_at", headerName: "updated", width: 180 },
+        { field: "updated_at", headerName: "updated", width: 180 },
         {
           field: "edit",
           headerName: "Edit",
           width: 170,
-          renderCell: () => (
-           <EditRole/>
+          renderCell: (params) => (
+           <EditRole Id={params.row.id}/>
           ),
         },
         {
           field: "delete",
           headerName: "Delete",
           width: 84,
-          renderCell: () => (
-              <DeleteTeam text="role"/>
+          renderCell: (params) => (
+              <DeleteTeam text="role" Id={params.row.id} url="role"/>
           ),
       },
       ];
@@ -48,7 +59,7 @@ function RoleList() {
       
       </section>
       <DataGrid
-        rows={data.rows}
+        rows={RoleTable}
         getRowHeight={() => 70} 
         columns={columns} // Pass the columns array as a prop
         slots={{
