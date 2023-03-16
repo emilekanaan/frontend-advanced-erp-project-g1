@@ -17,6 +17,7 @@ import MultipleSelectPlaceholder from "../DropDown";
 import { useState } from "react";
 import { Alert } from "@mui/material";
 import { Edit } from "@mui/icons-material";
+import { toast } from "react-toastify";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -75,9 +76,29 @@ function EditEmployee(props) {
       .post(`${process.env.REACT_APP_URL}/employee/${props.Id}`, formData)
       .then((response) => {
         console.log(response);
+        return toast(" employee edited successfully", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: { backgroundColor: "#4dedf5", color: "#16202a" },
+        });
       })
       .catch((error) => {
-        setError("Invalid credentials");
+        setError(error);
+        toast.error(error, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
   };
 
@@ -136,8 +157,6 @@ function EditEmployee(props) {
               </AppBar>
               <List sx={{ backgroundColor: "#2F4550" }}>
                 <section style={{ marginLeft: "19px" }}>
-                  {error && <Alert severity="error">{error}</Alert>}
-
                   <TextField
                     id="outlined-basic"
                     label="First Name"

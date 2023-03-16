@@ -15,6 +15,8 @@ import { TextField } from "@mui/material";
 import MultipleSelectPlaceholder from "../DropDown";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -53,9 +55,29 @@ function FormProject() {
       .post(`${process.env.REACT_APP_URL}/project`, formData)
       .then((response) => {
         console.log(response)
+        return toast(" added employee!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: { backgroundColor: "#4dedf5", color: "#16202a" },
+        });
       })
       .catch((error) => {
         console.log(error);
+        toast.error("invalid credintali", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
   };
   function handleChildData(data) {

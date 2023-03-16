@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js';
 import './Chart.css';
+
 const LineChart = () => {
   const chartRef = useRef();
 
@@ -33,6 +34,8 @@ const LineChart = () => {
         ]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         legend: {display: true},
         scales: {
           yAxes: [{
@@ -47,8 +50,7 @@ const LineChart = () => {
 
   return (
     <div>
-     <canvas id="myChart" ref={chartRef} width="850" height="500" className='chart'></canvas>
-
+      <canvas id="myChart" ref={chartRef} className="chart"></canvas>
     </div>
   )
 }

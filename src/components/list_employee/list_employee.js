@@ -38,7 +38,6 @@ export default function ListEmployee() {
   });
 
   const columns = [
-    { field: "id" },
     { field: "first_name", headerName: "First Name", width: 150 },
     { field: "last_name", headerName: "Last Name", width: 150 },
     { field: "email", headerName: "Email", width: 250 },
@@ -93,7 +92,7 @@ export default function ListEmployee() {
         <DataGrid
           rows={EmployeeTable}
           getRowHeight={() => 70}
-          columns={columns.filter((column) => column.field !== "id")}
+          columns={columns}
           columnBuffer={2}
           slots={{
             toolbar: GridToolbar,

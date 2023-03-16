@@ -1,4 +1,10 @@
 #myChart{
-   margin-top: 8%; 
-
+   margin-top: 15%; 
+   min-width:850px;
+   min-height:500px;
+}
+@media (max-width:300px){
+  #myChart{
+   display: none;
+}
 }
