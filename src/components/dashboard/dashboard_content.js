@@ -23,9 +23,6 @@ function DashboardContent(props) {
         .then((response) => {
           if (response.status === 200) {
             setUpdate(response.data);
-            console.log(token);
-            console.log(response.data);
-            console.log(cookie.load("access_token"));
           }
         })
         .catch((error) => {
@@ -39,7 +36,6 @@ function DashboardContent(props) {
       .then((response) => {
         if (response.status === 200) {
           setCount(response.data);
-          console.log(response.data);
         }
       })
       .catch((error) => {

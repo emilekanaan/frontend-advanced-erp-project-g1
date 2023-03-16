@@ -85,7 +85,7 @@ function FormEmployee() {
       <ThemeProvider theme={theme}>
         <Button
           onClick={handleClickOpen}
-          name="Add team"
+          name="Add employee"
           color="accent"
           startIcon={<AddIcon />}
           variant="contained"
@@ -95,132 +95,131 @@ function FormEmployee() {
         >
           Add Employee
         </Button>
-        <form>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Transition}
-          >
-            <form action="POST" onSubmit={handleSubmit}>
-              <AppBar sx={{ position: "relative", width: "600px" }}>
-                <Toolbar>
-                  <IconButton
-                    edge="start"
-                    color="inherit"
-                    onClick={handleClose}
-                    aria-label="close"
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                  <Typography
-                    sx={{ ml: 2, flex: 1 }}
-                    variant="h6"
-                    component="div"
-                  >
-                    Add New Employee
-                  </Typography>
-                  <Button
-                    autoFocus
-                    color="inherit"
-                    onClick={handleClose}
-                    type="submit"
-                  >
-                    save
-                  </Button>
-                </Toolbar>
-              </AppBar>
-              <List sx={{ backgroundColor: "#2F4550" }}>
-                <section style={{ marginLeft: "19px" }}>
-                  {error && <Alert severity="error">{error}</Alert>}
 
-                  <TextField
-                    id="outlined-basic"
-                    label="First Name"
-                    variant="outlined"
-                    sx={{
-                      width: "90%",
-                      margin: "1pc",
-                      "& .MuiOutlinedInput-root": {
-                        color: "white", // sets the text color to white
-                        "& fieldset": {
-                          borderColor: "white", // sets the border color to white
-                        },
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <form action="POST" onSubmit={handleSubmit}>
+            <AppBar sx={{ position: "relative", width: "600px" }}>
+              <Toolbar>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  onClick={handleClose}
+                  aria-label="close"
+                >
+                  <CloseIcon />
+                </IconButton>
+                <Typography
+                  sx={{ ml: 2, flex: 1 }}
+                  variant="h6"
+                  component="div"
+                >
+                  Add New Employee
+                </Typography>
+                <Button
+                  autoFocus
+                  color="inherit"
+                  onClick={handleClose}
+                  type="submit"
+                >
+                  save
+                </Button>
+              </Toolbar>
+            </AppBar>
+            <List sx={{ backgroundColor: "#2F4550" }}>
+              <section style={{ marginLeft: "19px" }}>
+                {error && <Alert severity="error">{error}</Alert>}
+
+                <TextField
+                  id="outlined-basic"
+                  label="First Name"
+                  variant="outlined"
+                  sx={{
+                    width: "90%",
+                    margin: "1pc",
+                    "& .MuiOutlinedInput-root": {
+                      color: "white", // sets the text color to white
+                      "& fieldset": {
+                        borderColor: "white", // sets the border color to white
                       },
-                    }}
-                    name="first_name"
-                    onChange={(e) => setFirstname(e.target.value)}
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Last Name"
-                    variant="outlined"
-                    sx={{
-                      width: "90%",
-                      margin: "1pc",
-                      "& .MuiOutlinedInput-root": {
-                        color: "white", // sets the text color to white
-                        "& fieldset": {
-                          borderColor: "white", // sets the border color to white
-                        },
+                    },
+                  }}
+                  name="first_name"
+                  onChange={(e) => setFirstname(e.target.value)}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Last Name"
+                  variant="outlined"
+                  sx={{
+                    width: "90%",
+                    margin: "1pc",
+                    "& .MuiOutlinedInput-root": {
+                      color: "white", // sets the text color to white
+                      "& fieldset": {
+                        borderColor: "white", // sets the border color to white
                       },
-                    }}
-                    onChange={(e) => setLastname(e.target.value)}
-                    name="last_name"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Email"
-                    variant="outlined"
-                    sx={{
-                      width: "90%",
-                      margin: "1pc",
-                      "& .MuiOutlinedInput-root": {
-                        color: "white", // sets the text color to white
-                        "& fieldset": {
-                          borderColor: "white", // sets the border color to white
-                        },
+                    },
+                  }}
+                  onChange={(e) => setLastname(e.target.value)}
+                  name="last_name"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Email"
+                  variant="outlined"
+                  sx={{
+                    width: "90%",
+                    margin: "1pc",
+                    "& .MuiOutlinedInput-root": {
+                      color: "white", // sets the text color to white
+                      "& fieldset": {
+                        borderColor: "white", // sets the border color to white
                       },
-                    }}
-                    onChange={(e) => setEmail(e.target.value)}
-                    name="email"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="phone"
-                    variant="outlined"
-                    sx={{
-                      width: "90%",
-                      margin: "1pc",
-                      "& .MuiOutlinedInput-root": {
-                        color: "white", // sets the text color to white
-                        "& fieldset": {
-                          borderColor: "white", // sets the border color to white
-                        },
+                    },
+                  }}
+                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="phone"
+                  variant="outlined"
+                  sx={{
+                    width: "90%",
+                    margin: "1pc",
+                    "& .MuiOutlinedInput-root": {
+                      color: "white", // sets the text color to white
+                      "& fieldset": {
+                        borderColor: "white", // sets the border color to white
                       },
-                    }}
-                    onChange={(e) => setPhoneNum(e.target.value)}
-                    name="phone_num"
-                  />
-                  <MultipleSelectPlaceholder onChildData={handleChildData} />
-                  <Stack direction="row" alignItems="center" spacing={2}>
-                    <Button
-                      variant="contained"
-                      component="label"
-                      sx={{ width: "90%", margin: "1pc" }}
-                    >
-                      Employee image
-                      <input
-                        accept=".png, .jpg, .jpeg"
-                        type="file"
-                        onChange={(e) => setSelectedFile(e.target.files[0])}
-                      />
-                    </Button>
-                  </Stack>
-                </section>
-              </List>
-            </form>
-          </Dialog>
-        </form>
+                    },
+                  }}
+                  onChange={(e) => setPhoneNum(e.target.value)}
+                  name="phone_num"
+                />
+                <MultipleSelectPlaceholder onChildData={handleChildData} />
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  <Button
+                    variant="contained"
+                    component="label"
+                    sx={{ width: "90%", margin: "1pc" }}
+                  >
+                    Employee image
+                    <input
+                      accept=".png, .jpg, .jpeg"
+                      type="file"
+                      onChange={(e) => setSelectedFile(e.target.files[0])}
+                    />
+                  </Button>
+                </Stack>
+              </section>
+            </List>
+          </form>
+        </Dialog>
       </ThemeProvider>
     </>
   );

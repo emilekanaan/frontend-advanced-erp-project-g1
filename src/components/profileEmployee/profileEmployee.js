@@ -10,11 +10,12 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
-import {useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import profile from "./profile.jpeg";
 import "./profile.css";
-import { motion } from "framer-motion";
+import cookie from "react-cookies";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import ProfileChart from "./profileChart/profileChart";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -22,25 +23,70 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function EmployeeProfile(props) {
   const [evaluation, setEvaluation] = useState([]);
-  const [role, setRole] = useState([]);
-  const [employeeProfile, setEmployeeProfile] = useState({});
+  const [employeeProfile, setEmployeeProfile] = useState([]);
   const [team, setTeam] = useState([]);
+  const [projectRole, setProjectRole] = useState([]);
 
-  const test = () => {
-    console.log("clicked!!!");
-  };
+  const columns = [
+    {
+      field: "project",
+      headerName: "Project",
+      width: 200,
+      valueGetter: (params) => {
+        return params.row.project.name;
+      },
+    },
+    {
+      field: "role",
+      headerName: "Role",
+      width: 200,
+      valueGetter: (params) => {
+        return params.row.role.role;
+      },
+    },
+  ];
+
+  const columns2 = [
+    {
+      field: "kpi",
+      headerName: "KPI",
+      width: 200,
+      valueGetter: (params) => {
+        return params.row.kpi.name;
+      },
+    },
+    {
+      field: "evaluation",
+      headerName: "Evaluation",
+      width: 150,
+      valueGetter: (params) => {
+        return params.row.evaluation;
+      },
+    },
+    {
+      field: "date",
+      headerName: "Date",
+      width: 200,
+      valueGetter: (params) => {
+        return params.row.date;
+      },
+    },
+  ];
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    console.log(props);
+    let token = cookie.load("access_token");
+
     axios
-      .get(`${process.env.REACT_APP_URL}/employee/${props.Id}`)
+      .get(`${process.env.REACT_APP_URL}/employee/${props.Id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           setEmployeeProfile(response.data.message[0]);
+
           setTeam(response.data.message[0].team);
-          console.log(response.data.message[0].team);
         }
       })
       .catch((error) => {
@@ -48,19 +94,25 @@ function EmployeeProfile(props) {
       });
 
     axios
-      .get(`${process.env.REACT_APP_URL}/evaluation/${props.Id}`)
+      .get(`${process.env.REACT_APP_URL}/evaluation/${props.Id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
+          setEvaluation(response.data.message);
+          console.log(response.data.message);
         }
       })
       .catch((error) => {
         console.log(error);
       });
+
     axios
-      .get(`${process.env.REACT_APP_URL}/employee-project-role/${props.Id}`)
+      .get(`${process.env.REACT_APP_URL}/employee-project-role/${props.Id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
-        if (response.status === 200) {
-        }
+        setProjectRole(response.data.message);
       })
       .catch((error) => {
         console.log(error);
@@ -101,12 +153,10 @@ function EmployeeProfile(props) {
           <ContactPageOutlinedIcon />
         </Button>
         <Dialog
-        fullScreen
-       sx={{width:"70%" ,height:"80%", margin:"auto"}}
+          fullScreen
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
-
         >
           <AppBar>
             <Toolbar>
@@ -118,7 +168,7 @@ function EmployeeProfile(props) {
               >
                 <CloseIcon />
               </IconButton>
-              <Typography  variant="h6" component="div">
+              <Typography variant="h6" component="div">
                 Employee Profile
               </Typography>
             </Toolbar>
@@ -127,35 +177,81 @@ function EmployeeProfile(props) {
             sx={{ backgroundColor: "#2F4550", width: "100%", height: "100%" }}
           >
             <section
-              style={{ display: "flex", marginTop: "70px", marginLeft: "7%" }}
+              style={{
+                display: "flex",
+                marginTop: "5pc",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
             >
-              {/* <img
-                src={profile}
-                alt=""
-                width={300}
-                height={350}
-                className="profileImage"
-              /> */}
               <section
-                style={{ marginLeft: "50px", color: "white", marginTop: "5%" }}
-              >
-                <h1>
-                  Name : {employeeProfile.first_name}{" "}
-                  {employeeProfile.last_name}
-                </h1>
-                <h1>Phone: {employeeProfile.phone_num}</h1>
-                <h1>Email :{employeeProfile.email}</h1>
-                <h1>Team :{team.name}</h1>
-              </section>
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ rotate: 180, scale: 1 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20,
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "600px",
                 }}
-                style={{ marginTop: "50px" }}
+              >
+                <img
+                  src={`http://localhost:8000/storage/${employeeProfile.picture}`}
+                  alt=""
+                  width={300}
+                  height={300}
+                  className="profileImage"
+                />
+
+                <section style={{ color: "white", fontSize: "1.3pc" }}>
+                  <h1>
+                    Name : {employeeProfile.first_name}{" "}
+                    {employeeProfile.last_name}
+                  </h1>
+                  <h1>Phone: {employeeProfile.phone_num}</h1>
+                  <h1>Email: {employeeProfile.email}</h1>
+                  <h1>Team: {team.name}</h1>
+                </section>
+              </section>
+
+              <ProfileChart />
+            </section>
+            <section className="employee-profile-bottom-section">
+              <DataGrid
+                rows={projectRole}
+                getRowHeight={() => 70}
+                columns={columns.filter((column) => column.field !== "id")}
+                slots={{
+                  toolbar: GridToolbar,
+                }}
+                sx={{
+                  maxWidth: "600px",
+                  boxShadow: "1px 2px 3px 3px rgba(0,0,0,0.63)",
+                  border: "1px solid #16202A ",
+                  color: "#f4f4f9",
+                  fontSize: "20px",
+                  "& .MuiDataGrid-cell": {
+                    backgroundColor: "#2f4550",
+                    color: "#F4F4F9",
+                  },
+                }}
+              />
+
+              <DataGrid
+                rows={evaluation}
+                getRowHeight={() => 70}
+                columns={columns2.filter((column) => column.field !== "id")}
+                slots={{
+                  toolbar: GridToolbar,
+                }}
+                sx={{
+                  maxWidth: "600px",
+                  boxShadow: "1px 2px 3px 3px rgba(0,0,0,0.63)",
+                  border: "1px solid #16202A ",
+                  color: "#f4f4f9",
+                  fontSize: "20px",
+                  "& .MuiDataGrid-cell": {
+                    backgroundColor: "#2f4550",
+                    color: "#F4F4F9",
+                  },
+                }}
               />
             </section>
           </List>

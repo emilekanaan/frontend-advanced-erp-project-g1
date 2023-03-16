@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
+import cookie from "react-cookies";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -32,14 +33,16 @@ export default function SingleSelectPlaceholder(props) {
   const [names, setNames] = React.useState([]);
 
   React.useEffect(() => {
+    let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/team`)
+      .get(`${process.env.REACT_APP_URL}/team`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           if (response.data.data) {
             setNames(response.data.data);
-            console.log(response.data.data)
-           
+            console.log(response.data.data);
           }
         }
       })
@@ -91,7 +94,6 @@ export default function SingleSelectPlaceholder(props) {
             <em>Placeholder</em>
           </MenuItem>
           {names.map((name) => (
-     
             <MenuItem
               key={name.id}
               value={name.name}

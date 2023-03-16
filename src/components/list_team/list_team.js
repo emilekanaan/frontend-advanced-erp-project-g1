@@ -29,6 +29,7 @@ function ListTeam() {
       })
       .then((response) => {
         setData(response.data);
+        console.log(response.data.data)
         setTableData(response.data.data);
       })
       .catch((error) => {
@@ -42,7 +43,6 @@ function ListTeam() {
   //   maxColumns: 5,
   // });
 
-  console.log(data);
 
   const columns = [
     { field: "id" },
