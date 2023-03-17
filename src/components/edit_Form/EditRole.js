@@ -13,7 +13,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {  TextField } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+
 import { toast } from "react-toastify";
+
+import cookie from "react-cookies";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -56,8 +60,11 @@ function EditRole(props) {
         if (name) formData.append("role",name);
         formData.append("_method","PATCH");
         console.log(name);
+    let token = cookie.load("access_token");
+
         axios
-            .post(`${process.env.REACT_APP_URL}/role/${props.Id}`,formData)
+            .post(`${process.env.REACT_APP_URL}/role/${props.Id}`,formData, {
+                headers: { Authorization: `Bearer ${token}` },})
             .then((response) => {
                 console.log(response);
                 return toast(" Role edited successfully", {

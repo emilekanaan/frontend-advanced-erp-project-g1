@@ -30,13 +30,12 @@ function LoginForm() {
           ] = `Bearer ${accessToken}`;
           setLoggedIn(true);
         }
-        console.log(response.data.access_token);
       })
       .catch((e) => {
         if (e.message === "Request failed with status code 401") {
-          console.log(e);
+          setError(e.response.data["error"]);
         } else {
-          console.log(e);
+          setError(e.message);
         }
       });
   };

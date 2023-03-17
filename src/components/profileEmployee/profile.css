@@ -1,3 +1,7 @@
-/* .profileImage{
-    margin: 70px 10px;
-} */
+.employee-profile-bottom-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5pc;
+  height: 25pc;
+}

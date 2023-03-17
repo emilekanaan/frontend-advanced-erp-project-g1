@@ -40,9 +40,8 @@ function DashboardContent(props) {
             setTeam2(response.data[2][1]);
             setKpi1(response.data[3][0]);
             setKpi2(response.data[3][1]);
-           setRole1(response.data[4][0])
-           setRole2(response.data[4][1])
-
+            setRole1(response.data[4][0]);
+            setRole2(response.data[4][1]);
           }
         })
         .catch((error) => {
@@ -56,7 +55,6 @@ function DashboardContent(props) {
       .then((response) => {
         if (response.status === 200) {
           setCount(response.data);
-          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -105,21 +103,21 @@ function DashboardContent(props) {
             </div>
             <div>
               <h3 className="recentlyMinTitle">
-              <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi1.name}{" "}
+                <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi1.name}{" "}
                 at {kpi1.created_at}
               </h3>
               <h3 className="recentlyMinTitle">
-              <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi2.name}{" "}
+                <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi2.name}{" "}
                 at {kpi2.created_at}
               </h3>
             </div>
             <div>
               <h3 className="recentlyMinTitle">
-              <span style={{ color: "#4dedf5" }}>New Role:</span> {role1.role}{" "}
+                <span style={{ color: "#4dedf5" }}>New Role:</span> {role1.role}{" "}
                 at {role1.created_at}
               </h3>
               <h3 className="recentlyMinTitle">
-              <span style={{ color: "#4dedf5" }}>New Role:</span> {role2.role}{" "}
+                <span style={{ color: "#4dedf5" }}>New Role:</span> {role2.role}{" "}
                 at {role2.created_at}
               </h3>
             </div>

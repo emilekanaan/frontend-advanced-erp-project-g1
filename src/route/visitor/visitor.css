@@ -9,9 +9,79 @@
   overflow-y: scroll;
   height: 100vh;
 }
-@media screen and (max-width: 768px) {
 
+.visitor-unauthorized {
+  color: red;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: xx-large;
+}
+
+@media screen and (max-width: 768px) {
   .visitor-main {
     width: 100%;
+  }
+
+  .visitor-unauthorized {
+    font-size: medium;
+  }
+}
+
+.visitor-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background: #eee; */
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.loading svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#infinity-outline {
+  fill: transparent;
+  stroke-width: 4;
+  stroke: var(--accent);
+  stroke-dasharray: 3px, 300px;
+  stroke-dashoffset: 0;
+  animation: anim 1500ms linear infinite;
+}
+
+#infinity-bg {
+  fill: transparent;
+  stroke-width: 4;
+  stroke: var(--secondary);
+  opacity: 0.2;
+}
+
+@keyframes anim {
+  12.5% {
+    stroke-dasharray: 42px, 300px;
+    stroke-dashoffset: -33px;
+  }
+  43.75% {
+    stroke-dasharray: 105px, 300px;
+    stroke-dashoffset: -105px;
+  }
+  100% {
+    stroke-dasharray: 3px, 300px;
+    stroke-dashoffset: -297px;
   }
 }

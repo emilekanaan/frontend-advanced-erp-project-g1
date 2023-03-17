@@ -27,24 +27,21 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function SingleSelectPlaceholder(props) {
+export default function SingleSelectPlaceholderProject(props) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState("");
   const [names, setNames] = React.useState([]);
 
   React.useEffect(() => {
+    console.log(props.id);
     let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/team`, {
+      .get(`${process.env.REACT_APP_URL}/project/${props.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        if (response.status === 200) {
-          if (response.data.data) {
-            setNames(response.data.data);
-            console.log(response.data.data);
-          }
-        }
+        setNames(response.data.data);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);

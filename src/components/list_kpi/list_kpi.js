@@ -8,11 +8,17 @@ import DeleteTeam from "../delete_team/delete_team";
 import EditKpi from "../edit_Form/EditKpi";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import cookie from "react-cookies";
+
 function ListKpi() {
   const[KpiTable, setKpiTable] =useState([]);
   useEffect(() => {
+    let token = cookie.load("access_token");
+
     axios
-    .get(`${process.env.REACT_APP_URL}/kpi`)
+    .get(`${process.env.REACT_APP_URL}/kpi`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
     .then((response) => {
       if(response.status===200) {
         console.log(response)

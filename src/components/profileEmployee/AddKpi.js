@@ -1,4 +1,7 @@
 import React from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddIcon from "@mui/icons-material/Add";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
@@ -10,17 +13,14 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {  TextField } from "@mui/material";
+import { Input, TextField } from "@mui/material";
+import MultipleSelectPlaceholder from "../DropDown";
 import { useState } from "react";
-
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-import cookie from "react-cookies";
-
-
 import axios from "axios";
+import SingleSelectPlaceholderProject from "./DropDownProject";
+import SingleSelectPlaceholderKpi from "./DropDownKpi";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -35,7 +35,7 @@ const theme = createTheme({
     },
 });
 
-function FormKpi() {
+function AddKpi(props) {
     const [name, setName] = useState("");
     const [dataFromteam, setDataFromKpi] = useState("");
     const [error, setError] = useState("");
@@ -57,36 +57,12 @@ function FormKpi() {
         const formData = new FormData();
         formData.append("name", name);
         console.log(name);
-        let token = cookie.load("access_token");
         axios
-
-              .post(`${process.env.REACT_APP_URL}/kpi`, formData, {
-                headers: { Authorization: `Bearer ${token}` },
-              })
-              .then ((response) => {
-                return toast(" added kpi!", {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    style: { backgroundColor: "#4dedf5", color: "#16202a" },
-                  });
-              })
-
+              .post(`${process.env.REACT_APP_URL}/kpi`,formData)
+              .then ((response) => {console.log(response)})
               .catch((error) => {
-                toast.error("invalid credentials", {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                  });
+               setError("Invalid credentials")
+               console.log(error)
                 })
     };
 
@@ -99,13 +75,11 @@ function FormKpi() {
                     onClick={handleClickOpen}
                     name="Add team"
                     color="accent"
-                    startIcon={<AddIcon />}
                     variant="contained"
-                    sx={{
-                        margin: "3pc 0",
-                    }}
-                >
-                    Add KPI
+                    sx={{color:"#16202a"}}
+                    >
+                  <AddIcon />
+                 
                 </Button>
                 <Dialog
                     open={open}
@@ -125,7 +99,7 @@ function FormKpi() {
                                 <CloseIcon />
                             </IconButton>
                             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                                Add New KPI
+                             Add Kpi
                             </Typography>
                             <Button autoFocus color="inherit" onClick={handleClose} type="submit">
                                 save
@@ -149,8 +123,10 @@ function FormKpi() {
                                     }}
                             }}
                         />
+                        <SingleSelectPlaceholderKpi id={props.teamName}/>
                         {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
                     </List>
+
                 </form>
                 </Dialog>
             </ThemeProvider>
@@ -158,4 +134,4 @@ function FormKpi() {
     );
 }
 
-export default FormKpi;
+export default AddKpi;

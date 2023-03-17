@@ -1,4 +1,4 @@
-import React from "react";
+import  React,{ useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,6 +12,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Edit from "@mui/icons-material/Edit";
+import axios from "axios";
+import AddIcon from "@mui/icons-material/Add";
+import { Alert } from "@mui/material";
+import MultipleSelectPlaceholder from "../DropDown";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -26,7 +31,14 @@ const theme = createTheme({
   },
 });
 
-function EditAdmin() {
+function EditAdmin(props) {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [dataFromteam, setDataFromteam] = useState("");
+  const [error, setError] = useState("");
+
   const test = () => {
     console.log("clicked!!!");
   };
@@ -39,6 +51,31 @@ function EditAdmin() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  function handleChildData(data) {
+    console.log(data);
+    setDataFromteam(data);
+  }
+  const handleSubmit = (e) => {
+    console.log(props);
+    e.preventDefault();
+    console.log(selectedFile);
+    const formData = new FormData();
+    if (selectedFile) formData.append("picture", selectedFile);
+    if (name) formData.append("name", name);
+    if (email) formData.append("email", email);
+    if (password) formData.append("password", password);
+    formData.append("_method", "PATCH");
+    console.log(selectedFile);
+
+    axios
+      .post(`${process.env.REACT_APP_URL}/admin/${props.Id}`, formData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        setError("Invalid credentials");
+      });
   };
 
   return (
@@ -61,11 +98,13 @@ function EditAdmin() {
         >
           <Edit />
         </Button>
+        <form>
         <Dialog
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
         >
+          <form action="POST" onSubmit={handleSubmit}>
           <AppBar sx={{ position: "relative", width: "550px" }}>
             <Toolbar>
               <IconButton
@@ -84,7 +123,9 @@ function EditAdmin() {
               </Button>
             </Toolbar>
           </AppBar>
-          <List sx={{ backgroundColor: "#2F4550" }}>
+          {/* <List sx={{ backgroundColor: "#2F4550" }}> */}
+          {/* <section style={{ marginLeft: "19px" }}> */}
+          {error && <Alert severity="error">{error}</Alert>}
             <TextField
               id="outlined-basic"
               label="Name"
@@ -100,6 +141,8 @@ function EditAdmin() {
                   },
                 },
               }}
+              name="name"
+              onChange={(e) => setName(e.target.value)}
             />
             <TextField
               id="outlined-basic"
@@ -116,7 +159,28 @@ function EditAdmin() {
                   },
                 },
               }}
+              onChange={(e) => setEmail(e.target.value)}
+              name="email"
             />
+              <TextField
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              color="secondary"
+              sx={{
+                width: "90%",
+                margin: "1pc",
+                "& .MuiOutlinedInput-root": {
+                  color: "white", // sets the text color to white
+                  "& fieldset": {
+                    borderColor: "white", // sets the border color to white
+                  },
+                },
+              }}
+              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+            />
+           <MultipleSelectPlaceholder onChildData={handleChildData} />
             <Stack direction="row" alignItems="center" spacing={2}>
               <Button
                 variant="contained"
@@ -124,12 +188,20 @@ function EditAdmin() {
                 sx={{ width: "90%", margin: "1pc" }}
               >
                 Admin image
+                <input
+                  accept=".png, .jpg, .jpeg"
+                  type="file"
+                  onChange={(e) => setSelectedFile(e.target.files[0])}
+                />
                 <input hidden accept="image/*" multiple type="file" />
               </Button>
             </Stack>
+            {/* </section> */}
             {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
-          </List>
+          {/* </List> */}
+          </form>
         </Dialog>
+        </form>
       </ThemeProvider>
     </>
   );
