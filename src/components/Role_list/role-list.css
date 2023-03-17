@@ -3,3 +3,33 @@
     width: 60%;
     margin: 40px auto;
 }
+.role-h1{
+    color: #f4f4f9;
+    font-size: 40px ;
+  
+  }
+  @media (max-width: 768px){
+    .role-table{
+      height: 65%;
+    width: 68%;
+    margin: 40px auto;
+    }
+  
+  }
+  @media (max-width: 680px){
+    .role-h1{
+      font-size: 35px;
+      margin-top: 45px;
+    }
+  
+  
+  }
+  @media (max-width: 480px){
+    .role-h1{
+      /* font-size: 30px; */
+      margin-top: 45px;
+      padding-right: 50px;
+  
+    }
+  
+  }

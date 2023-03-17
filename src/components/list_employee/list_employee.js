@@ -84,8 +84,8 @@ export default function ListEmployee() {
   return (
     <ThemeProvider theme={theme}>
       <div className="employee-table">
-        <section style={{ display: "flex", justifyContent: "space-between" }}>
-          <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Employee</h1>
+        <section style={{ display: "flex", justifyContent: "space-between" ,flexWrap:"wrap"}}>
+          <h1 className="employee-h1">Employee</h1>
 
           <FormEmployee />
         </section>

@@ -74,9 +74,10 @@ function ListProject() {
           display: "flex",
           justifyContent: "space-between",
           margin: "30px auto",
+          flexWrap:"wrap"
         }}
       >
-        <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Project</h1>
+        <h1 className="project-h1">Project</h1>
         <FormProject />
       </section>
       <DataGrid

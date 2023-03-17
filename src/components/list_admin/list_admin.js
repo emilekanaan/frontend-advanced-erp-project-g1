@@ -40,9 +40,10 @@ function ListAdmin() {
           display: "flex",
           justifyContent: "space-between",
           margin: "30px auto",
+          flexWrap:"wrap",
         }}
       >
-        <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Admin</h1>
+        <h1 className="admin-h1">Admin</h1>
         <FormAdmin />
       </section>
       <DataGrid

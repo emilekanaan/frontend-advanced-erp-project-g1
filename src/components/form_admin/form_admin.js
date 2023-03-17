@@ -51,7 +51,9 @@ function FormAdmin() {
           startIcon={<AddIcon />}
           variant="contained"
           sx={{
-            margin: "2pc 0",
+            // width:{xs:"80px" ,sm:"140px" ,md:"180px",lg:"180px"},
+            // fontSize:{xs:"11px" ,sm:"13px" ,md:"16px",lg:"20px"},
+            margin: "3pc 0",
           }}
         >
           Add Admin

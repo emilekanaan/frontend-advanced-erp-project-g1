@@ -52,9 +52,10 @@ function RoleList() {
           display: "flex",
           justifyContent: "space-between",
           margin: "30px auto",
+          flexWrap:"wrap",
         }}
       >
-        <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>Role</h1>
+        <h1 className='role-h1'>Role</h1>
         <RoleForm/>
       
       </section>

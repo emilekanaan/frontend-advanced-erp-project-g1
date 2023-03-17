@@ -19,6 +19,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Input, TextField } from "@mui/material";
 import MultipleSelectPlaceholder from "../DropDown";
 import { useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -58,10 +60,29 @@ function FormKpi() {
         console.log(name);
         axios
               .post(`${process.env.REACT_APP_URL}/kpi`,formData)
-              .then ((response) => {console.log(response)})
+              .then ((response) => {
+                return toast(" added kpi!", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    style: { backgroundColor: "#4dedf5", color: "#16202a" },
+                  });
+              })
               .catch((error) => {
-               setError("Invalid credentials")
-               console.log(error)
+                toast.error("invalid credentials", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                  });
                 })
     };
 
@@ -77,7 +98,7 @@ function FormKpi() {
                     startIcon={<AddIcon />}
                     variant="contained"
                     sx={{
-                        margin: "2pc 0",
+                        margin: "3pc 0",
                     }}
                 >
                     Add KPI
