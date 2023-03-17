@@ -32,6 +32,10 @@
   height: 4%;
 }
 
+.side-comp__logo > span {
+  color: var(--secondary);
+}
+
 .side-comp__logo > span > span {
   color: var(--accent);
 }
