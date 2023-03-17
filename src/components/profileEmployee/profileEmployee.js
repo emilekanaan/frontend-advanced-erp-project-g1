@@ -14,8 +14,11 @@ import { useState } from "react";
 import axios from "axios";
 import "./profile.css";
 import cookie from "react-cookies";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, GridToolbarContainer } from "@mui/x-data-grid";
 import ProfileChart from "./profileChart/profileChart";
+import { Add } from "@mui/icons-material";
+import AddRole from "./AddRole";
+import AddKpi from "./AddKpi";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -133,6 +136,25 @@ function EmployeeProfile(props) {
       accent: { main: "#4dedf5" },
     },
   });
+
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbar></GridToolbar>
+      <AddRole teamName={props.team}/>
+  
+      </GridToolbarContainer>
+    );
+  }
+  function CustomToolbar2() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbar></GridToolbar>
+      <AddKpi teamName={props.team}/>
+  
+      </GridToolbarContainer>
+    );
+  }
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -218,8 +240,9 @@ function EmployeeProfile(props) {
                 rows={projectRole}
                 getRowHeight={() => 70}
                 columns={columns.filter((column) => column.field !== "id")}
-                slots={{
-                  toolbar: GridToolbar,
+                components={{
+                  Toolbar: CustomToolbar,
+                
                 }}
                 sx={{
                   maxWidth: "600px",
@@ -238,8 +261,9 @@ function EmployeeProfile(props) {
                 rows={evaluation}
                 getRowHeight={() => 70}
                 columns={columns2.filter((column) => column.field !== "id")}
-                slots={{
-                  toolbar: GridToolbar,
+                components={{
+                  Toolbar: CustomToolbar2,
+                
                 }}
                 sx={{
                   maxWidth: "600px",

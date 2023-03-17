@@ -60,7 +60,7 @@ export default function ListEmployee() {
       headerName: "Show profile",
       width: 150,
       renderCell: (params) => {
-        return <EmployeeProfile Id={params.row.id} />;
+        return <EmployeeProfile Id={params.row.id} team={params.row.team_id}/>;
       },
     },
     {

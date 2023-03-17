@@ -1,18 +1,22 @@
 import React from 'react'
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useDemoData } from "@mui/x-data-grid-generator";
 import RoleForm from '../Role-form/role-form';
 import './role-list.css'
 import EditRole from '../edit_Form/EditRole';
 import DeleteTeam from '../delete_team/delete_team';
 import {useState, useEffect} from "react";
 import axios from 'axios';
+import cookie from "react-cookies";
 
 function RoleList() {
   const [RoleTable, setRoleTable] = useState([]);
   useEffect(() => {
+    let token = cookie.load("access_token");
+
     axios
-       .get(`${process.env.REACT_APP_URL}/role`)
+       .get(`${process.env.REACT_APP_URL}/role`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
        .then((response) => {
         console.log(response)
         setRoleTable(response.data.data);
