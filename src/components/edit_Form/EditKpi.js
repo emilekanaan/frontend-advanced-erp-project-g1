@@ -13,6 +13,7 @@ import { TextField } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { useState } from "react";
 import axios from "axios";
+import cookie from "react-cookies";
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -56,8 +57,12 @@ function EditKpi(props) {
     if (name) formData.append("name", name);
     formData.append("_method", "PATCH");
     console.log(name);
+    let token = cookie.load("access_token");
+
     axios
-      .post(`${process.env.REACT_APP_URL}/kpi/${props.Id}`, formData)
+      .post(`${process.env.REACT_APP_URL}/kpi/${props.Id}`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
       })

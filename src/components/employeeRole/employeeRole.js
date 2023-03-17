@@ -123,7 +123,12 @@ function EmployeeRole(props) {
                   columns={columns}
                   columnBuffer={2}
                   slots={{
-                    toolbar: GridToolbar,
+                    toolbar: () => (
+                      <>
+                        <GridToolbar />
+                        <Button >Role</Button>
+                      </>
+                    ),
                   }}
                   sx={{
                     marginTop: "25px",

@@ -50,7 +50,7 @@ const LineChart = () => {
 
   return (
     <div>
-      <canvas id="myChart" ref={chartRef} className="chart"></canvas>
+      <canvas id="myChart" ref={chartRef} className="chartdash"></canvas>
     </div>
   )
 }

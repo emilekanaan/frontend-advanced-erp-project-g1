@@ -1,7 +1,4 @@
 import React from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddIcon from "@mui/icons-material/Add";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
@@ -11,14 +8,13 @@ import Slide from "@mui/material/Slide";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import ListItemText from "@mui/material/ListItemText";
-import ListItem from "@mui/material/ListItem";
+
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Input, TextField } from "@mui/material";
-import MultipleSelectPlaceholder from "../DropDown";
+import {  TextField } from "@mui/material";
 import { useState } from "react";
+import cookie from "react-cookies";
+
 import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -56,8 +52,11 @@ function FormKpi() {
         const formData = new FormData();
         formData.append("name", name);
         console.log(name);
+        let token = cookie.load("access_token");
         axios
-              .post(`${process.env.REACT_APP_URL}/kpi`,formData)
+              .post(`${process.env.REACT_APP_URL}/kpi`, formData, {
+                headers: { Authorization: `Bearer ${token}` },
+              })
               .then ((response) => {console.log(response)})
               .catch((error) => {
                setError("Invalid credentials")
