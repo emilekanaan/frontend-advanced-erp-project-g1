@@ -13,6 +13,8 @@ import List from "@mui/material/List";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField } from "@mui/material";
 import { useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -52,16 +54,31 @@ function RoleForm() {
     console.log(role);
     let token = cookie.load("access_token");
     axios
-      .post(`${process.env.REACT_APP_URL}/role`, formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        setError("Invalid credentials");
-        console.log(error);
-      });
+
+       .post(`${process.env.REACT_APP_URL}/role`,formData)
+       .then((response) => {return toast(" added role!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: { backgroundColor: "#4dedf5", color: "#16202a" },
+      });})
+       .catch((error) => {
+        toast.error("invalid credentials", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+       })
+
   };
 
   return (
@@ -74,7 +91,7 @@ function RoleForm() {
           startIcon={<AddIcon />}
           variant="contained"
           sx={{
-            margin: "2pc 0",
+            margin: "3pc 0",
           }}
         >
           Add Role

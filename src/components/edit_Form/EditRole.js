@@ -13,7 +13,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {  TextField } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+
+import { toast } from "react-toastify";
+
 import cookie from "react-cookies";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -63,10 +67,30 @@ function EditRole(props) {
                 headers: { Authorization: `Bearer ${token}` },})
             .then((response) => {
                 console.log(response);
+                return toast(" Role edited successfully", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    style: { backgroundColor: "#4dedf5", color: "#16202a" },
+                  });
             })
             .catch((error ) =>{
                 console.log(error)
                 setError("Invalid credentials");
+                toast.error(error, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                  });
 
             });
 

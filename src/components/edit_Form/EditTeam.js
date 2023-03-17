@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import axios from "axios";
 import List from "@mui/material/List";
-
+import { toast } from "react-toastify";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {  TextField } from "@mui/material";
 
@@ -60,10 +60,29 @@ const handleSubmit = (e) => {
         .post(`${process.env.REACT_APP_URL}/team/${props.Id}`,formData)
         .then((response) => {
             console.log(response);
+            return toast("Team edited successfully", {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              style: { backgroundColor: "#4dedf5", color: "#16202a" },
+            });
         })
         .catch((error ) =>{
             console.log(error)
-            setError("Invalid credentials");
+            toast.error(error, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
 
         });
 

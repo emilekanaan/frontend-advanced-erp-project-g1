@@ -55,9 +55,10 @@ function ListKpi() {
           display: "flex",
           justifyContent: "space-between",
           margin: "30px auto",
+          flexWrap:"wrap",
         }}
       >
-        <h1 style={{ color: "#f4f4f9", fontSize: "40px" }}>KPI</h1>
+        <h1 className="kpi-h1">KPI</h1>
         <FormKpi />
       </section>
       <DataGrid

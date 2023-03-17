@@ -88,7 +88,7 @@ function FormEmployee() {
         });
       })
       .catch((error) => {
-        toast.error("invalid credintali", {
+        toast.error("invalid credentials", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -111,7 +111,7 @@ function FormEmployee() {
           startIcon={<AddIcon />}
           variant="contained"
           sx={{
-            margin: "2pc 0",
+            margin: "3pc 0",
           }}
         >
           Add Employee
