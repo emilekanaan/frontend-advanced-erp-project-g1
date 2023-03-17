@@ -27,7 +27,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function SingleSelectPlaceholderProject(props) {
+export default function SingleSelectPlaceholderRole(props) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState("");
   const [names, setNames] = React.useState([]);
@@ -35,26 +35,24 @@ export default function SingleSelectPlaceholderProject(props) {
   React.useEffect(() => {
     let token = cookie.load("access_token");
     axios
-      .get(`${process.env.REACT_APP_URL}/project/${props.id}`, {
+      .get(`${process.env.REACT_APP_URL}/role`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-       
-            setNames(response.data);
-            console.log(response.data);
-          
+        setNames(response.data.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [props.id]);
+  }, []);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
     setPersonName(value);
-    const data = [names.find((name) => name.name === value).id];
+    const data = [names.find((name) => name.role === value).id];
     props.onChildData(data);
     console.log(data);
   };
@@ -80,7 +78,7 @@ export default function SingleSelectPlaceholderProject(props) {
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (!selected) {
-              return <em>Team</em>;
+              return <em>Role</em>;
             }
 
             return selected;
@@ -89,15 +87,15 @@ export default function SingleSelectPlaceholderProject(props) {
           inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem disabled value="">
-            <em>Placeholder</em>
+            <em>Role</em>
           </MenuItem>
           {names.map((name) => (
             <MenuItem
               key={name.id}
-              value={name.name}
-              style={getStyles(name.name, personName, theme)}
+              value={name.role}
+              style={getStyles(name.role, personName, theme)}
             >
-              {name.name}
+              {name.role}
             </MenuItem>
           ))}
         </Select>
