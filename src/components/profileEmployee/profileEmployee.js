@@ -141,7 +141,7 @@ function EmployeeProfile(props) {
     return (
       <GridToolbarContainer>
         <GridToolbar></GridToolbar>
-      <AddRole teamName={props.team}/>
+      <AddRole teamName={props.team} employeeId={employeeProfile.id}/>
   
       </GridToolbarContainer>
     );
@@ -150,7 +150,7 @@ function EmployeeProfile(props) {
     return (
       <GridToolbarContainer>
         <GridToolbar></GridToolbar>
-      <AddKpi teamName={props.team}/>
+      <AddKpi teamName={props.team} employeeId={employeeProfile.id}/>
   
       </GridToolbarContainer>
     );

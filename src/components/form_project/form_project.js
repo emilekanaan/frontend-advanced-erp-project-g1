@@ -22,11 +22,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function FormProject() {
-    const [name,setName]=useState("");
-    const [teamid,setTeamid]=useState("");
-  const test = () => {
-    console.log("clicked!!!");
-  };
+  const [name, setName] = useState("");
+  const [teamid, setTeamid] = useState("");
 
   const [open, setOpen] = React.useState(false);
 
@@ -54,7 +51,7 @@ function FormProject() {
     axios
       .post(`${process.env.REACT_APP_URL}/project`, formData)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         return toast(" added employee!", {
           position: "bottom-right",
           autoClose: 5000,
@@ -81,8 +78,8 @@ function FormProject() {
       });
   };
   function handleChildData(data) {
-    console.log(data); 
-    setTeamid(data)
+    console.log(data);
+    setTeamid(data);
   }
   return (
     <>
@@ -99,13 +96,12 @@ function FormProject() {
         >
           Add Project
         </Button>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Transition}
-          >
-        <form action="POST" onSubmit={handleSubmit}>
-
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <form action="POST" onSubmit={handleSubmit}>
             <AppBar sx={{ position: "relative", width: "500px" }}>
               <Toolbar>
                 <IconButton
@@ -150,12 +146,11 @@ function FormProject() {
                 }}
                 onChange={(e) => setName(e.target.value)}
               />
-              <MultipleSelectPlaceholder onChildData={handleChildData}/>
+              <MultipleSelectPlaceholder onChildData={handleChildData} />
               {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
             </List>
-            </form>
-          </Dialog>
-    
+          </form>
+        </Dialog>
       </ThemeProvider>
     </>
   );

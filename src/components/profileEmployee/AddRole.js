@@ -1,7 +1,4 @@
 import React from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddIcon from "@mui/icons-material/Add";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
@@ -13,124 +10,148 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Input, TextField } from "@mui/material";
-import MultipleSelectPlaceholder from "../DropDown";
+import cookie from 'react-cookies'
 import { useState } from "react";
 import axios from "axios";
 import SingleSelectPlaceholderProject from "./DropDownProject";
+import SingleSelectPlaceholderRole from "./DropDownRole";
+import { toast } from "react-toastify";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const theme = createTheme({
-    palette: {
-        primary: { main: "#16202a" },
-        secondary: { main: "#f4f4f9" },
-        activeItem: { main: "#4dedf570" },
-        accent: { main: "#4dedf5" },
-    },
+  palette: {
+    primary: { main: "#16202a" },
+    secondary: { main: "#f4f4f9" },
+    activeItem: { main: "#4dedf570" },
+    accent: { main: "#4dedf5" },
+  },
 });
 
 function AddRole(props) {
-    const [name, setName] = useState("");
-    const [dataFromteam, setDataFromKpi] = useState("");
-    const [error, setError] = useState("");
-    const test = () => {
-        console.log("clicked!!!");
-    };
 
-    const [open, setOpen] = React.useState(false);
+const [employeeId,setEmployeeId]=useState("")
+  const [error, setError] = useState("");
+  const [projectId, setProjectId] = useState("");
+  const [roleId, setRoleId] = useState("");
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const test = () => {
+    console.log("clicked!!!");
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleSumbit =(e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("name", name);
-        console.log(name);
-        axios
-              .post(`${process.env.REACT_APP_URL}/kpi`,formData)
-              .then ((response) => {console.log(response)})
-              .catch((error) => {
-               setError("Invalid credentials")
-               console.log(error)
-                })
-    };
+  const [open, setOpen] = React.useState(false);
 
-    return (
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  function handleChildData(data) {
+    console.log(data);
+    setProjectId(data);
+  }
+  function handleChildData1(data) {
+    console.log(data);
+    setRoleId(data);
+  }
 
-        <>
-            <ThemeProvider theme={theme}>
-                <Button
-                    onClick={handleClickOpen}
-                    name="Add team"
-                    color="accent"
-                    variant="contained"
-                    sx={{color:"#16202a"}}
-                    >
-                  <AddIcon />
-                 
-                </Button>
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    TransitionComponent={Transition}
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleSumbit = (e) => {
+    setEmployeeId(props.employeeId)
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("role_id",roleId);
+    formData.append("employee_id", employeeId);
+    formData.append("project_id", projectId);
+    let token = cookie.load("access_token");
+    console.log(props.employeeId)
+   
+
+    axios
+      .post(`${process.env.REACT_APP_URL}/employee-project-role`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        return toast(" employee edited successfully", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: { backgroundColor: "#4dedf5", color: "#16202a" },
+        });
+      })
+      .catch((error) => {
+        setError("Invalid credentials");
+        console.log(error);
+      });
+  };
+
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <Button
+          onClick={handleClickOpen}
+          name="Add team"
+          color="accent"
+          variant="contained"
+          sx={{ color: "#16202a" }}
+        >
+          <AddIcon />
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <form action="POST" onSubmit={handleSumbit}>
+            <AppBar sx={{ position: "relative", width: "500px" }}>
+              <Toolbar>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  onClick={handleClose}
+                  aria-label="close"
                 >
-                <form action="POST" onSubmit={handleSumbit}>
-
-                    <AppBar sx={{ position: "relative", width: "500px" }}>
-                        <Toolbar>
-                            <IconButton
-                                edge="start"
-                                color="inherit"
-                                onClick={handleClose}
-                                aria-label="close"
-                            >
-                                <CloseIcon />
-                            </IconButton>
-                            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                               project and role
-                            </Typography>
-                            <Button autoFocus color="inherit" onClick={handleClose} type="submit">
-                                save
-                            </Button>
-                        </Toolbar>
-                    </AppBar>
-                    <List sx={{ backgroundColor:"#2F4550"}}>
-                       
-                        <TextField
-                            id="outlined-basic"
-                            label="Name"
-                            variant="outlined"
-                            onChange={(e)=>setName(e.target.value)}
-                            sx={{
-                                width: "90%",
-                                margin: "1pc",
-                                '& .MuiOutlinedInput-root': {
-                                    color: "white", // sets the text color to white
-                                    '& fieldset': {
-                                      borderColor: "white", // sets the border color to white
-                                    }}
-                            }}
-                        />
-                        <SingleSelectPlaceholderProject id={props.teamName}/>
-                        {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
-                    </List>
-
-                </form>
-                </Dialog>
-            </ThemeProvider>
-        </>
-    );
+                  <CloseIcon />
+                </IconButton>
+                <Typography
+                  sx={{ ml: 2, flex: 1 }}
+                  variant="h6"
+                  component="div"
+                >
+                  project and role
+                </Typography>
+                <Button
+                  autoFocus
+                  color="inherit"
+                  onClick={handleClose}
+                  type="submit"
+                >
+                  save
+                </Button>
+              </Toolbar>
+            </AppBar>
+            <List sx={{ backgroundColor: "#2F4550" }}>
+              <SingleSelectPlaceholderRole onChildData={handleChildData1} />
+              <SingleSelectPlaceholderProject
+                id={props.teamName}
+                onChildData={handleChildData}
+              />
+              {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
+            </List>
+          </form>
+        </Dialog>
+      </ThemeProvider>
+    </>
+  );
 }
 
 export default AddRole;

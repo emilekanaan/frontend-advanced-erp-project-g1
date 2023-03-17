@@ -5,39 +5,45 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import Delete from "@mui/icons-material/Delete";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import cookie from "react-cookies";
+
 function DeleteTeam(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-
     setOpen(true);
-
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCloseDelete=()=>{
-    console.log(props)
+  const handleCloseDelete = () => {
+    console.log(props);
     setOpen(false);
-    axios.delete(`${process.env.REACT_APP_URL}/${props.url}/${props.Id}`).then((response)=>{
-      toast(`${props.text} Deleted successfully`, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        style: { backgroundColor: "#4dedf5",color:"#16202a" }
-      });
-    }).catch((error)=>console.log(error));
-  }
+    let token = cookie.load("access_token");
+
+    axios
+      .delete(`${process.env.REACT_APP_URL}/${props.url}/${props.Id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        toast(`${props.text} Deleted successfully`, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: { backgroundColor: "#4dedf5", color: "#16202a" },
+        });
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div>
-      
       <Button
         name="delete team"
         variant="contained"
