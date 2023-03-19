@@ -1,6 +1,5 @@
 import React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useDemoData } from "@mui/x-data-grid-generator";
 import "./list_project.css";
 import FormProject from "../form_project/form_project.js";
 import DeleteTeam from "../delete_team/delete_team";
@@ -21,14 +20,30 @@ function ListProject() {
       })
       .then((response) => {
         if (response.status === 200) {
-          setProjectTable(response.data.data);
+          setProjectTable(response.data);
         }
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+  const handleAddAdmin = (newAdmin) => {
+    setProjectTable((prevAdminTable) => [...prevAdminTable, newAdmin]);
+  };
 
+  const handleDeleteProejct = (adminId) => {
+    setProjectTable((prevAdminTable) =>
+      prevAdminTable.filter((admin) => admin.id !== adminId)
+    );
+  };
+
+  const handleEditAdmin = (editedAdmin) => {
+    setProjectTable((prevAdminTable) =>
+      prevAdminTable.map((admin) =>
+        admin.id === editedAdmin.id ? editedAdmin : admin
+      )
+    );
+  };
   const columns = [
     { field: "id" },
     { field: "name", headerName: "Name", width: 350 },
@@ -54,14 +69,14 @@ function ListProject() {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: (params) => <EditProject Id={params.row.id} />,
+      renderCell: (params) => <EditProject Id={params.row.id} onEditAdmin={handleEditAdmin}/>,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 84,
       renderCell: (params) => (
-        <DeleteTeam text="project" Id={params.row.id} url="project" />
+        <DeleteTeam text="project" Id={params.row.id} url="project"   onDeleteAdmin={handleDeleteProejct} />
       ),
     },
   ];
@@ -77,7 +92,7 @@ function ListProject() {
         }}
       >
         <h1 className="project-h1">Project</h1>
-        <FormProject />
+        <FormProject onAddAdmin={handleAddAdmin} />
       </section>
       <DataGrid
         rows={projectTable}

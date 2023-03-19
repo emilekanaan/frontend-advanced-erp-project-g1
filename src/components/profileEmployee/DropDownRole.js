@@ -39,7 +39,7 @@ export default function SingleSelectPlaceholderRole(props) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setNames(response.data.data);
+        setNames(response.data);
         console.log(response.data.data);
       })
       .catch((error) => {
@@ -89,15 +89,16 @@ export default function SingleSelectPlaceholderRole(props) {
           <MenuItem disabled value="">
             <em>Role</em>
           </MenuItem>
-          {names.map((name) => (
-            <MenuItem
-              key={name.id}
-              value={name.role}
-              style={getStyles(name.role, personName, theme)}
-            >
-              {name.role}
-            </MenuItem>
-          ))}
+          {names.length > 0 &&
+            names.map((name) => (
+              <MenuItem
+                key={name.id}
+                value={name.role}
+                style={getStyles(name.role, personName, theme)}
+              >
+                {name.role}
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     </div>

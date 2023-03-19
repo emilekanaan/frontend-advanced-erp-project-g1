@@ -28,6 +28,8 @@ function DeleteTeam(props) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        console.log(props.Id)
+        props.onDeleteAdmin(props.Id);
         toast(`${props.text} Deleted successfully`, {
           position: "bottom-right",
           autoClose: 5000,
@@ -39,7 +41,18 @@ function DeleteTeam(props) {
           style: { backgroundColor: "#4dedf5", color: "#16202a" },
         });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error("Error", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      });
   };
 
   return (

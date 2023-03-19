@@ -26,14 +26,30 @@ function ListTeam() {
       })
       .then((response) => {
         setData(response.data);
-        console.log(response.data.data)
-        setTableData(response.data.data);
+        console.log(response.data)
+        setTableData(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  const handleAddAdmin = (newAdmin) => {
+    setTableData((prevAdminTable) => [...prevAdminTable, newAdmin]);
+  };
 
+  const handleDeleteTeam = (adminId) => {
+    setTableData((prevAdminTable) =>
+      prevAdminTable.filter((admin) => admin.id !== adminId)
+    );
+  };
+
+  const handleEditAdmin = (editedAdmin) => {
+    setTableData((prevAdminTable) =>
+      prevAdminTable.map((admin) =>
+        admin.id === editedAdmin.id ? editedAdmin : admin
+      )
+    );
+  };
 
 
   const columns = [
@@ -61,13 +77,13 @@ function ListTeam() {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: (params) => <EditTeam Id={params.row.id} />,
+      renderCell: (params) => <EditTeam Id={params.row.id}  onEditAdmin={handleEditAdmin} />,
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 150,
-      renderCell: (params) => <DeleteTeam text="team" Id={params.row.id} url="team"/>,
+      renderCell: (params) => <DeleteTeam text="team" Id={params.row.id} url="team"  onDeleteAdmin={handleDeleteTeam}/>,
     },
   ];
 
@@ -82,7 +98,7 @@ function ListTeam() {
         }}
       >
         <h1 className="team-h1">Team</h1>
-        <FormTeam />
+        <FormTeam onAddAdmin={handleAddAdmin}/>
       </section>
       <DataGrid
         rows={tableData}

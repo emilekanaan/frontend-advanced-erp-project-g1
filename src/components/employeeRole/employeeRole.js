@@ -27,9 +27,12 @@ function EmployeeRole(props) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     console.log(props);
+    let token = cookie.load("access_token");
 
     axios
-      .get(`${process.env.REACT_APP_URL}/employeeteam/${props.Id}`)
+      .get(`${process.env.REACT_APP_URL}/employee-role/${props.Id}`,{
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data.message);

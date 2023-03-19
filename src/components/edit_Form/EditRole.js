@@ -34,12 +34,8 @@ const theme = createTheme({
 
 function EditRole(props) {
     const [name,setName] = useState("")
-    const [dataFromrole, setDataFromRole] = useState("");
     const [error , setError] = useState("");
-    const test = () => {
-        console.log("clicked!!!");
-    };
-
+ 
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -49,10 +45,7 @@ function EditRole(props) {
     const handleClose = () => {
         setOpen(false);
     };
-    function handleChildData(data) {
-        console.log(data);
-        setDataFromRole(data);
-    }
+  
     const handleSubmit = (e) => {
         console.log(props);
         e.preventDefault();
@@ -66,6 +59,7 @@ function EditRole(props) {
             .post(`${process.env.REACT_APP_URL}/role/${props.Id}`,formData, {
                 headers: { Authorization: `Bearer ${token}` },})
             .then((response) => {
+                props.onEditAdmin(response.data.message);
                 console.log(response);
                 return toast(" Role edited successfully", {
                     position: "bottom-right",
@@ -81,7 +75,7 @@ function EditRole(props) {
             .catch((error ) =>{
                 console.log(error)
                 setError("Invalid credentials");
-                toast.error(error, {
+                toast.error("error", {
                     position: "bottom-right",
                     autoClose: 5000,
                     hideProgressBar: false,

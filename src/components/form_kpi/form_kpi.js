@@ -8,18 +8,13 @@ import Slide from "@mui/material/Slide";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-
 import List from "@mui/material/List";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {  TextField } from "@mui/material";
 import { useState } from "react";
-
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import cookie from "react-cookies";
-
-
 import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -35,14 +30,8 @@ const theme = createTheme({
     },
 });
 
-function FormKpi() {
+function FormKpi(props) {
     const [name, setName] = useState("");
-    const [dataFromteam, setDataFromKpi] = useState("");
-    const [error, setError] = useState("");
-    const test = () => {
-        console.log("clicked!!!");
-    };
-
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -64,6 +53,8 @@ function FormKpi() {
                 headers: { Authorization: `Bearer ${token}` },
               })
               .then ((response) => {
+                console.log(response)
+                props.onAddAdmin(response.data.message);
                 return toast(" added kpi!", {
                     position: "bottom-right",
                     autoClose: 5000,
