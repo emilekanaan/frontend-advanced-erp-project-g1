@@ -42,7 +42,7 @@ export default function SingleSelectPlaceholderKpi(props) {
       .then((response) => {
         if (response.status === 200) {
         
-         setNames(response.data.message.data)
+         setNames(response.data.message)
             console.log(response.data.message.data);
           
         }

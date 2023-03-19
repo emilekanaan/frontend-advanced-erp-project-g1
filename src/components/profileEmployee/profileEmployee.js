@@ -16,7 +16,6 @@ import "./profile.css";
 import cookie from "react-cookies";
 import { DataGrid, GridToolbar, GridToolbarContainer } from "@mui/x-data-grid";
 import ProfileChart from "./profileChart/profileChart";
-import { Add } from "@mui/icons-material";
 import AddRole from "./AddRole";
 import AddKpi from "./AddKpi";
 
@@ -141,8 +140,7 @@ function EmployeeProfile(props) {
     return (
       <GridToolbarContainer>
         <GridToolbar></GridToolbar>
-      <AddRole teamName={props.team} employeeId={employeeProfile.id}/>
-  
+        <AddRole teamName={props.team} employeeId={employeeProfile.id} onAddAdmin={handleAddRole}/>
       </GridToolbarContainer>
     );
   }
@@ -150,11 +148,16 @@ function EmployeeProfile(props) {
     return (
       <GridToolbarContainer>
         <GridToolbar></GridToolbar>
-      <AddKpi teamName={props.team} employeeId={employeeProfile.id}/>
-  
+        <AddKpi teamName={props.team} employeeId={employeeProfile.id} onAddAdmin={handleAddKpi}/>
       </GridToolbarContainer>
     );
   }
+  const handleAddKpi = (newAdmin) => {
+    setEvaluation((prevAdminTable) => [...prevAdminTable, newAdmin]);
+  };
+  const handleAddRole = (newAdmin) => {
+    setProjectRole((prevAdminTable) => [...prevAdminTable, newAdmin]);
+  };
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -242,7 +245,6 @@ function EmployeeProfile(props) {
                 columns={columns.filter((column) => column.field !== "id")}
                 components={{
                   Toolbar: CustomToolbar,
-                
                 }}
                 sx={{
                   maxWidth: "600px",
@@ -263,7 +265,6 @@ function EmployeeProfile(props) {
                 columns={columns2.filter((column) => column.field !== "id")}
                 components={{
                   Toolbar: CustomToolbar2,
-                
                 }}
                 sx={{
                   maxWidth: "600px",

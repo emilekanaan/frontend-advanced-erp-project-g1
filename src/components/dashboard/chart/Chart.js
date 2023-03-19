@@ -1,13 +1,28 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js';
 import './Chart.css';
+import axios from "axios";
+import cookie from "react-cookies";
 
 const LineChart = () => {
   const chartRef = useRef();
 
   useEffect(() => {
     const myChartRef = chartRef.current.getContext("2d");
-
+    let token = cookie.load("access_token");
+    token &&
+      axios
+        .get(`${process.env.REACT_APP_URL}/month`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+         
+      console.log(response)
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log(cookie.load("access_token"));
+        });
     new Chart(myChartRef, {
       type: "line",
       data: {

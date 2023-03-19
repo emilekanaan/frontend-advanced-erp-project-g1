@@ -19,15 +19,31 @@ export default function ListEmployee() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        if (response.status === 200) {
-          setEmployeeTable(response.data.data);
-        }
+      console.log(response)
+          setEmployeeTable(response.data);
+        
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+  const handleAddAdmin = (newAdmin) => {
+    setEmployeeTable((prevAdminTable) => [...prevAdminTable, newAdmin]);
+  };
 
+  const handleDeleteEmployee = (adminId) => {
+    setEmployeeTable((prevAdminTable) =>
+      prevAdminTable.filter((admin) => admin.id !== adminId)
+    );
+  };
+
+  const handleEditAdmin = (editedAdmin) => {
+    setEmployeeTable((prevAdminTable) =>
+      prevAdminTable.map((admin) =>
+        admin.id === editedAdmin.id ? editedAdmin : admin
+      )
+    );
+  };
   const theme = createTheme({
     palette: {
       primary: { main: "#16202a" },
@@ -68,7 +84,7 @@ export default function ListEmployee() {
       headerName: "Edit",
       width: 84,
 
-      renderCell: (params) => <EditEmployee Id={params.row.id} />,
+      renderCell: (params) => <EditEmployee Id={params.row.id} onEditAdmin={handleEditAdmin}/>,
     },
     {
       field: "delete",
@@ -76,7 +92,7 @@ export default function ListEmployee() {
       width: 84,
 
       renderCell: (params) => (
-        <DeleteTeam text="employee" Id={params.row.id} url="employee" />
+        <DeleteTeam text="employee" Id={params.row.id} url="employee" onDeleteAdmin={handleDeleteEmployee}/>
       ),
     },
   ];
@@ -87,7 +103,7 @@ export default function ListEmployee() {
         <section style={{ display: "flex", justifyContent: "space-between" ,flexWrap:"wrap"}}>
           <h1 className="employee-h1">Employee</h1>
 
-          <FormEmployee />
+          <FormEmployee onAddAdmin={handleAddAdmin}/>
         </section>
         <DataGrid
           rows={EmployeeTable}

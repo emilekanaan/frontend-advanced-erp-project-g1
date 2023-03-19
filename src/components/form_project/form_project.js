@@ -16,12 +16,13 @@ import MultipleSelectPlaceholder from "../DropDown";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import cookie from "react-cookies";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function FormProject() {
+function FormProject(props) {
   const [name, setName] = useState("");
   const [teamid, setTeamid] = useState("");
 
@@ -48,10 +49,15 @@ function FormProject() {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("team_id", teamid);
+    let token = cookie.load("access_token");
+
     axios
-      .post(`${process.env.REACT_APP_URL}/project`, formData)
+      .post(`${process.env.REACT_APP_URL}/project`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
+        props.onAddAdmin(response.data.message);
         return toast(" added employee!", {
           position: "bottom-right",
           autoClose: 5000,

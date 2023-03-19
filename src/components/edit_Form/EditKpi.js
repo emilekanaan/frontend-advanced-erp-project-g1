@@ -13,9 +13,7 @@ import { TextField } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { useState } from "react";
 import axios from "axios";
-
 import { toast } from "react-toastify";
-
 import cookie from "react-cookies";
 
 
@@ -35,12 +33,7 @@ const theme = createTheme({
 
 function EditKpi(props) {
   const [name, setName] = useState("");
-  const [dataFromkpi, setDataFromKpi] = useState("");
   const [error, setError] = useState("");
-  const test = () => {
-    console.log("clicked!!!");
-  };
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -50,10 +43,7 @@ function EditKpi(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  function handleChildData(data) {
-    console.log(data);
-    setDataFromKpi(data);
-  }
+
   const handleSubmit = (e) => {
     console.log(props);
     e.preventDefault();
@@ -69,6 +59,8 @@ function EditKpi(props) {
       })
       .then((response) => {
         console.log(response);
+        props.onEditAdmin(response.data.message);
+
         return toast(" KPI edited successfully", {
           position: "bottom-right",
           autoClose: 5000,

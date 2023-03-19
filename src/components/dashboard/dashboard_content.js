@@ -19,7 +19,7 @@ function DashboardContent(props) {
 
   const [role1, setRole1] = useState([]);
   const [role2, setRole2] = useState([]);
-
+const [data,setData]=useState(false)
   const [kpi1, setKpi1] = useState([]);
   const [kpi2, setKpi2] = useState([]);
   const [count, setCount] = useState([]);
@@ -32,6 +32,7 @@ function DashboardContent(props) {
         })
         .then((response) => {
           if (response.status === 200) {
+            setData(true)
             setProject1(response.data[0][0]);
             setProject2(response.data[0][1]);
             setEmployee1(response.data[1][0]);
@@ -61,7 +62,7 @@ function DashboardContent(props) {
         console.log(error);
       });
   }, []);
-
+if(data){
   return (
     <>
       <main className="dashboard-content">
@@ -72,53 +73,53 @@ function DashboardContent(props) {
             <div>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}> New Project:</span>{" "}
-                {project1.name} at {project1.created_at}
+                {project1.name} at {project1.created_at.split('T')[0]}
               </h3>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New Project:</span>{" "}
-                {project2.name} at {project2.created_at}
+                {project2.name} at {project2.created_at.split('T')[0]}
               </h3>
             </div>
             <div>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New Employee:</span>{" "}
                 {employee1.first_name} {employee1.last_name} at{" "}
-                {employee1.created_at}
+                {employee1.created_at.split('T')[0]}
               </h3>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New Employee:</span>{" "}
                 {employee2.first_name} {employee2.last_name} at{" "}
-                {employee2.created_at}
+                {employee2.created_at.split('T')[0]}
               </h3>
             </div>
             <div>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New Team:</span> {team1.name}{" "}
-                at {team1.created_at}
+                at {team1.created_at.split('T')[0]}
               </h3>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New Team:</span> {team2.name}{" "}
-                at {team2.created_at}
+                at {team2.created_at.split('T')[0]}
               </h3>
             </div>
             <div>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi1.name}{" "}
-                at {kpi1.created_at}
+                at {kpi1.created_at.split('T')[0]}
               </h3>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi2.name}{" "}
-                at {kpi2.created_at}
+                at {kpi2.created_at.split('T')[0]}
               </h3>
             </div>
             <div>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New Role:</span> {role1.role}{" "}
-                at {role1.created_at}
+                at {role1.created_at.split('T')[0]}
               </h3>
               <h3 className="recentlyMinTitle">
                 <span style={{ color: "#4dedf5" }}>New Role:</span> {role2.role}{" "}
-                at {role2.created_at}
+                at {role2.created_at.split('T')[0]}
               </h3>
             </div>
           </div>
@@ -172,6 +173,8 @@ function DashboardContent(props) {
       </main>
     </>
   );
+                }
+                
 }
 
 export default DashboardContent;

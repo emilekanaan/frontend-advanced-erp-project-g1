@@ -16,6 +16,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Edit } from "@mui/icons-material";
 import { toast } from "react-toastify";
+import cookie from "react-cookies";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -52,10 +53,15 @@ function EditProject(props) {
     if(name) formData.append("name", name);
     if(teamid) formData.append("team_id", teamid);
     formData.append("_method","PATCH");
+    let token = cookie.load("access_token");
+
     axios
-      .post(`${process.env.REACT_APP_URL}/project/${props.Id}`, formData)
+      .post(`${process.env.REACT_APP_URL}/project/${props.Id}`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
-        console.log(response)
+        props.onEditAdmin(response.data.project);
+        console.log(response.data.project)
         return toast(" employee edited successfully", {
           position: "bottom-right",
           autoClose: 5000,

@@ -12,6 +12,7 @@ import Slide from "@mui/material/Slide";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import { useState } from "react";
 import axios from "axios";
+import cookie from "react-cookies";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -19,14 +20,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function ShowTeam(props) {
   const [team, setTeam] = useState([]);
   const [project,setProject]=useState([])
-  const test = () => {
-    console.log("clicked!!!");
-  };
+
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     console.log(props);
+    let token = cookie.load("access_token");
+
     axios
-      .get(`${process.env.REACT_APP_URL}/team/${props.Id}`)
+      .get(`${process.env.REACT_APP_URL}/team/${props.Id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data.message);
@@ -38,7 +41,9 @@ function ShowTeam(props) {
         console.log(error);
       });
     axios
-      .get(`${process.env.REACT_APP_URL}/projectTeam/${props.Id}`)
+      .get(`${process.env.REACT_APP_URL}/projectTeam/${props.Id}`,{
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data.message);

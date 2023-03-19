@@ -14,7 +14,8 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
+import cookie from "react-cookies";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -29,13 +30,8 @@ const theme = createTheme({
   },
 });
 
-function FormTeam() {
+function FormTeam({ onAddAdmin }) {
   const [team, setTeam] = useState("");
-  const [dataFromteam, setDataFromTeam] = useState("");
-  const [error, setError] = useState("");
-  const test = () => {
-    console.log("clicked!!!");
-  };
 
   const [open, setOpen] = React.useState(false);
 
@@ -51,19 +47,27 @@ function FormTeam() {
     const formData = new FormData();
     formData.append("name",team);
     console.log(team);
+    let token = cookie.load("access_token");
+
     axios
-       .post(`${process.env.REACT_APP_URL}/team`,formData)
-       .then((response) => {return toast(" added team!", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        style: { backgroundColor: "#4dedf5", color: "#16202a" },
-      });})
-       .catch((error) => {
+       .post(`${process.env.REACT_APP_URL}/team`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        onAddAdmin(response.data.message);
+        console.log(response)
+        return toast(" added admin!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: { backgroundColor: "#4dedf5", color: "#16202a" },
+        });
+      })
+      .catch((error) => {
         toast.error("invalid credentials", {
           position: "bottom-right",
           autoClose: 5000,
@@ -74,7 +78,7 @@ function FormTeam() {
           progress: undefined,
           theme: "colored",
         });
-       })
+      });
   };
 
   return (

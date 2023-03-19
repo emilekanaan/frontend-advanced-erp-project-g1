@@ -30,7 +30,7 @@ const theme = createTheme({
   },
 });
 
-function RoleForm() {
+function RoleForm(props) {
   const [role, setRole] = useState("");
   const [dataFromrole, setDataFromRole] = useState("");
   const [error, setError] = useState("");
@@ -55,8 +55,13 @@ function RoleForm() {
     let token = cookie.load("access_token");
     axios
 
-       .post(`${process.env.REACT_APP_URL}/role`,formData)
-       .then((response) => {return toast(" added role!", {
+       .post(`${process.env.REACT_APP_URL}/role`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+       .then((response) => {
+        console.log(response)
+        props.onAddAdmin(response.data.message);
+        return toast(" added role!", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,

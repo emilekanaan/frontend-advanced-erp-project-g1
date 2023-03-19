@@ -1,5 +1,4 @@
 import React from "react";
-import AddIcon from "@mui/icons-material/Add";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,9 +14,9 @@ import axios from "axios";
 import Stack from "@mui/material/Stack";
 import MultipleSelectPlaceholder from "../DropDown";
 import { useState } from "react";
-import { Alert } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { toast } from "react-toastify";
+import cookie from "react-cookies";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -71,11 +70,15 @@ function EditEmployee(props) {
     if (dataFromteam) formData.append("team_id", dataFromteam);
     formData.append("_method", "PATCH");
     console.log(selectedFile);
+    let token = cookie.load("access_token");
 
     axios
-      .post(`${process.env.REACT_APP_URL}/employee/${props.Id}`, formData)
+      .post(`${process.env.REACT_APP_URL}/employee/${props.Id}`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
+        props.onEditAdmin(response.data.employee);
         return toast(" employee edited successfully", {
           position: "bottom-right",
           autoClose: 5000,
@@ -89,7 +92,7 @@ function EditEmployee(props) {
       })
       .catch((error) => {
         setError(error);
-        toast.error(error, {
+        toast.error("error", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -234,6 +237,7 @@ function EditEmployee(props) {
                     >
                       Employee image
                       <input
+                      hidden
                         accept=".png, .jpg, .jpeg"
                         type="file"
                         onChange={(e) => setSelectedFile(e.target.files[0])}

@@ -33,7 +33,7 @@ const theme = createTheme({
   },
 });
 
-function FormEmployee() {
+function FormEmployee(props) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -41,9 +41,6 @@ function FormEmployee() {
   const [phone_num, setPhoneNum] = useState("");
   const [dataFromteam, setDataFromteam] = useState("");
 
-  const test = () => {
-    console.log("clicked!!!");
-  };
 
   const [open, setOpen] = React.useState(false);
 
@@ -76,6 +73,8 @@ function FormEmployee() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        console.log(response.data.message)
+        props.onAddAdmin(response.data.message);
         return toast(" added employee!", {
           position: "bottom-right",
           autoClose: 5000,
@@ -88,6 +87,7 @@ function FormEmployee() {
         });
       })
       .catch((error) => {
+        console.log(error);
         toast.error("invalid credentials", {
           position: "bottom-right",
           autoClose: 5000,
@@ -229,6 +229,7 @@ function FormEmployee() {
                   >
                     Employee image
                     <input
+                    hidden
                       accept=".png, .jpg, .jpeg"
                       type="file"
                       onChange={(e) => setSelectedFile(e.target.files[0])}

@@ -143,8 +143,8 @@ function AddKpi(props) {
                   const value = e.target.value;
                   if (value >= 1 && value <= 10) {
                     setEvaluation(value);
-                  }else{
-                    alert("Please select a value")
+                  } else {
+                    alert("Please select a value");
                   }
                 }}
                 sx={{

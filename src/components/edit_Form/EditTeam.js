@@ -59,6 +59,7 @@ const handleSubmit = (e) => {
     axios
         .post(`${process.env.REACT_APP_URL}/team/${props.Id}`,formData)
         .then((response) => {
+          props.onEditAdmin(response.data.team);
             console.log(response);
             return toast("Team edited successfully", {
               position: "bottom-right",
@@ -73,7 +74,7 @@ const handleSubmit = (e) => {
         })
         .catch((error ) =>{
             console.log(error)
-            toast.error(error, {
+            toast.error("invalid credentials", {
               position: "bottom-right",
               autoClose: 5000,
               hideProgressBar: false,

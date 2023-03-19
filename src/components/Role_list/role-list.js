@@ -19,14 +19,30 @@ function RoleList() {
       })
        .then((response) => {
         console.log(response)
-        setRoleTable(response.data.data);
+        setRoleTable(response.data);
        })
        .catch((error) => {
         console.log(error);
        })
   },[])
 
-    
+  const handleAddAdmin = (newAdmin) => {
+    setRoleTable((prevAdminTable) => [...prevAdminTable, newAdmin]);
+  };
+
+  const handleDeleteRole = (adminId) => {
+    setRoleTable((prevAdminTable) =>
+      prevAdminTable.filter((admin) => admin.id !== adminId)
+    );
+  };
+
+  const handleEditAdmin = (editedAdmin) => {
+    setRoleTable((prevAdminTable) =>
+      prevAdminTable.map((admin) =>
+        admin.id === editedAdmin.id ? editedAdmin : admin
+      )
+    );
+  };
       const columns = [
        
         { field: "role", headerName: "Role", width: 260 },
@@ -37,7 +53,7 @@ function RoleList() {
           headerName: "Edit",
           width: 170,
           renderCell: (params) => (
-           <EditRole Id={params.row.id}/>
+           <EditRole Id={params.row.id}  onEditAdmin={handleEditAdmin} />
           ),
         },
         {
@@ -45,7 +61,7 @@ function RoleList() {
           headerName: "Delete",
           width: 84,
           renderCell: (params) => (
-              <DeleteTeam text="role" Id={params.row.id} url="role"/>
+              <DeleteTeam text="role" Id={params.row.id} url="role"  onDeleteAdmin={handleDeleteRole}/>
           ),
       },
       ];
@@ -60,7 +76,7 @@ function RoleList() {
         }}
       >
         <h1 className='role-h1'>Role</h1>
-        <RoleForm/>
+        <RoleForm onAddAdmin={handleAddAdmin}/>
       
       </section>
       <DataGrid

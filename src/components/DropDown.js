@@ -39,12 +39,11 @@ export default function SingleSelectPlaceholder(props) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        if (response.status === 200) {
-          if (response.data.data) {
-            setNames(response.data.data);
-            console.log(response.data.data);
-          }
-        }
+    
+        
+            setNames(response.data);
+            console.log(response);
+       
       })
       .catch((error) => {
         console.log(error);
