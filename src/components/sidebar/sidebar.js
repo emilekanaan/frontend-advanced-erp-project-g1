@@ -8,7 +8,7 @@ import "./sidebar.css";
 import { Navigate, NavLink } from "react-router-dom";
 import cookie from "react-cookies";
 
-const Sidebar = () => {
+const Sidebar = ({ userData }) => {
   const [selected, setSelected] = useState();
   const [expanded, setExpanded] = useState(false);
   const [loggedOut, setLoggedOut] = useState(false);
@@ -28,6 +28,7 @@ const Sidebar = () => {
     cookie.remove("access_token", { path: "/" });
     setLoggedOut(true);
   };
+
 
   return (
     <>
@@ -49,7 +50,7 @@ const Sidebar = () => {
           <div className="side-comp__logo">
             <img src={Logo} alt="logo" />
             <span>
-              E<span>R</span>P
+            {userData && userData.name}
             </span>
           </div>
 

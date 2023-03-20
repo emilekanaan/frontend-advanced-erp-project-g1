@@ -68,7 +68,7 @@ function AddKpi(props) {
       })
       .then((response) => {
         console.log(response);
-        return toast(" employee edited successfully", {
+        return toast("add evaluation successfully", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,

@@ -72,7 +72,6 @@ function FormEmployee(props) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data.message);
         props.onAddAdmin(response.data.message);
         return toast(" added employee!", {
           position: "bottom-right",
