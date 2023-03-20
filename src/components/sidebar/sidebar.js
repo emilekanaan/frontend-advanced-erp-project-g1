@@ -8,7 +8,6 @@ import "./sidebar.css";
 import { Navigate, NavLink } from "react-router-dom";
 import cookie from "react-cookies";
 
-
 const Sidebar = ({ userData }) => {
   const [selected, setSelected] = useState();
   const [expanded, setExpanded] = useState(false);
@@ -20,23 +19,21 @@ const Sidebar = ({ userData }) => {
     },
     false: {
       left: "-60%",
-      display:'none'
+      display: "none",
     },
   };
 
   const handleLogout = (e) => {
     e.preventDefault();
-    cookie.remove("access_token", { path: "/" })
+    cookie.remove("access_token", { path: "/" });
     setLoggedOut(true);
-  }
-console.log(userData)
+  };
+
 
   return (
     <>
       <div className="side-comp">
-        {loggedOut && (
-          <Navigate to="/" replace={true} />
-        )}
+        {loggedOut && <Navigate to="/" replace={true} />}
         <div
           className="side-comp__bars"
           style={expanded ? { left: "65%" } : { left: "5%" }}

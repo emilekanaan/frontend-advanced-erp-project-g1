@@ -19,28 +19,27 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 function ShowEmployee(props) {
   const [team, setTeam] = useState([]);
-  const [employee,setEmployee]=useState([])
- 
+  const [employee, setEmployee] = useState([]);
+
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     console.log(props);
     let token = cookie.load("access_token");
 
     axios
-      .get(`${process.env.REACT_APP_URL}/employeeteam/${props.Id}`,{
+      .get(`${process.env.REACT_APP_URL}/employeeteam/${props.Id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data.message);
-          setEmployee(response.data.message)
-      
+          setEmployee(response.data.message);
         }
       })
       .catch((error) => {
         console.log(error);
       });
-   
+
     setOpen(true);
   };
 
@@ -103,14 +102,14 @@ function ShowEmployee(props) {
             }}
           >
             <section>
-         
-              {
-                employee.map(pro=>{
-                  return (
-                   <h3 className="projectemployeeData"> {pro.first_name} {pro.last_name}</h3>
-                  )
-                })
-              }
+              {employee.map((pro) => {
+                return (
+                  <h3 className="projectemployeeData">
+                    {" "}
+                    {pro.first_name} {pro.last_name}
+                  </h3>
+                );
+              })}
             </section>
           </List>
         </Dialog>

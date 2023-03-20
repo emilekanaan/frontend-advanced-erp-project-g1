@@ -3,39 +3,33 @@
   width: 78%;
   margin: 40px auto;
 }
-.admin-h1{
+.admin-h1 {
   color: #f4f4f9;
-  font-size: 40px ;
-
+  font-size: 40px;
 }
 .css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
   color: grey;
 }
-.css-ptiqhd-MuiSvgIcon-root{
+.css-ptiqhd-MuiSvgIcon-root {
   color: antiquewhite;
 }
-@media (max-width: 768px){
-  .admin-table{
+@media (max-width: 768px) {
+  .admin-table {
     height: 65%;
-  width: 68%;
-  margin: 40px auto;
+    width: 68%;
+    margin: 40px auto;
   }
-
 }
-@media (max-width: 680px){
-  .admin-h1{
+@media (max-width: 680px) {
+  .admin-h1 {
     font-size: 35px;
     margin-top: 45px;
   }
-
-
 }
-@media (max-width: 480px){
-  .admin-h1{
+@media (max-width: 480px) {
+  .admin-h1 {
     /* font-size: 30px; */
     margin-top: 45px;
     padding-right: 50px;
-
   }
-
 }

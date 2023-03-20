@@ -6,8 +6,7 @@ import RoleList from "../../components/Role_list/role-list";
 function Role() {
     return (
         <>
-
-           <RoleList/>
+            <RoleList />
         </>
     );
 }

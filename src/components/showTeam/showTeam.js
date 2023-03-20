@@ -19,7 +19,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 function ShowTeam(props) {
   const [team, setTeam] = useState([]);
-  const [project,setProject]=useState([])
+  const [project, setProject] = useState([]);
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -41,13 +41,13 @@ function ShowTeam(props) {
         console.log(error);
       });
     axios
-      .get(`${process.env.REACT_APP_URL}/projectTeam/${props.Id}`,{
+      .get(`${process.env.REACT_APP_URL}/projectTeam/${props.Id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data.message);
-          setProject(response.data.message)
+          setProject(response.data.message);
         }
       })
       .catch((error) => {
@@ -116,14 +116,9 @@ function ShowTeam(props) {
             }}
           >
             <section>
-         
-              {
-                project.map(pro=>{
-                  return (
-                   <h3 className="projectemployeeData"> {pro.name}</h3>
-                  )
-                })
-              }
+              {project.map((pro) => {
+                return <h3 className="projectemployeeData"> {pro.name}</h3>;
+              })}
             </section>
           </List>
         </Dialog>

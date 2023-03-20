@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 
 import List from "@mui/material/List";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import cookie from 'react-cookies'
+import cookie from "react-cookies";
 import { useState } from "react";
 import axios from "axios";
 import SingleSelectPlaceholderProject from "./DropDownProject";
@@ -32,7 +32,6 @@ const theme = createTheme({
 });
 
 function AddRole(props) {
-
   const [error, setError] = useState("");
   const [projectId, setProjectId] = useState("");
   const [roleId, setRoleId] = useState("");
@@ -66,8 +65,7 @@ function AddRole(props) {
     formData.append("employee_id", props.employeeId);
     formData.append("project_id", projectId);
     let token = cookie.load("access_token");
-    console.log(props.employeeId)
-   
+    console.log(props.employeeId);
 
     axios
       .post(`${process.env.REACT_APP_URL}/employee-project-role`, formData, {

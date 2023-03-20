@@ -58,7 +58,7 @@ function FormProject(props) {
       .then((response) => {
         console.log(response);
         props.onAddAdmin(response.data.message);
-        return toast(" added employee!", {
+        return toast(" added project!", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,

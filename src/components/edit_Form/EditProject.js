@@ -23,8 +23,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function EditProject(props) {
-    const [name,setName]=useState("");
-    const [teamid,setTeamid]=useState("");
+  const [name, setName] = useState("");
+  const [teamid, setTeamid] = useState("");
   const test = () => {
     console.log("clicked!!!");
   };
@@ -50,9 +50,9 @@ function EditProject(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    if(name) formData.append("name", name);
-    if(teamid) formData.append("team_id", teamid);
-    formData.append("_method","PATCH");
+    if (name) formData.append("name", name);
+    if (teamid) formData.append("team_id", teamid);
+    formData.append("_method", "PATCH");
     let token = cookie.load("access_token");
 
     axios
@@ -61,7 +61,7 @@ function EditProject(props) {
       })
       .then((response) => {
         props.onEditAdmin(response.data.project);
-        console.log(response.data.project)
+        console.log(response.data.project);
         return toast(" employee edited successfully", {
           position: "bottom-right",
           autoClose: 5000,
@@ -88,13 +88,13 @@ function EditProject(props) {
       });
   };
   function handleChildData(data) {
-    console.log(data); 
-    setTeamid(data)
+    console.log(data);
+    setTeamid(data);
   }
   return (
     <>
       <ThemeProvider theme={theme}>
-      <Button
+        <Button
           onClick={handleClickOpen}
           name="Add team"
           color="accent"
@@ -110,13 +110,12 @@ function EditProject(props) {
         >
           <Edit />
         </Button>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Transition}
-          >
-        <form action="POST" onSubmit={handleSubmit}>
-
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <form action="POST" onSubmit={handleSubmit}>
             <AppBar sx={{ position: "relative", width: "500px" }}>
               <Toolbar>
                 <IconButton
@@ -132,7 +131,7 @@ function EditProject(props) {
                   variant="h6"
                   component="div"
                 >
-                  Add New Project
+                  Edit Project
                 </Typography>
                 <Button
                   autoFocus
@@ -161,12 +160,11 @@ function EditProject(props) {
                 }}
                 onChange={(e) => setName(e.target.value)}
               />
-              <MultipleSelectPlaceholder onChildData={handleChildData}/>
+              <MultipleSelectPlaceholder onChildData={handleChildData} />
               {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
             </List>
-            </form>
-          </Dialog>
-    
+          </form>
+        </Dialog>
       </ThemeProvider>
     </>
   );

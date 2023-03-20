@@ -10,14 +10,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {  TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 
 import { toast } from "react-toastify";
 
 import cookie from "react-cookies";
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -33,9 +32,9 @@ const theme = createTheme({
 });
 
 function EditRole(props) {
-    const [name,setName] = useState("")
-    const [error , setError] = useState("");
- 
+    const [name, setName] = useState("");
+    const [error, setError] = useState("");
+
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -45,19 +44,20 @@ function EditRole(props) {
     const handleClose = () => {
         setOpen(false);
     };
-  
+
     const handleSubmit = (e) => {
         console.log(props);
         e.preventDefault();
-        const formData=new FormData();
-        if (name) formData.append("role",name);
-        formData.append("_method","PATCH");
+        const formData = new FormData();
+        if (name) formData.append("role", name);
+        formData.append("_method", "PATCH");
         console.log(name);
-    let token = cookie.load("access_token");
+        let token = cookie.load("access_token");
 
         axios
-            .post(`${process.env.REACT_APP_URL}/role/${props.Id}`,formData, {
-                headers: { Authorization: `Bearer ${token}` },})
+            .post(`${process.env.REACT_APP_URL}/role/${props.Id}`, formData, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
             .then((response) => {
                 props.onEditAdmin(response.data.message);
                 console.log(response);
@@ -70,10 +70,10 @@ function EditRole(props) {
                     draggable: true,
                     progress: undefined,
                     style: { backgroundColor: "#4dedf5", color: "#16202a" },
-                  });
+                });
             })
-            .catch((error ) =>{
-                console.log(error)
+            .catch((error) => {
+                console.log(error);
                 setError("Invalid credentials");
                 toast.error("error", {
                     position: "bottom-right",
@@ -84,77 +84,81 @@ function EditRole(props) {
                     draggable: true,
                     progress: undefined,
                     theme: "colored",
-                  });
-
+                });
             });
-
-    }
+    };
 
     return (
-
-
         <>
             <ThemeProvider theme={theme}>
                 <Button
                     onClick={handleClickOpen}
                     name="Add team"
                     color="accent"
-              
                     variant="contained"
                     sx={{
                         padding: "10 50px",
                         backgroundColor: "transparent",
                         "&:hover": {
-                          backgroundColor: "#4dedf5",
-                          color: "#16202a",
+                            backgroundColor: "#4dedf5",
+                            color: "#16202a",
                         },
-                      }}
+                    }}
                 >
-                    <EditIcon/>
+                    <EditIcon />
                 </Button>
                 <Dialog
                     open={open}
                     onClose={handleClose}
                     TransitionComponent={Transition}
                 >
-              <form action="POST" onSubmit={handleSubmit} >
-
-                    <AppBar sx={{ position: "relative", width: "500px" }}>
-                        <Toolbar>
-                            <IconButton
-                                edge="start"
-                                color="inherit"
-                                onClick={handleClose}
-                                aria-label="close"
-                            >
-                                <CloseIcon />
-                            </IconButton>
-                            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                              Edit Role
-                            </Typography>
-                            <Button autoFocus color="inherit" onClick={handleClose} type="submit">
-                                save
-                            </Button>
-                        </Toolbar>
-                    </AppBar>
-                    <List sx={{ backgroundColor:"#2F4550"}}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Name"
-                            onChange={(e) => setName (e.target.value)}
-                            variant="outlined"
-                            sx={{
-                                width: "90%",
-                                margin: "1pc",
-                                '& .MuiOutlinedInput-root': {
-                                    color: "white", // sets the text color to white
-                                    '& fieldset': {
-                                      borderColor: "white", // sets the border color to white
-                                    }}
-                            }}
-                        />
-                        {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
-                    </List>
+                    <form action="POST" onSubmit={handleSubmit}>
+                        <AppBar sx={{ position: "relative", width: "500px" }}>
+                            <Toolbar>
+                                <IconButton
+                                    edge="start"
+                                    color="inherit"
+                                    onClick={handleClose}
+                                    aria-label="close"
+                                >
+                                    <CloseIcon />
+                                </IconButton>
+                                <Typography
+                                    sx={{ ml: 2, flex: 1 }}
+                                    variant="h6"
+                                    component="div"
+                                >
+                                    Edit Role
+                                </Typography>
+                                <Button
+                                    autoFocus
+                                    color="inherit"
+                                    onClick={handleClose}
+                                    type="submit"
+                                >
+                                    save
+                                </Button>
+                            </Toolbar>
+                        </AppBar>
+                        <List sx={{ backgroundColor: "#2F4550" }}>
+                            <TextField
+                                id="outlined-basic"
+                                label="Name"
+                                onChange={(e) => setName(e.target.value)}
+                                variant="outlined"
+                                sx={{
+                                    width: "90%",
+                                    margin: "1pc",
+                                    "& .MuiOutlinedInput-root": {
+                                        color: "white", // sets the text color to white
+                                        "& fieldset": {
+                                            borderColor: "white", // sets the border color to white
+                                        },
+                                    },
+                                }}
+                            />
+                            {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
+                        </List>
                     </form>
                 </Dialog>
             </ThemeProvider>

@@ -237,7 +237,7 @@ function EditEmployee(props) {
                     >
                       Employee image
                       <input
-                      hidden
+                        hidden
                         accept=".png, .jpg, .jpeg"
                         type="file"
                         onChange={(e) => setSelectedFile(e.target.files[0])}

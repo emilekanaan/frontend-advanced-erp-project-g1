@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 import cookie from "react-cookies";
 
@@ -42,20 +42,20 @@ function FormTeam({ onAddAdmin }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit=(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("name",team);
+    formData.append("name", team);
     console.log(team);
     let token = cookie.load("access_token");
 
     axios
-       .post(`${process.env.REACT_APP_URL}/team`, formData, {
+      .post(`${process.env.REACT_APP_URL}/team`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         onAddAdmin(response.data.message);
-        console.log(response)
+        console.log(response);
         return toast(" added admin!", {
           position: "bottom-right",
           autoClose: 5000,
@@ -101,44 +101,54 @@ function FormTeam({ onAddAdmin }) {
           onClose={handleClose}
           TransitionComponent={Transition}
         >
-        <form action="POST" onSubmit={handleSubmit}>
-          <AppBar sx={{ position: "relative", width: "500px" }}>
-            <Toolbar>
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={handleClose}
-                aria-label="close"
-              >
-                <CloseIcon />
-              </IconButton>
-              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                Add New Team
-              </Typography>
-              <Button autoFocus color="inherit" onClick={handleClose} type="submit">
-                save
-              </Button>
-            </Toolbar>
-          </AppBar>
-          <List sx={{ backgroundColor:'#2F4550'}}>
-            <TextField
-              id="outlined-basic"
-              label="Name"
-              color="secondary"
-              variant="outlined"
-              onChange={(e)=>setTeam(e.target.value)}
-              sx={{
-                width: "90%",
-                margin: "1pc",
-                '& .MuiOutlinedInput-root': {
+          <form action="POST" onSubmit={handleSubmit}>
+            <AppBar sx={{ position: "relative", width: "500px" }}>
+              <Toolbar>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  onClick={handleClose}
+                  aria-label="close"
+                >
+                  <CloseIcon />
+                </IconButton>
+                <Typography
+                  sx={{ ml: 2, flex: 1 }}
+                  variant="h6"
+                  component="div"
+                >
+                  Add New Team
+                </Typography>
+                <Button
+                  autoFocus
+                  color="inherit"
+                  onClick={handleClose}
+                  type="submit"
+                >
+                  save
+                </Button>
+              </Toolbar>
+            </AppBar>
+            <List sx={{ backgroundColor: "#2F4550" }}>
+              <TextField
+                id="outlined-basic"
+                label="Name"
+                color="secondary"
+                variant="outlined"
+                onChange={(e) => setTeam(e.target.value)}
+                sx={{
+                  width: "90%",
+                  margin: "1pc",
+                  "& .MuiOutlinedInput-root": {
                     color: "white", // sets the text color to white
-                    '& fieldset': {
+                    "& fieldset": {
                       borderColor: "white", // sets the border color to white
-                    }}
-              }}
-            />
-            {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
-          </List>
+                    },
+                  },
+                }}
+              />
+              {/* <Divider sx={{ width: "100%", margin: "1pc" }} /> */}
+            </List>
           </form>
         </Dialog>
       </ThemeProvider>

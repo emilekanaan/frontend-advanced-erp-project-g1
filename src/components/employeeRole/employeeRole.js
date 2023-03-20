@@ -30,7 +30,7 @@ function EmployeeRole(props) {
     let token = cookie.load("access_token");
 
     axios
-      .get(`${process.env.REACT_APP_URL}/employee-role/${props.Id}`,{
+      .get(`${process.env.REACT_APP_URL}/employee-role/${props.Id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -42,7 +42,6 @@ function EmployeeRole(props) {
       .catch((error) => {
         console.log(error);
       });
-     
 
     setOpen(true);
   };
@@ -54,11 +53,15 @@ function EmployeeRole(props) {
       width: 150,
       valueGetter: (params) => {
         return params.row.first_name;
-
       },
     },
-    { field: "Role", headerName: "Role", width: 150,  valueGetter: (params) => {}}
-  ]
+    {
+      field: "Role",
+      headerName: "Role",
+      width: 150,
+      valueGetter: (params) => { },
+    },
+  ];
   const handleClose = () => {
     setOpen(false);
   };
@@ -129,7 +132,7 @@ function EmployeeRole(props) {
                     toolbar: () => (
                       <>
                         <GridToolbar />
-                        <Button >Role</Button>
+                        <Button>Role</Button>
                       </>
                     ),
                   }}

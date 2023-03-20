@@ -5,8 +5,6 @@ import ListKpi from "../../components/list_kpi/list_kpi";
 function Kpi() {
     return (
         <>
-
-        
             <ListKpi />
         </>
     );

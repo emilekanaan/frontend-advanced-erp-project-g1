@@ -19,9 +19,8 @@ export default function ListEmployee() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-      console.log(response)
-          setEmployeeTable(response.data);
-        
+        console.log(response);
+        setEmployeeTable(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -76,7 +75,7 @@ export default function ListEmployee() {
       headerName: "Show profile",
       width: 150,
       renderCell: (params) => {
-        return <EmployeeProfile Id={params.row.id} team={params.row.team_id}/>;
+        return <EmployeeProfile Id={params.row.id} team={params.row.team_id} />;
       },
     },
     {
@@ -84,7 +83,9 @@ export default function ListEmployee() {
       headerName: "Edit",
       width: 84,
 
-      renderCell: (params) => <EditEmployee Id={params.row.id} onEditAdmin={handleEditAdmin}/>,
+      renderCell: (params) => (
+        <EditEmployee Id={params.row.id} onEditAdmin={handleEditAdmin} />
+      ),
     },
     {
       field: "delete",
@@ -92,7 +93,12 @@ export default function ListEmployee() {
       width: 84,
 
       renderCell: (params) => (
-        <DeleteTeam text="employee" Id={params.row.id} url="employee" onDeleteAdmin={handleDeleteEmployee}/>
+        <DeleteTeam
+          text="employee"
+          Id={params.row.id}
+          url="employee"
+          onDeleteAdmin={handleDeleteEmployee}
+        />
       ),
     },
   ];
@@ -100,10 +106,16 @@ export default function ListEmployee() {
   return (
     <ThemeProvider theme={theme}>
       <div className="employee-table">
-        <section style={{ display: "flex", justifyContent: "space-between" ,flexWrap:"wrap"}}>
+        <section
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+          }}
+        >
           <h1 className="employee-h1">Employee</h1>
 
-          <FormEmployee onAddAdmin={handleAddAdmin}/>
+          <FormEmployee onAddAdmin={handleAddAdmin} />
         </section>
         <DataGrid
           rows={EmployeeTable}

@@ -19,7 +19,7 @@ function DashboardContent(props) {
 
   const [role1, setRole1] = useState([]);
   const [role2, setRole2] = useState([]);
-const [data,setData]=useState(false)
+  const [data, setData] = useState(false);
   const [kpi1, setKpi1] = useState([]);
   const [kpi2, setKpi2] = useState([]);
   const [count, setCount] = useState([]);
@@ -32,7 +32,7 @@ const [data,setData]=useState(false)
         })
         .then((response) => {
           if (response.status === 200) {
-            setData(true)
+            setData(true);
             setProject1(response.data[0][0]);
             setProject2(response.data[0][1]);
             setEmployee1(response.data[1][0]);
@@ -62,119 +62,118 @@ const [data,setData]=useState(false)
         console.log(error);
       });
   }, []);
-if(data){
-  return (
-    <>
-      <main className="dashboard-content">
-        <aside>
-          <div className="recently">
-            <h1 className="recentlyTitle">Recently Added</h1>
+  if (data) {
+    return (
+      <>
+        <main className="dashboard-content">
+          <aside>
+            <div className="recently">
+              <h1 className="recentlyTitle">Recently Added</h1>
 
-            <div>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}> New Project:</span>{" "}
-                {project1.name} at {project1.created_at.split('T')[0]}
-              </h3>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New Project:</span>{" "}
-                {project2.name} at {project2.created_at.split('T')[0]}
-              </h3>
+              <div>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}> New Project:</span>{" "}
+                  {project1.name} at {project1.created_at.split("T")[0]}
+                </h3>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New Project:</span>{" "}
+                  {project2.name} at {project2.created_at.split("T")[0]}
+                </h3>
+              </div>
+              <div>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New Employee:</span>{" "}
+                  {employee1.first_name} {employee1.last_name} at{" "}
+                  {employee1.created_at.split("T")[0]}
+                </h3>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New Employee:</span>{" "}
+                  {employee2.first_name} {employee2.last_name} at{" "}
+                  {employee2.created_at.split("T")[0]}
+                </h3>
+              </div>
+              <div>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New Team:</span>{" "}
+                  {team1.name} at {team1.created_at.split("T")[0]}
+                </h3>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New Team:</span>{" "}
+                  {team2.name} at {team2.created_at.split("T")[0]}
+                </h3>
+              </div>
+              <div>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi1.name}{" "}
+                  at {kpi1.created_at.split("T")[0]}
+                </h3>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi2.name}{" "}
+                  at {kpi2.created_at.split("T")[0]}
+                </h3>
+              </div>
+              <div>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New Role:</span>{" "}
+                  {role1.role} at {role1.created_at.split("T")[0]}
+                </h3>
+                <h3 className="recentlyMinTitle">
+                  <span style={{ color: "#4dedf5" }}>New Role:</span>{" "}
+                  {role2.role} at {role2.created_at.split("T")[0]}
+                </h3>
+              </div>
             </div>
-            <div>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New Employee:</span>{" "}
-                {employee1.first_name} {employee1.last_name} at{" "}
-                {employee1.created_at.split('T')[0]}
-              </h3>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New Employee:</span>{" "}
-                {employee2.first_name} {employee2.last_name} at{" "}
-                {employee2.created_at.split('T')[0]}
-              </h3>
-            </div>
-            <div>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New Team:</span> {team1.name}{" "}
-                at {team1.created_at.split('T')[0]}
-              </h3>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New Team:</span> {team2.name}{" "}
-                at {team2.created_at.split('T')[0]}
-              </h3>
-            </div>
-            <div>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi1.name}{" "}
-                at {kpi1.created_at.split('T')[0]}
-              </h3>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New KPI:</span> {kpi2.name}{" "}
-                at {kpi2.created_at.split('T')[0]}
-              </h3>
-            </div>
-            <div>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New Role:</span> {role1.role}{" "}
-                at {role1.created_at.split('T')[0]}
-              </h3>
-              <h3 className="recentlyMinTitle">
-                <span style={{ color: "#4dedf5" }}>New Role:</span> {role2.role}{" "}
-                at {role2.created_at.split('T')[0]}
-              </h3>
-            </div>
-          </div>
-        </aside>
-        <section className="left">
-          <section className="employee_project_team">
-            <div className="card_project">
-              <article className="dash_title">
-                <WebStoriesSharpIcon
-                  style={{
-                    color: "#f4f4f9",
-                    marginLeft: "10px",
-                    marginTop: "35px",
-                  }}
-                />
-                <h1>Project</h1>
-              </article>
-              <span>{count[0]}</span>
-            </div>
-            <div>
-              <article className="dash_title">
-                <Groups2Icon
-                  style={{
-                    color: "#f4f4f9",
-                    marginLeft: "10px",
-                    marginTop: "35px",
-                  }}
-                />
-                <h1>Team</h1>
-              </article>
-              <span>{count[1]}</span>
-            </div>
-            <div>
-              <article className="dash_title">
-                <PersonSharpIcon
-                  style={{
-                    color: "#f4f4f9",
-                    marginLeft: "10px",
-                    marginTop: "35px",
-                  }}
-                />
-                <h1>Employee</h1>
-              </article>
-              <span>{count[2]}</span>
-            </div>
+          </aside>
+          <section className="left">
+            <section className="employee_project_team">
+              <div className="card_project">
+                <article className="dash_title">
+                  <WebStoriesSharpIcon
+                    style={{
+                      color: "#f4f4f9",
+                      marginLeft: "10px",
+                      marginTop: "35px",
+                    }}
+                  />
+                  <h1>Project</h1>
+                </article>
+                <span>{count[0]}</span>
+              </div>
+              <div>
+                <article className="dash_title">
+                  <Groups2Icon
+                    style={{
+                      color: "#f4f4f9",
+                      marginLeft: "10px",
+                      marginTop: "35px",
+                    }}
+                  />
+                  <h1>Team</h1>
+                </article>
+                <span>{count[1]}</span>
+              </div>
+              <div>
+                <article className="dash_title">
+                  <PersonSharpIcon
+                    style={{
+                      color: "#f4f4f9",
+                      marginLeft: "10px",
+                      marginTop: "35px",
+                    }}
+                  />
+                  <h1>Employee</h1>
+                </article>
+                <span>{count[2]}</span>
+              </div>
+            </section>
+            <section>
+              <LineChart />
+            </section>
           </section>
-          <section>
-            <LineChart />
-          </section>
-        </section>
-      </main>
-    </>
-  );
-                }
-                
+        </main>
+      </>
+    );
+  }
 }
 
 export default DashboardContent;
