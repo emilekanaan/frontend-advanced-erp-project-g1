@@ -9,19 +9,22 @@ import Project from "./pages/project/project";
 import Role from "./pages/role/role";
 import Team from "./pages/team/team";
 import Visitor from "./route/visitor/visitor";
-
 import { useState, createContext } from "react";
 
 export const UserContext = createContext(null);
-
 const App = () => {
+const [userData, setUserData] = useState(null);
+
   const [token, setToken] = useState("test");
+  const handleLogin = (data) => {
+    setUserData(data);
+  };
   return (
     <>
       <UserContext.Provider value={{ token, setToken }}>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/" element={<Visitor />}>
+          <Route path="/" element={<Login onLogin={handleLogin} />} />
+          <Route path="/" element={<Visitor userData={userData}/>}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/team" element={<Team />} />

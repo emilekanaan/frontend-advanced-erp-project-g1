@@ -33,7 +33,6 @@ const theme = createTheme({
 
 function AddRole(props) {
 
-const [employeeId,setEmployeeId]=useState("")
   const [error, setError] = useState("");
   const [projectId, setProjectId] = useState("");
   const [roleId, setRoleId] = useState("");
@@ -61,11 +60,10 @@ const [employeeId,setEmployeeId]=useState("")
     setOpen(false);
   };
   const handleSumbit = (e) => {
-    setEmployeeId(props.employeeId)
     e.preventDefault();
     const formData = new FormData();
     formData.append("role_id",roleId);
-    formData.append("employee_id", employeeId);
+    formData.append("employee_id", props.employeeId);
     formData.append("project_id", projectId);
     let token = cookie.load("access_token");
     console.log(props.employeeId)
@@ -77,7 +75,7 @@ const [employeeId,setEmployeeId]=useState("")
       })
       .then((response) => {
         console.log(response);
-        return toast(" employee edited successfully", {
+        return toast(" add role successfully", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,

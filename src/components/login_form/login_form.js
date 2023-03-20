@@ -6,11 +6,12 @@ import { Navigate } from "react-router-dom";
 import { Alert } from "@mui/material";
 import cookie from "react-cookies";
 
-function LoginForm() {
+function LoginForm({ props }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState("");
+  const [userData,setUserData]=useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +21,10 @@ function LoginForm() {
         password: password,
       })
       .then((response) => {
+        console.log(response)
         if (response.status === 200) {
+          setUserData(response.data.admin);
+     
           cookie.save("access_token", response.data.access_token, {
             maxAge: 5 * 60 * 60 * 1000,
           });
@@ -37,6 +41,7 @@ function LoginForm() {
         } else {
           setError(e.message);
         }
+        console.log(e)
       });
   };
 
