@@ -9,24 +9,24 @@ import axios from "axios";
 import cookie from "react-cookies";
 
 function ListKpi() {
-  const[KpiTable, setKpiTable] =useState([]);
+  const [KpiTable, setKpiTable] = useState([]);
   useEffect(() => {
     let token = cookie.load("access_token");
 
     axios
-    .get(`${process.env.REACT_APP_URL}/kpi`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-      if(response.status===200) {
-        console.log(response)
-        setKpiTable(response.data.message);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  },[]);
+      .get(`${process.env.REACT_APP_URL}/kpi`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          setKpiTable(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   const handleAddAdmin = (newAdmin) => {
     setKpiTable((prevAdminTable) => [...prevAdminTable, newAdmin]);
   };
@@ -52,13 +52,22 @@ function ListKpi() {
       field: "edit",
       headerName: "Edit",
       width: 200,
-      renderCell: (params) => <EditKpi Id={params.row.id} onEditAdmin={handleEditAdmin}/>,
+      renderCell: (params) => (
+        <EditKpi Id={params.row.id} onEditAdmin={handleEditAdmin} />
+      ),
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 200,
-      renderCell: (params) => <DeleteTeam text="Kpi" Id={params.row.id} url="kpi"  onDeleteAdmin={handleDeleteKpi}/>,
+      renderCell: (params) => (
+        <DeleteTeam
+          text="Kpi"
+          Id={params.row.id}
+          url="kpi"
+          onDeleteAdmin={handleDeleteKpi}
+        />
+      ),
     },
   ];
 
@@ -69,7 +78,7 @@ function ListKpi() {
           display: "flex",
           justifyContent: "space-between",
           margin: "30px auto",
-          flexWrap:"wrap",
+          flexWrap: "wrap",
         }}
       >
         <h1 className="kpi-h1">KPI</h1>

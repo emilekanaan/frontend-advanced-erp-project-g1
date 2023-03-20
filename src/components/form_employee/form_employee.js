@@ -41,7 +41,6 @@ function FormEmployee(props) {
   const [phone_num, setPhoneNum] = useState("");
   const [dataFromteam, setDataFromteam] = useState("");
 
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -73,7 +72,7 @@ function FormEmployee(props) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data.message)
+        console.log(response.data.message);
         props.onAddAdmin(response.data.message);
         return toast(" added employee!", {
           position: "bottom-right",
@@ -122,7 +121,7 @@ function FormEmployee(props) {
           onClose={handleClose}
           TransitionComponent={Transition}
         >
-          <form action="POST" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <AppBar sx={{ position: "relative", width: "600px" }}>
               <Toolbar>
                 <IconButton
@@ -229,7 +228,7 @@ function FormEmployee(props) {
                   >
                     Employee image
                     <input
-                    hidden
+                      hidden
                       accept=".png, .jpg, .jpeg"
                       type="file"
                       onChange={(e) => setSelectedFile(e.target.files[0])}

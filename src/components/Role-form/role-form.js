@@ -13,8 +13,8 @@ import List from "@mui/material/List";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField } from "@mui/material";
 import { useState } from "react";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -55,23 +55,24 @@ function RoleForm(props) {
     let token = cookie.load("access_token");
     axios
 
-       .post(`${process.env.REACT_APP_URL}/role`, formData, {
+      .post(`${process.env.REACT_APP_URL}/role`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       })
-       .then((response) => {
-        console.log(response)
+      .then((response) => {
+        console.log(response);
         props.onAddAdmin(response.data.message);
         return toast(" added role!", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        style: { backgroundColor: "#4dedf5", color: "#16202a" },
-      });})
-       .catch((error) => {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: { backgroundColor: "#4dedf5", color: "#16202a" },
+        });
+      })
+      .catch((error) => {
         toast.error("invalid credentials", {
           position: "bottom-right",
           autoClose: 5000,
@@ -82,8 +83,7 @@ function RoleForm(props) {
           progress: undefined,
           theme: "colored",
         });
-       })
-
+      });
   };
 
   return (

@@ -40,24 +40,22 @@
   margin-top: 5%;
 }
 @media (max-width: 1517px) {
- .dashboard-content{
-  flex-direction: column-reverse;
- }
- aside{
-  margin: auto;
-
- }
- .left{
-  margin: auto;
-width: 100%;
- }
- .employee_project_team {
-  flex-wrap: wrap;
- }
- .employee_project_team div{
-  margin: 5px;
-
- }
+  .dashboard-content {
+    flex-direction: column-reverse;
+  }
+  aside {
+    margin: auto;
+  }
+  .left {
+    margin: auto;
+    width: 100%;
+  }
+  .employee_project_team {
+    flex-wrap: wrap;
+  }
+  .employee_project_team div {
+    margin: 5px;
+  }
 }
 .recently {
   background: linear-gradient(
@@ -72,11 +70,11 @@ width: 100%;
   border-radius: 10px;
   box-shadow: 3px 3px 3px #00000055;
   font-size: 27px;
-  color:#f4f4f9;
+  color: #f4f4f9;
   overflow-y: scroll;
   margin-top: 7%;
 }
-.recently h3{
+.recently h3 {
   font-size: 25px;
 }
 .left {
@@ -87,32 +85,32 @@ width: 100%;
   font-size: 35px;
   color: var(--secondary);
 }
-.recentlyTitle{
-text-align: center;
-padding: 15px;
+.recentlyTitle {
+  text-align: center;
+  padding: 15px;
 }
-h3{
+h3 {
   text-align: center;
 }
-@media (max-width: 1040px){
+@media (max-width: 1040px) {
   .employee_project_team {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-   }
+  }
 }
 @media (max-width: 695px) {
-  .recently{
+  .recently {
     width: 85%;
     margin: auto;
     font-size: 15px;
   }
-  .recently h3{
+  .recently h3 {
     font-size: 20px;
   }
 }
 @media (max-width: 420px) {
-  .employee_project_team{
+  .employee_project_team {
     flex-direction: column;
     margin: auto;
   }

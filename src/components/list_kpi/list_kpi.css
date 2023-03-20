@@ -1,35 +1,29 @@
-.Kpi-table{
-    height: 75%;
-    width: 65%;
-    margin: 40px auto;
+.Kpi-table {
+  height: 75%;
+  width: 65%;
+  margin: 40px auto;
 }
-.kpi-h1{
-    color: #f4f4f9;
-    font-size: 40px ;
-  
-  }
-  @media (max-width: 768px){
-    .kpi-table{
-      height: 65%;
+.kpi-h1 {
+  color: #f4f4f9;
+  font-size: 40px;
+}
+@media (max-width: 768px) {
+  .kpi-table {
+    height: 65%;
     width: 68%;
     margin: 40px auto;
-    }
-  
   }
-  @media (max-width: 680px){
-    .kpi-h1{
-      font-size: 35px;
-      margin-top: 45px;
-    }
-  
-  
+}
+@media (max-width: 680px) {
+  .kpi-h1 {
+    font-size: 35px;
+    margin-top: 45px;
   }
-  @media (max-width: 480px){
-    .kpi-h1{
-      /* font-size: 30px; */
-      margin-top: 45px;
-      padding-right: 50px;
-  
-    }
-  
+}
+@media (max-width: 480px) {
+  .kpi-h1 {
+    /* font-size: 30px; */
+    margin-top: 45px;
+    padding-right: 50px;
   }
+}

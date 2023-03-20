@@ -103,7 +103,7 @@
 
 @media screen and (max-width: 768px) {
   .side-comp__sidebar {
-  display: none;
+    display: none;
   }
   .menuItem > span {
     display: block;
@@ -129,7 +129,6 @@
     border-radius: 10px;
     z-index: 9;
   }
-  
 }
 .side_content {
   color: var(--primary);

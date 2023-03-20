@@ -26,7 +26,7 @@ function ListTeam() {
       })
       .then((response) => {
         setData(response.data);
-        console.log(response.data)
+        console.log(response.data);
         setTableData(response.data);
       })
       .catch((error) => {
@@ -50,7 +50,6 @@ function ListTeam() {
       )
     );
   };
-
 
   const columns = [
     { field: "id" },
@@ -77,13 +76,22 @@ function ListTeam() {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: (params) => <EditTeam Id={params.row.id}  onEditAdmin={handleEditAdmin} />,
+      renderCell: (params) => (
+        <EditTeam Id={params.row.id} onEditAdmin={handleEditAdmin} />
+      ),
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 150,
-      renderCell: (params) => <DeleteTeam text="team" Id={params.row.id} url="team"  onDeleteAdmin={handleDeleteTeam}/>,
+      renderCell: (params) => (
+        <DeleteTeam
+          text="team"
+          Id={params.row.id}
+          url="team"
+          onDeleteAdmin={handleDeleteTeam}
+        />
+      ),
     },
   ];
 
@@ -94,11 +102,11 @@ function ListTeam() {
           display: "flex",
           justifyContent: "space-between",
           margin: "30px auto",
-          flexWrap:"wrap",
+          flexWrap: "wrap",
         }}
       >
         <h1 className="team-h1">Team</h1>
-        <FormTeam onAddAdmin={handleAddAdmin}/>
+        <FormTeam onAddAdmin={handleAddAdmin} />
       </section>
       <DataGrid
         rows={tableData}

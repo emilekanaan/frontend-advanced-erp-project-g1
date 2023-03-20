@@ -1,44 +1,38 @@
 /* {{ height: '75%', width: '100%', marginTop:,marginLeft:'2%'}} */
-.employee-table{
-    height: 75%;
-    width: 90%;
-    margin: 29px auto;
+.employee-table {
+  height: 75%;
+  width: 90%;
+  margin: 29px auto;
 }
 .css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
-    color:grey;
+  color: grey;
 }
 /* .MuiDataGrid-colCell[data-field="id"],
 .MuiDataGrid-cell[data-field="id"],
 .MuiDataGrid-colHeader[data-field="id"] {
   display: none;
 } */
-.employee-h1{
+.employee-h1 {
   color: #f4f4f9;
-  font-size: 40px ;
-
+  font-size: 40px;
 }
-@media (max-width: 768px){
-  .employee-table{
+@media (max-width: 768px) {
+  .employee-table {
     height: 65%;
-  width: 68%;
-  margin: 40px auto;
+    width: 68%;
+    margin: 40px auto;
   }
-
 }
-@media (max-width: 680px){
-  .employee-h1{
+@media (max-width: 680px) {
+  .employee-h1 {
     font-size: 35px;
     margin-top: 45px;
   }
-
-
 }
-@media (max-width: 480px){
-  .employee-h1{
+@media (max-width: 480px) {
+  .employee-h1 {
     /* font-size: 30px; */
     margin-top: 45px;
     padding-right: 50px;
-
   }
-
 }

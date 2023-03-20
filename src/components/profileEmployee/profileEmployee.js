@@ -140,7 +140,11 @@ function EmployeeProfile(props) {
     return (
       <GridToolbarContainer>
         <GridToolbar></GridToolbar>
-        <AddRole teamName={props.team} employeeId={employeeProfile.id} onAddAdmin={handleAddRole}/>
+        <AddRole
+          teamName={props.team}
+          employeeId={employeeProfile.id}
+          onAddAdmin={handleAddRole}
+        />
       </GridToolbarContainer>
     );
   }
@@ -148,7 +152,11 @@ function EmployeeProfile(props) {
     return (
       <GridToolbarContainer>
         <GridToolbar></GridToolbar>
-        <AddKpi teamName={props.team} employeeId={employeeProfile.id} onAddAdmin={handleAddKpi}/>
+        <AddKpi
+          teamName={props.team}
+          employeeId={employeeProfile.id}
+          onAddAdmin={handleAddKpi}
+        />
       </GridToolbarContainer>
     );
   }

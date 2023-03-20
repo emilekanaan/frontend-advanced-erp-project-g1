@@ -80,13 +80,20 @@
   color: #f4f4f9;
   text-transform: uppercase;
 }
-.login-page__section .login-page__signin .login-page__content .login-page__form {
+.login-page__section
+  .login-page__signin
+  .login-page__content
+  .login-page__form {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
-.login-page__section .login-page__signin .login-page__content .login-page__form .login-page__inputBox {
+.login-page__section
+  .login-page__signin
+  .login-page__content
+  .login-page__form
+  .login-page__inputBox {
   position: relative;
   width: 100%;
 }
@@ -116,7 +123,7 @@
   i {
   position: absolute;
   left: 0;
-  top:0;
+  top: 0;
   padding: 15px 10px;
   font-style: normal;
   color: #aaa;
@@ -149,7 +156,11 @@
   color: #fff;
   text-decoration: none;
 }
-.login-page__signin .login-page__content .login-page__form .links a:nth-child(2) {
+.login-page__signin
+  .login-page__content
+  .login-page__form
+  .links
+  a:nth-child(2) {
   color: #f4f4f9;
   font-weight: 600;
 }
@@ -183,7 +194,7 @@
 }
 
 @media (max-width: 500px) {
-  .login-page__section .login-page__signin{
+  .login-page__section .login-page__signin {
     width: auto;
   }
 }

@@ -33,7 +33,6 @@ export default function SingleSelectPlaceholderKpi(props) {
   const [names, setNames] = React.useState([]);
 
   React.useEffect(() => {
-  
     let token = cookie.load("access_token");
     axios
       .get(`${process.env.REACT_APP_URL}/kpi`, {
@@ -41,10 +40,8 @@ export default function SingleSelectPlaceholderKpi(props) {
       })
       .then((response) => {
         if (response.status === 200) {
-        
-         setNames(response.data.message)
-            console.log(response.data.message.data);
-          
+          setNames(response.data.message);
+          console.log(response.data.message.data);
         }
       })
       .catch((error) => {

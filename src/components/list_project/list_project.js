@@ -62,21 +62,28 @@ function ListProject() {
       headerName: "Employees",
       width: 150,
       renderCell: (params) => {
-        return <EmployeeRole Id={params.row.id} teamId={params.row.team_id}/>;
+        return <EmployeeRole Id={params.row.id} teamId={params.row.team_id} />;
       },
     },
     {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: (params) => <EditProject Id={params.row.id} onEditAdmin={handleEditAdmin}/>,
+      renderCell: (params) => (
+        <EditProject Id={params.row.id} onEditAdmin={handleEditAdmin} />
+      ),
     },
     {
       field: "delete",
       headerName: "Delete",
       width: 84,
       renderCell: (params) => (
-        <DeleteTeam text="project" Id={params.row.id} url="project"   onDeleteAdmin={handleDeleteProejct} />
+        <DeleteTeam
+          text="project"
+          Id={params.row.id}
+          url="project"
+          onDeleteAdmin={handleDeleteProejct}
+        />
       ),
     },
   ];
@@ -88,7 +95,7 @@ function ListProject() {
           display: "flex",
           justifyContent: "space-between",
           margin: "30px auto",
-          flexWrap:"wrap"
+          flexWrap: "wrap",
         }}
       >
         <h1 className="project-h1">Project</h1>

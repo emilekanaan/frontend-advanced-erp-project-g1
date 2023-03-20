@@ -28,7 +28,7 @@ function DeleteTeam(props) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(props.Id)
+        console.log(props.Id);
         props.onDeleteAdmin(props.Id);
         toast(`${props.text} Deleted successfully`, {
           position: "bottom-right",
