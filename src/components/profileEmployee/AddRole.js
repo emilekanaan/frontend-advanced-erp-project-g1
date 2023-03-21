@@ -8,7 +8,6 @@ import Slide from "@mui/material/Slide";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-
 import List from "@mui/material/List";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import cookie from "react-cookies";
@@ -32,14 +31,8 @@ const theme = createTheme({
 });
 
 function AddRole(props) {
-  const [error, setError] = useState("");
   const [projectId, setProjectId] = useState("");
   const [roleId, setRoleId] = useState("");
-
-  const test = () => {
-    console.log("clicked!!!");
-  };
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -61,7 +54,7 @@ function AddRole(props) {
   const handleSumbit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("role_id",roleId);
+    formData.append("role_id", roleId);
     formData.append("employee_id", props.employeeId);
     formData.append("project_id", projectId);
     let token = cookie.load("access_token");
@@ -85,7 +78,6 @@ function AddRole(props) {
         });
       })
       .catch((error) => {
-        setError("Invalid credentials");
         console.log(error);
       });
   };

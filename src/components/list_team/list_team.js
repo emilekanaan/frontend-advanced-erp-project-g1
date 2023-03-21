@@ -12,7 +12,6 @@ import ShowEmployee from "../showTeam/showEmployee";
 
 function ListTeam() {
   const [tableData, setTableData] = useState([]);
-  const [data, setData] = useState([]);
 
   useEffect(() => {
     getAllTeams();
@@ -25,7 +24,6 @@ function ListTeam() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setData(response.data);
         console.log(response.data);
         setTableData(response.data);
       })

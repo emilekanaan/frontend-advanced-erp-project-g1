@@ -34,8 +34,6 @@ function EditAdmin(props, onEditAdmin) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -187,6 +185,7 @@ function EditAdmin(props, onEditAdmin) {
                 label="Password"
                 variant="outlined"
                 color="secondary"
+                type="password"
                 sx={{
                   width: "90%",
                   margin: "1pc",

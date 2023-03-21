@@ -1,5 +1,4 @@
 import React from "react";
-import AddIcon from "@mui/icons-material/Add";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
@@ -25,10 +24,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function EditProject(props) {
   const [name, setName] = useState("");
   const [teamid, setTeamid] = useState("");
-  const test = () => {
-    console.log("clicked!!!");
-  };
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

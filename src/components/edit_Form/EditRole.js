@@ -33,8 +33,6 @@ const theme = createTheme({
 
 function EditRole(props) {
     const [name, setName] = useState("");
-    const [error, setError] = useState("");
-
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -74,7 +72,6 @@ function EditRole(props) {
             })
             .catch((error) => {
                 console.log(error);
-                setError("Invalid credentials");
                 toast.error("error", {
                     position: "bottom-right",
                     autoClose: 5000,

@@ -11,7 +11,6 @@ function LoginForm({ props }) {
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState("");
-  const [userData,setUserData]=useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,10 +20,8 @@ function LoginForm({ props }) {
         password: password,
       })
       .then((response) => {
-        console.log(response)
+        console.log(response);
         if (response.status === 200) {
-          setUserData(response.data.admin);
-     
           cookie.save("access_token", response.data.access_token, {
             maxAge: 5 * 60 * 60 * 1000,
           });
@@ -41,7 +38,7 @@ function LoginForm({ props }) {
         } else {
           setError(e.message);
         }
-        console.log(e)
+        console.log(e);
       });
   };
 
@@ -325,7 +322,7 @@ function LoginForm({ props }) {
               <input type="hidden" name="_token" value="{{ csrf_token() }}" />
               <div className="login-page__inputBox">
                 <input
-                  className="login-page__input"
+                  className="login-page__input login-page__email"
                   name="email"
                   onChange={(e) => handleChange(e)}
                   type="email"

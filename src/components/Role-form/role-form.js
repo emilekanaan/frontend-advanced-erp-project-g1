@@ -32,12 +32,6 @@ const theme = createTheme({
 
 function RoleForm(props) {
   const [role, setRole] = useState("");
-  const [dataFromrole, setDataFromRole] = useState("");
-  const [error, setError] = useState("");
-  const test = () => {
-    console.log("clicked!!!");
-  };
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

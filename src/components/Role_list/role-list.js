@@ -10,6 +10,7 @@ import cookie from "react-cookies";
 
 function RoleList() {
   const [RoleTable, setRoleTable] = useState([]);
+
   useEffect(() => {
     let token = cookie.load("access_token");
 

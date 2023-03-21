@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import cookie from "react-cookies";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -20,11 +20,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 function EmployeeRole(props) {
   const [EmployeeTable, setEmployeeTable] = useState([]);
-
-  const test = () => {
-    console.log("clicked!!!");
-  };
   const [open, setOpen] = React.useState(false);
+
   const handleClickOpen = () => {
     console.log(props);
     let token = cookie.load("access_token");

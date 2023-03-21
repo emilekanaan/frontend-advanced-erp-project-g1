@@ -38,12 +38,6 @@ function EditEmployee(props) {
   const [email, setEmail] = useState("");
   const [phone_num, setPhoneNum] = useState("");
   const [dataFromteam, setDataFromteam] = useState("");
-  const [error, setError] = useState("");
-
-  const test = () => {
-    console.log("clicked!!!");
-  };
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -91,7 +85,6 @@ function EditEmployee(props) {
         });
       })
       .catch((error) => {
-        setError(error);
         toast.error("error", {
           position: "bottom-right",
           autoClose: 5000,
