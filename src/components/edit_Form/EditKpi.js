@@ -31,7 +31,6 @@ const theme = createTheme({
 
 function EditKpi(props) {
   const [name, setName] = useState("");
-  const [error, setError] = useState("");
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -72,7 +71,6 @@ function EditKpi(props) {
       })
       .catch((error) => {
         console.log(error);
-        setError("Invalid credentials");
         toast.error(error, {
           position: "bottom-right",
           autoClose: 5000,

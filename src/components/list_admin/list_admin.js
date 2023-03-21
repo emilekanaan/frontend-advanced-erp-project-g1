@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-// import { useDemoData } from "@mui/x-data-grid-generator";
 import "./list_admin.css";
 import FormAdmin from "../form_admin/form_admin";
 import DeleteTeam from "../delete_team/delete_team";
@@ -11,6 +10,7 @@ import cookie from "react-cookies";
 function ListAdmin() {
   const [AdminTable, setAdminTable] = useState([]);
   const [data, setData] = useState(false);
+
   useEffect(() => {
     let token = cookie.load("access_token");
     axios

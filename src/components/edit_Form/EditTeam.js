@@ -30,12 +30,6 @@ const theme = createTheme({
 
 function EditTeam(props) {
   const [Name, setName] = useState("");
-  const [dataFromteam, setDataFromTeam] = useState("");
-  const [error, setError] = useState("");
-  const test = () => {
-    console.log("clicked!!!");
-  };
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -45,10 +39,7 @@ function EditTeam(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  function handleChildData(data) {
-    console.log(data);
-    setDataFromTeam(data);
-  }
+
   const handleSubmit = (e) => {
     console.log(props);
     e.preventDefault();

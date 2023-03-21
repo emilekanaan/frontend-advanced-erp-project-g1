@@ -34,8 +34,6 @@ function AddKpi(props) {
   const [evaluation, setEvaluation] = useState("");
   const [date, setDate] = useState("");
   const [employeeId, setEmployeeId] = useState("");
-
-  const [error, setError] = useState("");
   const [kpiId, setKpiId] = useState("");
 
   function handleChildData(data) {
@@ -80,7 +78,6 @@ function AddKpi(props) {
         });
       })
       .catch((error) => {
-        setError("Invalid credentials");
         console.log(error);
       });
   };

@@ -13,18 +13,18 @@ import { useState, createContext } from "react";
 
 export const UserContext = createContext(null);
 const App = () => {
-const [userData, setUserData] = useState(null);
-
+  const [userData, setUserData] = useState(null);
   const [token, setToken] = useState("test");
   const handleLogin = (data) => {
     setUserData(data);
   };
+
   return (
     <>
       <UserContext.Provider value={{ token, setToken }}>
         <Routes>
           <Route path="/" element={<Login onLogin={handleLogin} />} />
-          <Route path="/" element={<Visitor userData={userData}/>}>
+          <Route path="/" element={<Visitor userData={userData} />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/team" element={<Team />} />

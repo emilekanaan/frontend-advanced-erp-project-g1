@@ -18,7 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 function ShowEmployee(props) {
-  const [team, setTeam] = useState([]);
+  const [team] = useState([]);
   const [employee, setEmployee] = useState([]);
 
   const [open, setOpen] = React.useState(false);
@@ -32,6 +32,7 @@ function ShowEmployee(props) {
       })
       .then((response) => {
         if (response.status === 200) {
+          console.log(response);
           console.log(response.data.message);
           setEmployee(response.data.message);
         }

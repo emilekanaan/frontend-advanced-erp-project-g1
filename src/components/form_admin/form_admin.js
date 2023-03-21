@@ -34,7 +34,6 @@ function FormAdmin({ onAddAdmin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -179,6 +178,7 @@ function FormAdmin({ onAddAdmin }) {
                   label="Password"
                   variant="outlined"
                   color="secondary"
+                  type="password"
                   sx={{
                     width: "90%",
                     margin: "1pc",

@@ -29,7 +29,6 @@ const Sidebar = ({ userData }) => {
     setLoggedOut(true);
   };
 
-
   return (
     <>
       <div className="side-comp">
@@ -49,9 +48,7 @@ const Sidebar = ({ userData }) => {
           {/* logo */}
           <div className="side-comp__logo">
             <img src={Logo} alt="logo" />
-            <span>
-            {userData && userData.name}
-            </span>
+            <span>{userData && userData.name}</span>
           </div>
 
           {/* menu */}

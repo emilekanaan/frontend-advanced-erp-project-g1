@@ -102,13 +102,32 @@
   .login-page__content
   .login-page__form
   .login-page__inputBox
-  .login-page__input {
+  .login-page__input[type="email"] {
   position: relative;
-  width: 100%;
+  width: 95%;
   background: #333;
   border: none;
   outline: none;
-  padding: 25px 10px 7.5px;
+  padding: 25px 10px 7.5px 10px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+  border: 1px solid #4dedf5;
+}
+
+.login-page__section
+  .login-page__signin
+  .login-page__content
+  .login-page__form
+  .login-page__inputBox
+  .login-page__input[type="password"] {
+  position: relative;
+  width: 95%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px 10px;
   border-radius: 4px;
   color: #fff;
   font-weight: 500;
@@ -176,10 +195,21 @@
   font-size: 1.35em;
   letter-spacing: 0.05em;
   cursor: pointer;
+  position: relative;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #4dedf5;
 }
 .login-page__input[type="submit"]:active {
   opacity: 0.6;
 }
+
+.login-page__email {
+  width: 90%;
+}
+
 @media (max-width: 900px) {
   .login-page__section span {
     width: calc(10vw - 2px);
@@ -196,5 +226,43 @@
 @media (max-width: 500px) {
   .login-page__section .login-page__signin {
     width: auto;
+  }
+
+  .login-page__section
+    .login-page__signin
+    .login-page__content
+    .login-page__form
+    .login-page__inputBox
+    .login-page__input[type="email"] {
+    position: relative;
+    width: 91%;
+    background: #333;
+    border: none;
+    outline: none;
+    padding: 25px 10px 7.5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1em;
+    border: 1px solid #4dedf5;
+  }
+
+  .login-page__section
+    .login-page__signin
+    .login-page__content
+    .login-page__form
+    .login-page__inputBox
+    .login-page__input[type="password"] {
+    position: relative;
+    width: 91%;
+    background: #333;
+    border: none;
+    outline: none;
+    padding: 25px 10px 7.5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1em;
+    border: 1px solid #4dedf5;
   }
 }

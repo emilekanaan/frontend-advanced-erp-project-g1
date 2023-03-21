@@ -10,6 +10,7 @@ import cookie from "react-cookies";
 
 function ListKpi() {
   const [KpiTable, setKpiTable] = useState([]);
+
   useEffect(() => {
     let token = cookie.load("access_token");
 

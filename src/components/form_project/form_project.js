@@ -25,7 +25,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function FormProject(props) {
   const [name, setName] = useState("");
   const [teamid, setTeamid] = useState("");
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
